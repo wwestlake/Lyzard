@@ -54,6 +54,16 @@ namespace Lyzard.TestConsole
 
         static void Main(string[] args)
         {
+            FileSystemAccess.GetFileSystemItems("C:\\").ToList().ForEach(item => {
+                Console.WriteLine($"{item.ModfiedOn}: {item.ItemType}: {item.Extension}: {item.Name}: {item.FullPath}");
+            });
+
+
+            pause("Hit the any key");
+        }
+
+        static void ProjectTest(string[] args)
+        {
             //var project = Project.Create(Paths.Projects, "My Project");
             var path = $"{Paths.Projects}\\My Project\\My Project.lyzard";
             var project = Project.Load(path);

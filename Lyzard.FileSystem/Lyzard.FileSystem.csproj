@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileSystemAccess.cs" />
+    <Compile Include="FileSystemItem.cs" />
     <Compile Include="FileSystemSaveWatcher.cs" />
     <Compile Include="ManagedFile.cs" />
     <Compile Include="ManagedFolder.cs" />

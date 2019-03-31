@@ -1,6 +1,8 @@
 ﻿// DISCLAIMER: Use this code at your own risk. 
 // No support is provided and this code has NOT been tested.
 
+// Apache License "melenaos" on github https://github.com/melenaos/FileSystemSafeWatcher
+
 using System;
 using System.IO;
 using System.Timers;

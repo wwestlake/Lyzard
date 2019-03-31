@@ -3,9 +3,86 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit Tests", "Unit Tests", "{2A1223BB-CD2D-4470-A309-F4E85174E997}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Class Libraries", "Class Libraries", "{F2306309-E114-467F-8243-C191D6A62F8E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{E5EF4E31-8C8D-4427-A4CE-219980168507}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lyzard.Core", "Lyzard.Core\Lyzard.Core.csproj", "{4DDE0941-3567-40EF-9373-2A1F02695327}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lyzard.TestConsole", "Lyzard.TestConsole\Lyzard.TestConsole.csproj", "{E52D4369-5D5B-45BD-9CDD-FF08E5D356EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lyzard.Compiler", "Lyzard.Compiler\Lyzard.Compiler.csproj", "{17EDC774-3293-4270-9D94-450F80B25504}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lyzard.Executive", "Lyzard.Executive\Lyzard.Executive.csproj", "{6353B145-57C3-4D16-BD7F-8B29D2FDA386}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lyzard.Interfaces", "Lyzard.Interfaces\Lyzard.Interfaces.csproj", "{242DF884-D9F1-4B8D-891B-56D973CBB1D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lyzard.PluginFramework", "Lyzard.PluginFramework\Lyzard.PluginFramework.csproj", "{0B6A580A-FC50-4F97-A652-E89BEA5CC68A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lyzard.Utilities", "Lyzard.Utilities\Lyzard.Utilities.csproj", "{5F586DDB-CDF7-47B0-A6CF-B1105FFC177F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lyzard.MessageBus", "Lyzard.MessageBus\Lyzard.MessageBus.csproj", "{8E731891-6390-42C7-9A5B-9D5AE408805F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lyzard.FileSystem", "Lyzard.FileSystem\Lyzard.FileSystem.csproj", "{7AC24E59-0F41-496E-B9EA-BF6C2C51724D}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4DDE0941-3567-40EF-9373-2A1F02695327}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DDE0941-3567-40EF-9373-2A1F02695327}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DDE0941-3567-40EF-9373-2A1F02695327}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DDE0941-3567-40EF-9373-2A1F02695327}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E52D4369-5D5B-45BD-9CDD-FF08E5D356EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E52D4369-5D5B-45BD-9CDD-FF08E5D356EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E52D4369-5D5B-45BD-9CDD-FF08E5D356EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E52D4369-5D5B-45BD-9CDD-FF08E5D356EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17EDC774-3293-4270-9D94-450F80B25504}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17EDC774-3293-4270-9D94-450F80B25504}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17EDC774-3293-4270-9D94-450F80B25504}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17EDC774-3293-4270-9D94-450F80B25504}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6353B145-57C3-4D16-BD7F-8B29D2FDA386}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6353B145-57C3-4D16-BD7F-8B29D2FDA386}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6353B145-57C3-4D16-BD7F-8B29D2FDA386}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6353B145-57C3-4D16-BD7F-8B29D2FDA386}.Release|Any CPU.Build.0 = Release|Any CPU
+		{242DF884-D9F1-4B8D-891B-56D973CBB1D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{242DF884-D9F1-4B8D-891B-56D973CBB1D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{242DF884-D9F1-4B8D-891B-56D973CBB1D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{242DF884-D9F1-4B8D-891B-56D973CBB1D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B6A580A-FC50-4F97-A652-E89BEA5CC68A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B6A580A-FC50-4F97-A652-E89BEA5CC68A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B6A580A-FC50-4F97-A652-E89BEA5CC68A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B6A580A-FC50-4F97-A652-E89BEA5CC68A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F586DDB-CDF7-47B0-A6CF-B1105FFC177F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F586DDB-CDF7-47B0-A6CF-B1105FFC177F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F586DDB-CDF7-47B0-A6CF-B1105FFC177F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F586DDB-CDF7-47B0-A6CF-B1105FFC177F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E731891-6390-42C7-9A5B-9D5AE408805F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E731891-6390-42C7-9A5B-9D5AE408805F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E731891-6390-42C7-9A5B-9D5AE408805F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E731891-6390-42C7-9A5B-9D5AE408805F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AC24E59-0F41-496E-B9EA-BF6C2C51724D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AC24E59-0F41-496E-B9EA-BF6C2C51724D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AC24E59-0F41-496E-B9EA-BF6C2C51724D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AC24E59-0F41-496E-B9EA-BF6C2C51724D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4DDE0941-3567-40EF-9373-2A1F02695327} = {F2306309-E114-467F-8243-C191D6A62F8E}
+		{E52D4369-5D5B-45BD-9CDD-FF08E5D356EA} = {2A1223BB-CD2D-4470-A309-F4E85174E997}
+		{17EDC774-3293-4270-9D94-450F80B25504} = {F2306309-E114-467F-8243-C191D6A62F8E}
+		{6353B145-57C3-4D16-BD7F-8B29D2FDA386} = {F2306309-E114-467F-8243-C191D6A62F8E}
+		{242DF884-D9F1-4B8D-891B-56D973CBB1D4} = {F2306309-E114-467F-8243-C191D6A62F8E}
+		{0B6A580A-FC50-4F97-A652-E89BEA5CC68A} = {F2306309-E114-467F-8243-C191D6A62F8E}
+		{5F586DDB-CDF7-47B0-A6CF-B1105FFC177F} = {F2306309-E114-467F-8243-C191D6A62F8E}
+		{8E731891-6390-42C7-9A5B-9D5AE408805F} = {F2306309-E114-467F-8243-C191D6A62F8E}
+		{7AC24E59-0F41-496E-B9EA-BF6C2C51724D} = {F2306309-E114-467F-8243-C191D6A62F8E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AE90B002-DEBC-4C09-A6E4-E8CB054DA0DF}

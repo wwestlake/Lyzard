@@ -16,6 +16,7 @@
  * limitations under the License.
  */
 using Lyzard.Compiler;
+using Lyzard.Core;
 using Lyzard.Executive;
 using Lyzard.FileSystem;
 using Lyzard.Interfaces;
@@ -53,6 +54,23 @@ namespace Lyzard.TestConsole
         static Func<Error, string> converter = (err) => err.IsWarning ? "Warning" : "Error";
 
         static void Main(string[] args)
+        {
+            var adder = new AddInteger();
+            adder.ConnectToInput("Left", new OutputConnector<int>(() => 1));
+            adder.ConnectToInput("Right", new OutputConnector<int>(() => 2));
+
+            var output = new TextOutput();
+            output.ConnectToInput<int>("Text", adder.Output("Result").Delegate as OutputConnector<int>);
+
+            output.Execute();
+
+
+
+
+            pause("Press a key");
+        }
+
+        static void FileSystemTest(string[] args)
         {
             FileSystemAccess.GetFileSystemItems("C:\\").ToList().ForEach(item => {
                 Console.WriteLine($"{item.ModfiedOn}: {item.ItemType}: {item.Extension}: {item.Name}: {item.FullPath}");

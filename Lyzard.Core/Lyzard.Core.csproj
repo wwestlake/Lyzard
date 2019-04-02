@@ -42,10 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Add.cs" />
     <Compile Include="BaseBlock.cs" />
     <Compile Include="BaseExecutionBlock.cs" />
     <Compile Include="BinaryOperator.cs" />
+    <Compile Include="Branch.cs" />
     <Compile Include="ConnectorDescription.cs" />
     <Compile Include="Connectors.cs" />
     <Compile Include="TextFormatter.cs" />

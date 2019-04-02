@@ -29,6 +29,18 @@ namespace Lyzard.Core
         }
 
         /// <summary>
+        /// Returns the delegate of the specified output as an
+        /// output connector of the specified type.
+        /// </summary>
+        /// <typeparam name="T">The type of output connector</typeparam>
+        /// <param name="name">The name of the output</param>
+        /// <returns>An OutputConnector<typeparamref name="T"/></returns>
+        public OutputConnector<T> GetOutput<T>(string name)
+        {
+            return Output(name).Delegate as OutputConnector<T>;
+        }
+
+        /// <summary>
         /// Names of all inputs
         /// </summary>
         public IEnumerable<string> InputNames { get { return _inputs.Keys; } }
@@ -115,6 +127,23 @@ namespace Lyzard.Core
             }
             throw new NullReferenceException($"Connector {inputName} has not been defined");
         }
+
+        protected T GetValue<T>(string inputName)
+        {
+            return SafeCast<T>(GetValue(inputName));
+        }
+
+        protected static T SafeCast<T>(object obj)
+        {
+            if (obj == null) return default(T);
+            if (obj.GetType() == typeof(T) || obj.GetType().IsSubclassOf(typeof(T)))
+            {
+                return (T)obj;
+            }
+            return default(T);
+        }
+            
+
 
     }
 }

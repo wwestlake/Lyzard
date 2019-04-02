@@ -55,12 +55,12 @@ namespace Lyzard.TestConsole
 
         static void Main(string[] args)
         {
-            var adder = new AddInteger();
-            adder.ConnectToInput("Left", new OutputConnector<int>(() => 1));
-            adder.ConnectToInput("Right", new OutputConnector<int>(() => 2));
+            var oper = new MulInteger();
+            oper.ConnectToInput("Left", new OutputConnector<int>(() => 3));
+            oper.ConnectToInput("Right", new OutputConnector<int>(() => 4));
 
             var output = new TextOutput();
-            output.ConnectToInput<int>("Text", adder.Output("Result").Delegate as OutputConnector<int>);
+            output.ConnectToInput("Text", oper.GetOutput<int>("Result"));
 
             output.Execute();
 

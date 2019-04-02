@@ -26,7 +26,39 @@ namespace Lyzard.Core
     /// </summary>
     public abstract class BaseExecutionBlock : BaseBlock
     {
-        public  BaseExecutionBlock Next;
+        private BaseExecutionBlock _next;
+
+        /// <summary>
+        /// Returns the next execution block in the chain.
+        /// If the next execution block is not rnabled this
+        /// returns null and cannot be set.
+        /// </summary>
+        public  BaseExecutionBlock Next
+        {
+            get
+            {
+                if (_enableNext) return _next;
+                return null;
+            }
+            set
+            {
+                if (_enableNext) _next = value;
+            }
+        }
+
+        /// <summary>
+        /// Returns true is the Next execution block is available to be set
+        /// This is used by the UI to determine if a Next execution block
+        /// connection should be displayed.
+        /// </summary>
+        public bool IsNextAvailabe
+        {
+            get
+            {
+                return _enableNext;
+            }
+        }
+
         /// <summary>
         /// Executes this block
         /// </summary>
@@ -36,10 +68,15 @@ namespace Lyzard.Core
             Next?.Execute();
         }
 
+
         /// <summary>
         /// Override to provide block functionality.
         /// </summary>
         protected abstract void Operation();
 
+        /// <summary>
+        /// Set to false by sub classes that do not support the 
+        /// </summary>
+        protected bool _enableNext = true;
     }
 }

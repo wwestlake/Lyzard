@@ -14,11 +14,11 @@ namespace Lyzard.Core
         /// that executes any binary operator on two input values
         /// the Left and Right operands
         /// </summary>
-        public BinaryOperator()
+        public BinaryOperator(Func<T,T,T> oper)
         {
             AddInput<T>("Left");
             AddInput<T>("Right");
-            AddInput<Func<T,T,T>>("Operator");
+            AddInput<Func<T,T,T>>("Operator", oper);
             AddOutput<T>("Result", new OutputConnector<T>(() => {
                 var left = (T)GetValue("Left");
                 var right = (T)GetValue("Right");
@@ -28,12 +28,64 @@ namespace Lyzard.Core
         }
     }
 
-    public class AddInteger : BinaryOperator<int>
+    public class Add<T> : BinaryOperator<T>
     {
-        public AddInteger() : base()
-        {
-            Input("Operator").Delegate = new InputConnector<Func<int, int, int>>(() => (l, r) => l + r);
-        }
+        public Add() : base((l, r) =>
+            {
+                dynamic a = l;
+                dynamic b = r;
+                return a + b;
+            })
+        { }
     }
+
+    public class AddInteger : Add<int> { }
+    public class AddFloat   : Add<float> { }
+    public class AddDouble  : Add<double> { }
+    
+    public class Mul<T> : BinaryOperator<T>
+    {
+        public Mul() : base((l, r) =>
+        {
+            dynamic a = l;
+            dynamic b = r;
+            return a * b;
+        })
+        { }
+    }
+
+    public class MulInteger : Mul<int> { }
+    public class MulFloat   : Mul<float> { }
+    public class MulDouble  : Mul<double> { }
+
+    public class Sub<T> : BinaryOperator<T>
+    {
+        public Sub() : base((l, r) =>
+        {
+            dynamic a = l;
+            dynamic b = r;
+            return a - b;
+        })
+        { }
+    }
+
+    public class SubInteger : Sub<int> { }
+    public class SubFloat   : Sub<float> { }
+    public class SubDouble  : Sub<double> { }
+
+    public class Div<T> : BinaryOperator<T>
+    {
+        public Div() : base((l, r) =>
+        {
+            dynamic a = l;
+            dynamic b = r;
+            return a / b;
+        })
+        { }
+    }
+
+    public class DivInteger : Div<int> { }
+    public class DivFloat   : Div<float> { }
+    public class DivDouble  : Div<double> { }
 
 }

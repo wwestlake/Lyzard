@@ -17,6 +17,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -30,6 +31,12 @@ namespace Lyzard.Utilities
         {
             return src.Substring(0, src.IndexOf(chr));
         }
+
+        public static string MakeRelativePath(this string path1, string path2)
+        {
+            return path2.Substring(path1.Length).TrimStart(Path.DirectorySeparatorChar);
+        }
+
     }
     
     public static class Helpers

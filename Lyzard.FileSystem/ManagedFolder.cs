@@ -49,14 +49,21 @@ namespace Lyzard.FileSystem
             _watcher.EnableRaisingEvents = true;
         }
 
+        public IList<ManagedFolder> SubFolders { get; set; } = new List<ManagedFolder>();
+        public IList<ManagedFile> Files { get; set; } = new List<ManagedFile>();
+
         public ManagedFile CreateFile(string filename)
         {
-            return new ManagedFile($"{_path}\\filename");
+            var file = new ManagedFile($"{_path}\\{filename}");
+            Files.Add(file);
+            return file;
         }
 
         public ManagedFolder CreateFolder(string foldername)
         {
-            return new ManagedFolder($"{_path}\\foldername");
+            var folder = new ManagedFolder($"{_path}\\{foldername}");
+            SubFolders.Add(folder);
+            return folder;
         }
 
         private void OnChanged(object sender, FileSystemEventArgs e)

@@ -44,13 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonFolders.cs" />
     <Compile Include="FileSystemAccess.cs" />
     <Compile Include="FileSystemItem.cs" />
     <Compile Include="FileSystemSaveWatcher.cs" />
     <Compile Include="ManagedFile.cs" />
     <Compile Include="ManagedFolder.cs" />
     <Compile Include="Paths.cs" />
-    <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

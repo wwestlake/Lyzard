@@ -28,6 +28,8 @@ namespace Lyzard.FileSystem
 
         public ManagedFile(string filepath)
         {
+            var folder = Path.GetDirectoryName(filepath);
+            if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
             if (!File.Exists(filepath)) File.Create(filepath).Close();
             FullPath = filepath;
             FilePath = Path.GetDirectoryName(filepath);

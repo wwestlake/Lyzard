@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8E731891-6390-42C7-9A5B-9D5AE408805F}</ProjectGuid>
+    <ProjectGuid>{A3A0407F-890A-4F60-85D8-9E02B2389117}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lyzard.MessageBus</RootNamespace>
-    <AssemblyName>Lyzard.MessageBus</AssemblyName>
+    <RootNamespace>Lyzard.ProjectManager</RootNamespace>
+    <AssemblyName>Lyzard.ProjectManager</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,16 +44,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IMessageBroker.cs" />
-    <Compile Include="MessageBroker.cs" />
-    <Compile Include="MessagePayload.cs" />
+    <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lyzard.FileSystem\Lyzard.FileSystem.csproj">
+      <Project>{7ac24e59-0f41-496e-b9ea-bf6c2c51724d}</Project>
+      <Name>Lyzard.FileSystem</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lyzard.Interfaces\Lyzard.Interfaces.csproj">
       <Project>{242df884-d9f1-4b8d-891b-56d973cbb1d4}</Project>
       <Name>Lyzard.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lyzard.MessageBus\Lyzard.MessageBus.csproj">
+      <Project>{8e731891-6390-42c7-9a5b-9d5ae408805f}</Project>
+      <Name>Lyzard.MessageBus</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lyzard.Utilities\Lyzard.Utilities.csproj">
+      <Project>{5f586ddb-cdf7-47b0-a6cf-b1105ffc177f}</Project>
+      <Name>Lyzard.Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

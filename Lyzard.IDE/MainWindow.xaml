@@ -42,7 +42,7 @@
 
             <Ribbon.QuickAccessToolBar>
                 <RibbonQuickAccessToolBar>
-                    <RibbonButton x:Name ="Save" SmallImageSource="Resources/Images/save.png" />
+                    <RibbonButton x:Name ="Save" SmallImageSource="Resources/Images/save.png" Command="{Binding SaveCommand}" />
                     <RibbonSplitButton x:Name ="Undo" SmallImageSource="Resources/Images/undo.png">
                         <RibbonSplitMenuItem Header="Undo 1" />
                         <RibbonSplitMenuItem Header="Undo 2" />
@@ -68,6 +68,9 @@
                     <RibbonMenuItem Header="New File" Command="{Binding FileNew}" />
                     <RibbonMenuItem Header="Save Layout" Click="RibbonMenuItem_Click" />
                     <RibbonMenuItem Header="Load Layout" Click="RibbonMenuItem_Click_1" />
+                    <RibbonMenuItem Header="Save" Command="{Binding SaveCommand}" />
+                    <RibbonMenuItem Header="Save As" Command="{Binding SaveAsCommand}" />
+                    <RibbonMenuItem Header="Save All" Command="{Binding SaveAllCommand}" />
                 </RibbonGroup>
             </RibbonTab>
             <RibbonTab Header="View">
@@ -87,7 +90,9 @@
             DataContext="{Binding DockManager}"  
             AllowMixedOrientation="True" 
             DocumentsSource="{Binding Path=Documents, Mode=TwoWay}"
-            AnchorablesSource="{Binding Path=Tools, Mode=TwoWay}">
+            AnchorablesSource="{Binding Path=Tools, Mode=TwoWay}"
+            ActiveContent="{Binding Path=ActiveDocument, Mode=TwoWay, Converter={StaticResource ActiveDocumentConverter}}"
+            >
 
             <dock:DockingManager.Theme>
                 <dock:Vs2013DarkTheme />
@@ -152,7 +157,8 @@
                             <Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}"/>
                             <Setter Property="ContentId" Value="{Binding Model.ContentId}"/>
                             <Setter Property="IconSource" Value="{Binding Model.IconSource}" />
-                            <!--<Setter Property="Title" Value="{Binding Model.Title}" />-->
+                            <Setter Property="IsSelected" Value="{Binding Model.IsSelected, Mode=TwoWay}"/>
+                            <Setter Property="IsActive" Value="{Binding Model.IsActive, Mode=TwoWay}"/>
                         </Style>
                     </pane:PanesStyleSelector.FileStyle>
                 </pane:PanesStyleSelector>

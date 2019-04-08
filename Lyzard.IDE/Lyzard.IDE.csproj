@@ -66,6 +66,9 @@
     <Compile Include="Converters\BooleanConverter.cs" />
     <Compile Include="Converters\BooleanNotConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Messages\DocumentActivatedMessage.cs" />
+    <Compile Include="Messages\FileCreatedMessage.cs" />
+    <Compile Include="Messages\FileSavedMessage.cs" />
     <Compile Include="ViewModels\CodeEditorViewModel.cs" />
     <Compile Include="ViewModels\ConsoleViewModel.cs" />
     <Compile Include="ViewModels\DelegateCommand.cs" />
@@ -186,6 +189,10 @@
     <ProjectReference Include="..\Lyzard.FileSystem\Lyzard.FileSystem.csproj">
       <Project>{7AC24E59-0F41-496E-B9EA-BF6C2C51724D}</Project>
       <Name>Lyzard.FileSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lyzard.MessageBus\Lyzard.MessageBus.csproj">
+      <Project>{8E731891-6390-42C7-9A5B-9D5AE408805F}</Project>
+      <Name>Lyzard.MessageBus</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

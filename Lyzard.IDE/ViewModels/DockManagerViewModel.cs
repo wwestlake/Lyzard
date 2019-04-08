@@ -32,6 +32,34 @@ namespace Lyzard.IDE.ViewModels
         }
 
 
+        DocumentViewModelBase _activeDocument;
 
+        public DocumentViewModelBase ActiveDocument
+        {
+            get
+            {
+                return _activeDocument;
+            }
+            set
+            {
+                if (_activeDocument != value)
+                {
+                    _activeDocument = value;
+                    FirePropertyChanged();
+                    ActiveDocumentChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+
+        public event EventHandler ActiveDocumentChanged;
+
+        internal void SaveAll(object x)
+        {
+        }
+
+        internal bool CanSaveAll(object x)
+        {
+            return _editors.Any(editor => editor.IsDirty);
+        }
     }
 }

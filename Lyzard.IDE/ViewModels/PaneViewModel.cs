@@ -1,4 +1,6 @@
-﻿using System.Windows.Input;
+﻿using Lyzard.IDE.Messages;
+using Lyzard.MessageBus;
+using System.Windows.Input;
 using System.Windows.Media;
 
 
@@ -82,6 +84,7 @@ namespace Lyzard.IDE.ViewModels
                 {
                     _isActive = value;
                     FirePropertyChanged();
+                    if (_isActive) MessageBroker.Instance.Publish(this, new DocumentActivatedMessage());
                 }
             }
         }

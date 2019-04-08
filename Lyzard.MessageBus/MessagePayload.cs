@@ -8,11 +8,14 @@ namespace Lyzard.MessageBus
         public T Details { get; set; }
         public DateTime TimeStamp { get; set; }
 
-        public MessagePayload(T payload, object source)
+        internal Action<T> ReplyTo { get; set; }
+
+        public MessagePayload(T payload, object source, Action<T> replyTo = null)
         {
             Sender = source;
             Details = payload;
             TimeStamp = DateTime.Now;
+            ReplyTo = replyTo;
         }
     }
 }

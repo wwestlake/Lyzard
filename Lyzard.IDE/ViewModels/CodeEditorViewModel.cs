@@ -35,7 +35,9 @@ namespace Lyzard.IDE.ViewModels
 
         public override void SaveAs(object param)
         {
-            var a = param;
+            MessageBroker.Instance.Publish(this, new FileSavedMessage(), (msg) => {
+                Console.WriteLine("SaveAs Got Callback");
+            });
         }
     }
 }

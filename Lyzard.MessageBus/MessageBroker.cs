@@ -16,18 +16,26 @@ namespace Lyzard.MessageBus
 
         private MessageBroker() { }
         
-        public void Publish<T>(object source, T message)
+        public void Publish<T>(object source, T message, Action<T> replyTo = null)
         {
             if (source == null || message == null) return;
             if (!_subscribers.ContainsKey(typeof(T))) return;
 
             var delegates = _subscribers[typeof(T)];
             if (delegates == null || delegates.Count == 0) return;
-            var payload = new MessagePayload<T>(message, source);
+            var payload = new MessagePayload<T>(message, source, replyTo);
             foreach (var handler in delegates.Select(item => item as Action<MessagePayload<T>>))
             {
                 Task.Factory.StartNew(() => handler?.Invoke(payload));
             }
+        }
+
+        public void Reply<T>(object source, MessagePayload<T> originator, T message)
+        {
+            if (originator.ReplyTo == null) return;
+            Task.Factory.StartNew(() => {
+                originator.ReplyTo(message);
+            });
         }
 
         public void Subscribe<T>(Action<MessagePayload<T>> subscription)

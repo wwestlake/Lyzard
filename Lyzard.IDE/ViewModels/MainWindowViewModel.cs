@@ -37,6 +37,11 @@ namespace Lyzard.IDE.ViewModels
             _fileexpl.ToolWindowHidden += (s, e) => { DoToggleFileManager(); };
 
             _dockManager.ActiveDocumentChanged += _dockManager_ActiveDocumentChanged;
+
+            MessageBroker.Instance.Subscribe<FileSavedMessage>((msg) => {
+                MessageBroker.Instance.Reply(this, msg, new FileSavedMessage() { Vm = null });
+            });
+
         }
 
         private void _dockManager_ActiveDocumentChanged(object sender, EventArgs e)

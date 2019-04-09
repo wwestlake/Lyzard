@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lyzard.IDE.ViewModels
 {
-    public class ConsoleViewModel : ToolViewModelBase
+    public class ExplorerViewModelBase : PaneViewModel
     {
 
     }

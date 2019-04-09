@@ -7,14 +7,12 @@ using System.Windows.Input;
 
 namespace Lyzard.IDE.ViewModels
 {
-    public delegate void ToolWindowHiddenEventHandler(object sender, EventArgs e);
 
     public class ToolViewModelBase : PaneViewModel 
     {
         private string _title;
         private bool _isVisible = false;
 
-        public event ToolWindowHiddenEventHandler ToolWindowHidden;
 
         public ToolViewModelBase()
         {
@@ -22,10 +20,6 @@ namespace Lyzard.IDE.ViewModels
         }
 
 
-        protected void OnToolWindowHidden()
-        {
-            ToolWindowHidden?.Invoke(this, new EventArgs());
-        }
 
         public bool IsVisible
         {

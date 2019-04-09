@@ -32,7 +32,7 @@ namespace Lyzard.IDE
             Loaded += (s, e) =>
             {
                 DataContext = new MainWindowViewModel();
-                LoadLayout();
+                //LoadLayout();
             };
 
         }

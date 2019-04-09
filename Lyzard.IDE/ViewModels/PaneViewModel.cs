@@ -1,16 +1,26 @@
 ﻿using Lyzard.IDE.Messages;
 using Lyzard.MessageBus;
+using System;
 using System.Windows.Input;
 using System.Windows.Media;
 
 
 namespace Lyzard.IDE.ViewModels
 {
+    public delegate void ToolWindowHiddenEventHandler(object sender, EventArgs e);
+
     public class PaneViewModel : ViewModelBase
     {
+        public event ToolWindowHiddenEventHandler ToolWindowHidden;
+
+
         public PaneViewModel()
         { }
 
+        protected void OnToolWindowHidden()
+        {
+            ToolWindowHidden?.Invoke(this, new EventArgs());
+        }
 
         #region Title
 
@@ -91,6 +101,22 @@ namespace Lyzard.IDE.ViewModels
 
         #endregion
 
+        private bool _isVisible = true;
+        public bool IsVisible
+        {
+            get { return _isVisible; }
+            set
+            {
+                if (_isVisible != value)
+                {
+                    _isVisible = value;
+                    FirePropertyChanged();
+                }
+            }
+        }
 
+
+
+ 
     }
 }

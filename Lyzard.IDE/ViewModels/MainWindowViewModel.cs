@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
+using Xceed.Wpf.AvalonDock.Themes;
 
 namespace Lyzard.IDE.ViewModels
 {
@@ -16,9 +17,10 @@ namespace Lyzard.IDE.ViewModels
     {
 
         private string _title;
+        private Dictionary<string, Theme> _themes = new Dictionary<string, Theme>();
         private DockManagerViewModel _dockManager;
 
-        private readonly ConsoleViewModel _console = new ConsoleViewModel() { Title = "Console" };
+        private readonly CommandConsoleViewModel _console = new CommandConsoleViewModel() { Title = "Console" };
         private readonly FileExplorerViewModel _fileexpl = new FileExplorerViewModel() { Title = "File Explorer" };
         private readonly OutputViewModel _output = new OutputViewModel() { Title = "Output" };
         private readonly ProjectExplorerViewModel _project = new ProjectExplorerViewModel() { Title = "Project Explorer" };
@@ -29,6 +31,22 @@ namespace Lyzard.IDE.ViewModels
             _dockManager = new DockManagerViewModel();
             Title = "Lyzard Developer";
 
+            DockManager.Anchorables.Add(_console);
+            DockManager.Anchorables.Add(_fileexpl);
+            DockManager.Anchorables.Add(_output);
+            DockManager.Anchorables.Add(_project);
+            DockManager.Anchorables.Add(_properties);
+
+            _themes.Add("Aero", new AeroTheme());
+            _themes.Add("VS 2010", new VS2010Theme());
+            _themes.Add("VS 2013 Blue", new Vs2013BlueTheme());
+            _themes.Add("VS 2013 Dark", new Vs2013DarkTheme());
+            _themes.Add("VS 2013 Light", new Vs2013LightTheme());
+            _themes.Add("Metro", new MetroTheme());
+            _themes.Add("Generic", new GenericTheme());
+            _themes.Add("Expression Dark", new ExpressionDarkTheme());
+            _themes.Add("Expression Light", new ExpressionLightTheme());
+            _dockManager.CurrentTheme = _themes["VS 2013 Dark"];
             RegisterHandlers();
         }
 
@@ -53,6 +71,33 @@ namespace Lyzard.IDE.ViewModels
 
         public string Title { get { return _title; } set { _title = value; FirePropertyChanged(); } }
 
+
+        public IList<string> ThemeNames
+        {
+            get
+            {
+                return _themes.Keys.ToList();
+            }
+        }
+
+        private string _selectedStyle = "VS 2013 Dark";
+        public string SelectedStyle 
+        {
+            get
+            {
+                return _selectedStyle;
+            }
+            set
+            {
+                if (value == null) return;
+                if (value == _selectedStyle) return;
+                _selectedStyle = value;
+                FirePropertyChanged();
+                _dockManager.CurrentTheme = _themes[_selectedStyle];
+            }
+
+        }
+
         public DockManagerViewModel DockManager
         {
             get
@@ -66,7 +111,7 @@ namespace Lyzard.IDE.ViewModels
             }
         }
 
-        private string _toggleFileManagerHeader = "Show File Manager";
+        private string _toggleFileManagerHeader = "Hide File Manager";
 
         public string ToggleFileManagerHeader
         {
@@ -87,7 +132,44 @@ namespace Lyzard.IDE.ViewModels
             //FirePropertyChanged("SaveCommand");
         });
 
-        public ICommand ToggleFileManager => new DelegateCommand((x) => DoToggleFileManager());
+        public bool FileExplorerVisibility
+        {
+            get { return _fileexpl.IsVisible; }
+            set
+            {
+                if (value)
+                    _fileexpl.IsVisible = true;
+                else
+                    _fileexpl.IsVisible = false;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool ProjectExplorerVisibility
+        {
+            get { return _project.IsVisible; }
+            set
+            {
+                if (value)
+                    _project.IsVisible = true;
+                else
+                    _project.IsVisible = false;
+                FirePropertyChanged();
+            }
+        }
+
+        public bool PropertiesExplorerVisibility
+        {
+            get { return _properties.IsVisible; }
+            set
+            {
+                if (value)
+                    _properties.IsVisible = true;
+                else
+                    _properties.IsVisible = false;
+                FirePropertyChanged();
+            }
+        }
 
         public ICommand SaveCommand => new DelegateCommand((x) =>
         {
@@ -115,9 +197,9 @@ namespace Lyzard.IDE.ViewModels
 
         public void DoToggleFileManager()
         {
-            if (!_dockManager.Tools.Contains(_fileexpl))
+            if (!_dockManager.Anchorables.Contains(_fileexpl))
             {
-                _dockManager.Tools.Add(_fileexpl);
+                _dockManager.Anchorables.Add(_fileexpl);
             }
             _fileexpl.IsVisible = !_fileexpl.IsVisible;
             ToggleFileManagerHeader =

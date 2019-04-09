@@ -11,7 +11,7 @@ namespace Lyzard.IDE.Views.Pane
 {
     class PanesStyleSelector : StyleSelector
     {
-        public Style ToolStyle
+        public Style ExplorerStyle
         {
             get;
             set;
@@ -23,13 +23,22 @@ namespace Lyzard.IDE.Views.Pane
             set;
         }
 
+        public Style ConsoleStyle
+        {
+            get;
+            set;
+        }
+
         public override System.Windows.Style SelectStyle(object item, System.Windows.DependencyObject container)
         {
-            if (item is ToolViewModelBase)
-                return ToolStyle;
+            if (item is ExplorerViewModelBase)
+                return ExplorerStyle;
 
             if (item is DocumentViewModelBase)
                 return FileStyle;
+
+            if (item is ConsoleViewModelBase)
+                return ConsoleStyle;
 
             return base.SelectStyle(item, container);
         }

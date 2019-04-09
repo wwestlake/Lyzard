@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Lyzard.IDE.ViewModels.CodeEditorViewModel" Collapsed="true">
+    <Position X="5.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAACAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\CodeEditorViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lyzard.IDE.ViewModels.CommandConsoleViewModel" Collapsed="true">
+    <Position X="8.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\CommandConsoleViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lyzard.IDE.ViewModels.ConsoleViewModelBase" Collapsed="true">
+    <Position X="9.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\ConsoleViewModelBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lyzard.IDE.ViewModels.DelegateCommand" Collapsed="true">
+    <Position X="14" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQEACAAQAAECAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\DelegateCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Lyzard.IDE.ViewModels.DockManagerViewModel" Collapsed="true">
+    <Position X="6.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgBAAAEBgAAAAgAAAQAAAAACEAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\DockManagerViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lyzard.IDE.ViewModels.DocumentViewModelBase" Collapsed="true">
+    <Position X="5.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAACAEACAAAAAAAAABBBAAAAAAA=</HashCode>
+      <FileName>ViewModels\DocumentViewModelBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lyzard.IDE.ViewModels.ExplorerViewModelBase" Collapsed="true">
+    <Position X="14.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\ExplorerViewModelBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lyzard.IDE.ViewModels.FileExplorerViewModel" Collapsed="true">
+    <Position X="15.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAQAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\FileExplorerViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lyzard.IDE.ViewModels.MainWindowViewModel" Collapsed="true">
+    <Position X="8.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>MAABAIAQAIAAEEgAACEAAAAAgBAgAAAAAAAAECIEAAA=</HashCode>
+      <FileName>ViewModels\MainWindowViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lyzard.IDE.ViewModels.OutputViewModel" Collapsed="true">
+    <Position X="10.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\OutputViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lyzard.IDE.ViewModels.PaneViewModel" Collapsed="true">
+    <Position X="11.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIJABEEAAEIAAAACAAAAAAgAAEAAAIAAAAAA=</HashCode>
+      <FileName>ViewModels\PaneViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lyzard.IDE.ViewModels.ProjectExplorerViewModel" Collapsed="true">
+    <Position X="13.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\ProjectExplorerViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lyzard.IDE.ViewModels.PropertiesViewModel" Collapsed="true">
+    <Position X="17.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\PropertiesViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lyzard.IDE.ViewModels.ViewModelBase" Collapsed="true">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\ViewModelBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Delegate Name="Lyzard.IDE.ViewModels.ToolWindowHiddenEventHandler" Collapsed="true">
+    <Position X="14" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\PaneViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

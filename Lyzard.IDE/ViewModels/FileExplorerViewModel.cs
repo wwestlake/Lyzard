@@ -8,12 +8,13 @@ using System.Windows.Media.Imaging;
 
 namespace Lyzard.IDE.ViewModels
 {
-    public class FileExplorerViewModel : ToolViewModelBase
+    public class FileExplorerViewModel : ExplorerViewModelBase
     {
         private bool _canHide = true;
 
         public FileExplorerViewModel()
-        { 
+        {
+            Title = "File Explorer";
             IconSource = new BitmapImage(new Uri($"pack://application:,,/Resources/Images/FileExplore.png"));
         }
 

@@ -18,17 +18,8 @@
     <Window.Resources>
         <conv:ActiveDocumentConverter x:Key="ActiveDocumentConverter"/>
         <conv:BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-        <!-- conv:BooleanToVisibilityConverter 
-        x:Key="BooleanToVisibilityConverter" 
-        True="Collapsed"
-        False="Visible" />
-    <conv:BooleanToVisibilityConverter 
-        x:Key="BooleanNotToVisibilityConverter" 
-        True="Visible"
-        False="Collapsed" / -->
         <conv:BooleanNotConverter x:Key="BooleanNotConverter" />
-
-
+        <dock:BoolToVisibilityConverter x:Key="btvc"/>
 
     </Window.Resources>
 
@@ -75,9 +66,19 @@
             </RibbonTab>
             <RibbonTab Header="View">
                 <RibbonGroup Header="Tools">
-                    <RibbonMenuItem Header="{Binding ToggleFileManagerHeader}" Command="{Binding ToggleFileManager}" />
+                    <RibbonCheckBox Label="File Explorer" IsChecked="{Binding FileExplorerVisibility}" />
+                    <RibbonCheckBox Label="Project Explorer"  IsChecked="{Binding ProjectExplorerVisibility}" />
+                    <RibbonCheckBox Label="Properties"  IsChecked="{Binding PropertiesExplorerVisibility}" />
                     <RibbonMenuItem Header="Save Layout" Click="RibbonMenuItem_Click" />
                     <RibbonMenuItem Header="Load Layout" Click="RibbonMenuItem_Click_1" />
+                </RibbonGroup>
+                <RibbonGroup Header="Styling">
+                    <RibbonComboBox>
+                        <RibbonGallery SelectedItem="{Binding SelectedStyle, Mode=TwoWay}">
+                            <RibbonGalleryCategory ItemsSource="{Binding ThemeNames}" />
+                        </RibbonGallery>
+                                       
+                    </RibbonComboBox>
                 </RibbonGroup>
             </RibbonTab>
 
@@ -90,20 +91,17 @@
             DataContext="{Binding DockManager}"  
             AllowMixedOrientation="True" 
             DocumentsSource="{Binding Path=Documents, Mode=TwoWay}"
-            AnchorablesSource="{Binding Path=Tools, Mode=TwoWay}"
+            AnchorablesSource="{Binding Path=Anchorables, Mode=TwoWay}"
             ActiveContent="{Binding Path=ActiveDocument, Mode=TwoWay, Converter={StaticResource ActiveDocumentConverter}}"
+            Theme="{Binding CurrentTheme}"                 
             >
-
-            <dock:DockingManager.Theme>
-                <dock:Vs2013DarkTheme />
-            </dock:DockingManager.Theme>
 
 
             <dock:DockingManager.Resources>
                 <DataTemplate DataType="{x:Type vm:CodeEditorViewModel}">
                    <views:CodeEditorView />
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type vm:ConsoleViewModel}">
+                <DataTemplate DataType="{x:Type vm:CommandConsoleViewModel}">
                     <views:ConsoleView />
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type vm:FileExplorerViewModel}">
@@ -127,19 +125,23 @@
                 </DataTemplate>
             </dock:DockingManager.DocumentHeaderTemplate>
 
-            <!--<dock:DockingManager.AnchorableHeaderTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal" >
-                        <Image Height="16" Source="{Binding Model.IconSource}" Margin="0 0 4 0" />
-                        <TextBlock Text="{Binding Model.Title}" />
-                    </StackPanel>
-                </DataTemplate>
-            </dock:DockingManager.AnchorableHeaderTemplate>-->
 
 
             <dock:DockingManager.LayoutItemContainerStyleSelector>
                 <pane:PanesStyleSelector>
-                    <pane:PanesStyleSelector.ToolStyle>
+                    <pane:PanesStyleSelector.ExplorerStyle>
+                        <Style TargetType="{x:Type dock:LayoutAnchorableItem}">
+                            <Setter Property="Visibility" Value="{Binding Model.IsVisible, Mode=TwoWay, Converter={StaticResource btvc}, ConverterParameter={x:Static Visibility.Hidden}}"/>
+                            <Setter Property="ContentId" Value="{Binding Model.ContentId}"/>
+                            <Setter Property="IsSelected" Value="{Binding Model.IsSelected, Mode=TwoWay}"/>
+                            <Setter Property="IsActive" Value="{Binding Model.IsActive, Mode=TwoWay}"/>
+                            <Setter Property="HideCommand" Value="{Binding Model.HideCommand}" />
+                            <Setter Property="CanHide" Value="{Binding Model.CanHide, diag:PresentationTraceSources.TraceLevel=High}" />
+                            <Setter Property="Title" Value="{Binding Model.Title}" />
+                            <Setter Property="IconSource" Value="{Binding Model.IconSource, diag:PresentationTraceSources.TraceLevel=High}" />
+                        </Style>
+                    </pane:PanesStyleSelector.ExplorerStyle>
+                    <pane:PanesStyleSelector.ConsoleStyle>
                         <Style TargetType="{x:Type dock:LayoutAnchorableItem}">
                             <Setter Property="Visibility" Value="{Binding Model.IsVisible, Mode=TwoWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}"/>
                             <Setter Property="ContentId" Value="{Binding Model.ContentId}"/>
@@ -150,7 +152,7 @@
                             <Setter Property="Title" Value="{Binding Model.Title}" />
                             <Setter Property="IconSource" Value="{Binding Model.IconSource, diag:PresentationTraceSources.TraceLevel=High}" />
                         </Style>
-                    </pane:PanesStyleSelector.ToolStyle>
+                    </pane:PanesStyleSelector.ConsoleStyle>
                     <pane:PanesStyleSelector.FileStyle>
                         <Style TargetType="{x:Type dock:LayoutItem}">
                             <Setter Property="ToolTip" Value="{Binding Model.FilePath}"/>
@@ -173,13 +175,6 @@
             <dock:LayoutRoot x:Name="_layoutRoot">
                 
                 <dock:LayoutPanel Orientation="Horizontal">
-                    
-                    <dock:LayoutAnchorablePaneGroup DockWidth="300">
-                        <dock:LayoutAnchorablePane Name="ToolsPane" >
-                        </dock:LayoutAnchorablePane>
-                    </dock:LayoutAnchorablePaneGroup>
-                    
-                    
                     <dock:LayoutDocumentPane>
                     </dock:LayoutDocumentPane>
                 </dock:LayoutPanel>

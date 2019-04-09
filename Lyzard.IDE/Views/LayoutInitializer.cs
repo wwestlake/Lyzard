@@ -19,13 +19,6 @@ namespace Lyzard.IDE.Views
                 destinationContainer.FindParent<LayoutFloatingWindow>() != null)
                 return false;
 
-            var toolsPane = layout.Descendents().OfType<LayoutAnchorablePane>().FirstOrDefault(d => d.Name == "ToolsPane");
-            if (toolsPane != null)
-            {
-                toolsPane.Children.Add(anchorableToShow);
-                return true;
-            }
-
             return false;
 
         }
@@ -33,11 +26,7 @@ namespace Lyzard.IDE.Views
 
         public void AfterInsertAnchorable(LayoutRoot layout, LayoutAnchorable anchorableShown)
         {
-            var vm = anchorableShown.Content as FileExplorerViewModel;
-            if (vm != null)
-            {
-                var a = vm;
-            }
+
         }
 
 

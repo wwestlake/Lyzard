@@ -5,32 +5,48 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xceed.Wpf.AvalonDock.Themes;
 
 namespace Lyzard.IDE.ViewModels
 {
     public class DockManagerViewModel : ViewModelBase
     {
-        private ObservableCollection<CodeEditorViewModel> _editors;
-        private ObservableCollection<ToolViewModelBase> _tools;
+        private ObservableCollection<DocumentViewModelBase> _editors;
+        private ObservableCollection<PaneViewModel> _tools;
+        private Theme _theme;
 
         public DockManagerViewModel()
         {
-            _editors = new ObservableCollection<CodeEditorViewModel>();
-            _tools = new ObservableCollection<ToolViewModelBase>();
+            _editors = new ObservableCollection<DocumentViewModelBase>();
+            _tools = new ObservableCollection<PaneViewModel>();
         }
 
-        public ObservableCollection<CodeEditorViewModel> Documents
+        public ObservableCollection<DocumentViewModelBase> Documents
         {
             get { return _editors; }
             set { _editors = value; FirePropertyChanged(); }
         }
 
-        public ObservableCollection<ToolViewModelBase> Tools
+        public ObservableCollection<PaneViewModel> Anchorables
         {
             get { return _tools; }
             set { _tools = value; FirePropertyChanged(); }
         }
 
+        public Theme CurrentTheme
+        {
+            get
+            {
+                return _theme;
+            }
+            set
+            {
+                if (_theme != value)
+                    _theme = value;
+                FirePropertyChanged();
+
+            }
+        }
 
         DocumentViewModelBase _activeDocument;
 

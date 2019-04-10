@@ -3,7 +3,7 @@
   <Class Name="Lyzard.IDE.ViewModels.CodeEditorViewModel" Collapsed="true">
     <Position X="5.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAIAAAAAAAAAAAAAAAAACAAAAAAAAABAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAACAAAAAAAAABAAAACAEAA=</HashCode>
       <FileName>ViewModels\CodeEditorViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -32,14 +32,14 @@
   <Class Name="Lyzard.IDE.ViewModels.DockManagerViewModel" Collapsed="true">
     <Position X="6.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAgBAAAEBgAAAAgAAAQAAAAACEAAAAAAAAAA=</HashCode>
+      <HashCode>AAAgAAAAAgBCAAEBgAAAAgAAAQAAAAACEAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\DockManagerViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Lyzard.IDE.ViewModels.DocumentViewModelBase" Collapsed="true">
     <Position X="5.5" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAIAAAAAAAAAAAAACAEACAAAAAAAAABBBAAAAAAA=</HashCode>
+      <HashCode>AAAAAIAAAAAAAAAAAAACAEACAAAAAAAAABBBAACAAAA=</HashCode>
       <FileName>ViewModels\DocumentViewModelBase.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -60,7 +60,7 @@
   <Class Name="Lyzard.IDE.ViewModels.MainWindowViewModel" Collapsed="true">
     <Position X="8.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>MAABAIAQAIAAEEgAACEAAAAAgBAgAAAAAAAAECIEAAA=</HashCode>
+      <HashCode>MAAJAICRAKAAEUAAACEAAAAAgBAhAAAAAAAAEiIEAAA=</HashCode>
       <FileName>ViewModels\MainWindowViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -95,10 +95,9 @@
   <Class Name="Lyzard.IDE.ViewModels.ViewModelBase" Collapsed="true">
     <Position X="9.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAEAAAgAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\ViewModelBase.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
   </Class>
   <Delegate Name="Lyzard.IDE.ViewModels.ToolWindowHiddenEventHandler" Collapsed="true">
     <Position X="14" Y="3.25" Width="1.5" />

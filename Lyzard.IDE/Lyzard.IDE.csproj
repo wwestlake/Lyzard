@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Lyzard.IDE.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -119,7 +120,7 @@
     <Compile Include="Views\ToolBoxView.xaml.cs">
       <DependentUpon>ToolBoxView.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -127,7 +128,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -195,7 +196,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="ViewModels\ClassDiagram1.cd" />
+    <None Include="ViewModels\ViewModelDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -208,6 +209,10 @@
     <ProjectReference Include="..\Lyzard.FileSystem\Lyzard.FileSystem.csproj">
       <Project>{7AC24E59-0F41-496E-B9EA-BF6C2C51724D}</Project>
       <Name>Lyzard.FileSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lyzard.Interfaces\Lyzard.Interfaces.csproj">
+      <Project>{242DF884-D9F1-4B8D-891B-56D973CBB1D4}</Project>
+      <Name>Lyzard.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lyzard.MessageBus\Lyzard.MessageBus.csproj">
       <Project>{8E731891-6390-42C7-9A5B-9D5AE408805F}</Project>

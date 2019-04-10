@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.136
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit Tests", "Unit Tests", "{2A1223BB-CD2D-4470-A309-F4E85174E997}"
 EndProject
@@ -34,6 +34,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lyzard.ProjectManager", "Lyzard.ProjectManager\Lyzard.ProjectManager.csproj", "{A3A0407F-890A-4F60-85D8-9E02B2389117}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lyzard.Config", "Lyzard.Config\Lyzard.Config.csproj", "{1269A2D2-4FE0-461A-BB9F-9CAF7738A6C7}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Lyzard.Setup", "Lyzard.Setup\Lyzard.Setup.vdproj", "{B68717C1-318E-46D6-B840-4E9CB2230F90}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Inbstallers", "Inbstallers", "{D5ACA8EE-2F20-406B-8063-81843A983A4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +97,8 @@ Global
 		{1269A2D2-4FE0-461A-BB9F-9CAF7738A6C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1269A2D2-4FE0-461A-BB9F-9CAF7738A6C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1269A2D2-4FE0-461A-BB9F-9CAF7738A6C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B68717C1-318E-46D6-B840-4E9CB2230F90}.Debug|Any CPU.ActiveCfg = Debug
+		{B68717C1-318E-46D6-B840-4E9CB2230F90}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -111,6 +117,7 @@ Global
 		{E84C9051-20B8-458D-AB9E-92690D32E571} = {F2306309-E114-467F-8243-C191D6A62F8E}
 		{A3A0407F-890A-4F60-85D8-9E02B2389117} = {F2306309-E114-467F-8243-C191D6A62F8E}
 		{1269A2D2-4FE0-461A-BB9F-9CAF7738A6C7} = {F2306309-E114-467F-8243-C191D6A62F8E}
+		{B68717C1-318E-46D6-B840-4E9CB2230F90} = {D5ACA8EE-2F20-406B-8063-81843A983A4E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AE90B002-DEBC-4C09-A6E4-E8CB054DA0DF}

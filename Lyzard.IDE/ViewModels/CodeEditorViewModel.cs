@@ -1,10 +1,12 @@
 ﻿using Lyzard.IDE.Messages;
+using Lyzard.Interfaces;
 using Lyzard.MessageBus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -13,7 +15,8 @@ namespace Lyzard.IDE.ViewModels
 {
     public class CodeEditorViewModel : DocumentViewModelBase
     {
-       
+
+        private string _file = "";
 
         public CodeEditorViewModel()
         {
@@ -24,6 +27,24 @@ namespace Lyzard.IDE.ViewModels
         public override bool CanSave(object param)
         {
             return IsDirty;
+        }
+
+        public override void Close()
+        {
+            if (IsDirty)
+            {
+                switch (ShowMessageBox($"File '{_file}' has changed, do you want to Save the File.", "File Not Saved", MessageBoxButtons.YesNoCancel))
+                {
+                    case MessageBoxResults.Yes:
+                        Save(null);
+                        break;
+                    case MessageBoxResults.No:
+
+                        break;
+                    case MessageBoxResults.Cancel:
+                        return;
+                }
+            }
         }
 
         public override void Save(object param)

@@ -1,4 +1,4 @@
-﻿<Window x:Class="Lyzard.IDE.MainWindow"
+﻿<Window x:Class="Lyzard.IDE.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -28,18 +28,18 @@
         <Ribbon DockPanel.Dock="Top">
 
             <Ribbon.HelpPaneContent>
-                <RibbonButton SmallImageSource="Resources/Images/Help.png" Command="{Binding HelpCommand}" />
+                <RibbonButton SmallImageSource="/Resources/Images/Help.png" Command="{Binding HelpCommand}" />
             </Ribbon.HelpPaneContent>
 
             <Ribbon.QuickAccessToolBar>
                 <RibbonQuickAccessToolBar>
-                    <RibbonButton x:Name ="Save" SmallImageSource="Resources/Images/save.png" Command="{Binding SaveCommand}" />
-                    <RibbonSplitButton x:Name ="Undo" SmallImageSource="Resources/Images/undo.png">
+                    <RibbonButton x:Name ="Save" SmallImageSource="/Resources/Images/save.png" Command="{Binding SaveCommand}" />
+                    <RibbonSplitButton x:Name ="Undo" SmallImageSource="/Resources/Images/undo.png">
                         <RibbonSplitMenuItem Header="Undo 1" />
                         <RibbonSplitMenuItem Header="Undo 2" />
                         <RibbonSplitMenuItem Header="Undo 3" />
                     </RibbonSplitButton>
-                    <RibbonSplitButton x:Name="Redo" SmallImageSource="Resources/Images/redo.png" >
+                    <RibbonSplitButton x:Name="Redo" SmallImageSource="/Resources/Images/redo.png" >
                         <RibbonSplitMenuItem Header="Redo 1" />
                         <RibbonSplitMenuItem Header="Redo 2" />
                     </RibbonSplitButton>
@@ -48,8 +48,8 @@
             <!-- Application Menu, located at the left-hand side (down arrow) -->
             <Ribbon.ApplicationMenu>
                 <RibbonApplicationMenu KeyTip="F">
-                    <RibbonApplicationMenuItem Header="Options" ImageSource="Resources/Images/options.png" />
-                    <RibbonApplicationMenuItem Header="Exit" ImageSource="Resources/Images/quit.png" />
+                    <RibbonApplicationMenuItem Header="Options" ImageSource="/Resources/Images/options.png" />
+                    <RibbonApplicationMenuItem Header="Exit" ImageSource="/Resources/Images/quit.png" />
                 </RibbonApplicationMenu>
             </Ribbon.ApplicationMenu>
 

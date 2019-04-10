@@ -20,7 +20,7 @@ namespace Lyzard.IDE.ViewModels
         }
 
         public ICommand CloseCommand => new DelegateCommand((x) => {
-            var a = x;
+            Close();
         });
 
         public bool IsDirty { get; set; } = true;
@@ -41,8 +41,7 @@ namespace Lyzard.IDE.ViewModels
         public abstract bool CanSave(object param);
         public abstract void Save(object param);
         public abstract void SaveAs(object param);
-
-
+        public abstract void Close();
 
     }
 }

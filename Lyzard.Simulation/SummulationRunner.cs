@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Lyzard.Simulation
 {
-    public abstract class SimulationBase
+    /// <summary>
+    /// Manages the operation of a simulation
+    /// </summary>
+    public class SummulationRunner
     {
-
     }
 }

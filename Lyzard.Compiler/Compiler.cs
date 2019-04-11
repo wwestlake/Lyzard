@@ -16,8 +16,11 @@
  * limitations under the License.
  */
 using System.CodeDom.Compiler;
+using System.Collections.Generic;
 using Microsoft.CSharp;
 using Microsoft.VisualBasic;
+using System.Linq;
+using System.IO;
 
 namespace Lyzard.Compiler
 {
@@ -50,34 +53,20 @@ namespace Lyzard.Compiler
             _parameters.ReferencedAssemblies.Add(path);
         }
 
-        public Results Compile(string name, string code, bool loadAssembly = true)
+        public CompilerResults Compile(string name, string outputPath, string code)
         {
-            var output = new Results();
             _parameters.OutputAssembly = $"{name}.dll";
-
-
-            CompilerResults results = _provider.CompileAssemblyFromSource(_parameters, new string[] { code });
-            if (!results.Errors.HasErrors)
-            {
-                if (loadAssembly) output.Assembly = results.CompiledAssembly;
-                output.PathToAssembly = results.PathToAssembly;
-            }
-
-            foreach (CompilerError err in results.Errors)
-            {
-                output.Errors.Add(new Error
-                {
-                    ErrorNumber = err.ErrorNumber,
-                    Column = err.Column,
-                    ErrorText = err.ErrorText,
-                    FileName = err.FileName,
-                    IsWarning = err.IsWarning,
-                    Line = err.Line
-                });
-            }
-
-            return output;
+            _parameters.CompilerOptions = $" /out:{outputPath}/{name}.dll";
+            return _provider.CompileAssemblyFromSource(_parameters, new string[] { code });
         }
+
+        public CompilerResults Compile(string name, string outputPath, IEnumerable<string> files)
+        {
+            _parameters.OutputAssembly = $"{name}.dll";
+            _parameters.CompilerOptions = $" /out:{outputPath}/{name}.dll";
+            return _provider.CompileAssemblyFromFile(_parameters, files.ToArray());
+        }
+
 
 
 

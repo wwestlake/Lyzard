@@ -44,6 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="TestClasses\TestClass1.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestClasses\TestClass2.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="CompilerTest.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -54,6 +60,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lyzard.AppDominaControl\Lyzard.AppDominaControl.csproj">
+      <Project>{e74f74f1-74d8-46e5-9ea1-156ab6db7aaf}</Project>
+      <Name>Lyzard.AppDominaControl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lyzard.Collections\Lyzard.Collections.csproj">
       <Project>{871bb41f-336d-4fa1-a90b-223457e5cdc0}</Project>
       <Name>Lyzard.Collections</Name>

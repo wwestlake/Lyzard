@@ -15,11 +15,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+using Lyzard.AppDominaControl;
 using Lyzard.Collections;
+using Lyzard.Compiler;
 using Lyzard.FileSystem;
 using Lyzard.MessageBus;
 using Lyzard.ProjectManager;
 using System;
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace Lyzard.TestConsole
@@ -34,12 +39,31 @@ namespace Lyzard.TestConsole
 
         static void Main(string[] args)
         {
-            var q = new AveragingQueue(10);
+            var compiler = new CSharpCompiler();
+            var dllPath = Path.GetFullPath("TestClasses") + CommonFolders.Sep + "TestApp.dll";
+            var results = compiler.Compile("TestApp", "TestClasses", new List<string> {
+                Path.GetFullPath( "TestClasses/TestClass1.cs" ),
+                Path.GetFullPath("TestClasses/TestClass2.cs")
+            });
 
-            for (int i = 0; i < 1000; i++)
+            foreach (CompilerError err in results.Errors)
             {
-                q.Enqueue(i * 1.0);
-                Console.WriteLine($"{q.Sum()} / {q.Count} = {q.Average}");
+                Console.WriteLine($"{(err.IsWarning ? "WARNING :" : "ERROR  :")} {err.ErrorText}");
+            }
+            
+            if (! results.Errors.HasErrors)
+            {
+                var loader = new AppDomainLoader("TestApp", dllPath);
+
+                if (loader.IsLoaded)
+                {
+                    var testClass1 = loader.RunRemoteFunc<object>(() => {
+                        Console.WriteLine(AppDomain.CurrentDomain.SetupInformation.ApplicationName);
+
+                        return null;
+                    });
+                }
+
             }
 
             pause("Press a key");

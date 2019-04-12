@@ -83,6 +83,12 @@
     <Compile Include="Messages\DocumentActivatedMessage.cs" />
     <Compile Include="Messages\FileCreatedMessage.cs" />
     <Compile Include="Messages\FileSavedMessage.cs" />
+    <Compile Include="UserControls\PluginDocumentViewWrapper.xaml.cs">
+      <DependentUpon>PluginDocumentViewWrapper.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PluginToolPaneViewWrapper.xaml.cs">
+      <DependentUpon>PluginToolPaneViewWrapper.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\CodeEditorViewModel.cs" />
     <Compile Include="ViewModels\CommandConsoleViewModel.cs" />
     <Compile Include="ViewModels\ConsoleViewModelBase.cs" />
@@ -94,6 +100,8 @@
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\OutputViewModel.cs" />
     <Compile Include="ViewModels\PaneViewModel.cs" />
+    <Compile Include="ViewModels\Plugins\UserPluginDocumentViewModel.cs" />
+    <Compile Include="ViewModels\Plugins\UserPluginToolPaneViewModel.cs" />
     <Compile Include="ViewModels\ProjectExplorerViewModel.cs" />
     <Compile Include="ViewModels\PropertiesViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModelBase.cs" />
@@ -121,6 +129,14 @@
     <Compile Include="Views\ToolBoxView.xaml.cs">
       <DependentUpon>ToolBoxView.xaml</DependentUpon>
     </Compile>
+    <Page Include="UserControls\PluginDocumentViewWrapper.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\PluginToolPaneViewWrapper.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -203,6 +219,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lyzard.AppDominaControl\Lyzard.AppDominaControl.csproj">
+      <Project>{E74F74F1-74D8-46E5-9EA1-156AB6DB7AAF}</Project>
+      <Name>Lyzard.AppDominaControl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lyzard.CustomControls\Lyzard.CustomControls.csproj">
       <Project>{e84c9051-20b8-458d-ab9e-92690d32e571}</Project>
       <Name>Lyzard.CustomControls</Name>
@@ -218,6 +238,10 @@
     <ProjectReference Include="..\Lyzard.MessageBus\Lyzard.MessageBus.csproj">
       <Project>{8E731891-6390-42C7-9A5B-9D5AE408805F}</Project>
       <Name>Lyzard.MessageBus</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lyzard.PluginFramework\Lyzard.PluginFramework.csproj">
+      <Project>{0b6a580a-fc50-4f97-a652-e89bea5cc68a}</Project>
+      <Name>Lyzard.PluginFramework</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

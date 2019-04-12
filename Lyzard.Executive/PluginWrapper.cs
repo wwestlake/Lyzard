@@ -16,6 +16,7 @@
  * limitations under the License.
  */
 using Lyzard.Interfaces;
+using Lyzard.PluginFramework;
 using System;
 using System.CodeDom.Compiler;
 

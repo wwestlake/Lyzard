@@ -43,7 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="IApplicationApi.cs" />
+    <Compile Include="IPlugin.cs" />
+    <Compile Include="IPluginDocumentView.cs" />
+    <Compile Include="IPluginToolPaneView.cs" />
+    <Compile Include="IPluginViewModel.cs" />
+    <Compile Include="PluginLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

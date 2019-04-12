@@ -45,7 +45,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Language.cs" />
-    <Compile Include="IPlugin.cs" />
     <Compile Include="MessageBoxButtons.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

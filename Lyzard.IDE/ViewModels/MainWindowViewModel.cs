@@ -1,9 +1,13 @@
-﻿using Lyzard.IDE.Messages;
+﻿using Lyzard.AppDominaControl;
+using Lyzard.IDE.Messages;
+using Lyzard.Interfaces;
 using Lyzard.MessageBus;
+using Lyzard.PluginFramework;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,6 +17,7 @@ using Xceed.Wpf.AvalonDock.Themes;
 
 namespace Lyzard.IDE.ViewModels
 {
+    [Serializable]
     public class MainWindowViewModel : ViewModelBase
     {
 
@@ -206,6 +211,17 @@ namespace Lyzard.IDE.ViewModels
                 _fileexpl.IsVisible ? "Hide File Explorer" : "Show File Explorer";
 
         }
+
+        public ICommand TestLoadPlugin => new DelegateCommand((x) =>
+        {
+            var loader = new AppDomainLoader(@"E:\Software Development\Visual Studio 2017\Projects\Lyzard\LagDaemon.LyzardPlugins.TestPlugin\bin\Debug\LagDaemon.LyzardPlugins.TestPlugin.dll");
+            var plugin = loader.RunRemoteFunc(() => 
+            {
+                var pluginLoader = new PluginLoader();
+                return pluginLoader.GetPlugin();
+            });
+            plugin.Initialize(_dockManager);
+        });
 
 
     }

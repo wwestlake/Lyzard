@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Lyzard.IDE.ViewModels.Plugins;
+using Lyzard.PluginFramework;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -9,16 +11,41 @@ using Xceed.Wpf.AvalonDock.Themes;
 
 namespace Lyzard.IDE.ViewModels
 {
-    public class DockManagerViewModel : ViewModelBase
+    public class DockManagerViewModel : ViewModelBase, IApplicationApi
     {
         private ObservableCollection<DocumentViewModelBase> _editors;
         private ObservableCollection<PaneViewModel> _tools;
         private Theme _theme;
 
+        private static DockManagerViewModel DocumentManager;
+
         public DockManagerViewModel()
         {
+            DocumentManager = this;
             _editors = new ObservableCollection<DocumentViewModelBase>();
             _tools = new ObservableCollection<PaneViewModel>();
+        }
+
+        public void CreateDocument(IPluginDocumentView view, IPluginDocumentViewModel model)
+        {
+            view.ViewModel = model;
+            var vm = new UserPluginDocumentViewModel()
+            {
+                Content = view,
+                ViewModel = model
+            };
+            DocumentManager.Documents.Add(vm);
+        }
+
+        public void CreateToolPane(IPluginToolPaneView view, IPluginToolPaneViewModel model)
+        {
+            view.ViewModel = model;
+            var vm = new UserPluginToolPaneViewModel()
+            {
+                Content = view,
+                ViewModel = model
+            };
+            DocumentManager.Anchorables.Add(vm);
         }
 
         public ObservableCollection<DocumentViewModelBase> Documents
@@ -77,5 +104,9 @@ namespace Lyzard.IDE.ViewModels
         {
             return _editors.Any(editor => editor.IsDirty);
         }
+
+
+
+
     }
 }

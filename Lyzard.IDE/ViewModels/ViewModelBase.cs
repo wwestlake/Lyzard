@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace Lyzard.IDE.ViewModels
 {
-    public class ViewModelBase : INotifyPropertyChanged
+    public class ViewModelBase : MarshalByRefObject, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

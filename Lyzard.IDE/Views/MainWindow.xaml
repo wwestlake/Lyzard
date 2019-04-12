@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lyzard.IDE"
         xmlns:views="clr-namespace:Lyzard.IDE.Views"
+        xmlns:plgviews="clr-namespace:Lyzard.IDE.UserControls"
         xmlns:pane="clr-namespace:Lyzard.IDE.Views.Pane"
         xmlns:conv="clr-namespace:Lyzard.IDE.Converters"
         xmlns:lyzard="clr-namespace:Lyzard.CustomControls;assembly=Lyzard.CustomControls"
@@ -12,6 +13,7 @@
         xmlns:dock="http://schemas.xceed.com/wpf/xaml/avalondock"
         xmlns:dockctrl="http://schemas.xceed.com/wpf/xaml/avalondock"
         xmlns:vm="clr-namespace:Lyzard.IDE.ViewModels"
+        xmlns:plgvm="clr-namespace:Lyzard.IDE.ViewModels.Plugins"
         mc:Ignorable="d"
         Title="{Binding Title}" Height="450" Width="800">
 
@@ -35,13 +37,8 @@
                 <RibbonQuickAccessToolBar>
                     <RibbonButton x:Name ="Save" SmallImageSource="/Resources/Images/save.png" Command="{Binding SaveCommand}" />
                     <RibbonSplitButton x:Name ="Undo" SmallImageSource="/Resources/Images/undo.png">
-                        <RibbonSplitMenuItem Header="Undo 1" />
-                        <RibbonSplitMenuItem Header="Undo 2" />
-                        <RibbonSplitMenuItem Header="Undo 3" />
                     </RibbonSplitButton>
                     <RibbonSplitButton x:Name="Redo" SmallImageSource="/Resources/Images/redo.png" >
-                        <RibbonSplitMenuItem Header="Redo 1" />
-                        <RibbonSplitMenuItem Header="Redo 2" />
                     </RibbonSplitButton>
                 </RibbonQuickAccessToolBar>
             </Ribbon.QuickAccessToolBar>
@@ -54,7 +51,7 @@
             </Ribbon.ApplicationMenu>
 
 
-            <RibbonTab Header="FIle">
+            <RibbonTab Header="File">
                 <RibbonGroup Header="New">
                     <RibbonMenuItem Header="New File" Command="{Binding FileNew}" />
                     <RibbonMenuItem Header="Save Layout" Click="RibbonMenuItem_Click" />
@@ -62,6 +59,7 @@
                     <RibbonMenuItem Header="Save" Command="{Binding SaveCommand}" />
                     <RibbonMenuItem Header="Save As" Command="{Binding SaveAsCommand}" />
                     <RibbonMenuItem Header="Save All" Command="{Binding SaveAllCommand}" />
+                    <RibbonMenuItem Header="Test Load Plugin" Command="{Binding TestLoadPlugin}" />
                 </RibbonGroup>
             </RibbonTab>
             <RibbonTab Header="View">
@@ -113,6 +111,13 @@
                 <DataTemplate DataType="{x:Type vm:PropertiesViewModel}">
                     <views:PropertiesView />
                 </DataTemplate>
+                <DataTemplate DataType="{x:Type plgvm:UserPluginDocumentViewModel}">
+                    <plgviews:PluginDocumentViewWrapper />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type plgvm:UserPluginToolPaneViewModel}">
+                    <plgviews:PluginToolPaneViewWrapper />
+                </DataTemplate>
+
             </dock:DockingManager.Resources>
 
 

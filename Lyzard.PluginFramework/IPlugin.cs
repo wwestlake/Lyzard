@@ -21,14 +21,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lyzard.Interfaces
+namespace Lyzard.PluginFramework
 {
+    /// <summary>
+    /// The main class of the plugin implements this interface.
+    /// More than one class may implement this interface but the
+    /// startup class should be specified in the Plugin.json file.
+    /// </summary>
     public interface IPlugin
-   {
-        string Name { get; }
-        void Initialize();
-        void StartPlugin();
-
-
+    {
+        /// <summary>
+        /// Initializes the plugin
+        /// </summary>
+        /// <param name="api">The application API used to create documents and tool panes</param>
+        void Initialize(IApplicationApi api);
     }
 }

@@ -38,6 +38,13 @@ namespace Lyzard.AppDominaControl
 
         public bool IsLoaded { get => _loaded; private set => _loaded = value; }
 
+        public AppDomainLoader(string dllpath)
+        {
+            _context = AppDomainContext.Wrap(AppDomain.CurrentDomain);
+            _context.LoadAssembly(LoadMethod.LoadFile, dllpath);
+            IsLoaded = true;
+        }
+
         public AppDomainLoader(string appName, string dllpath)
         {
             var rootDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -46,6 +53,7 @@ namespace Lyzard.AppDominaControl
                 ApplicationName = appName,
                 ApplicationBase = rootDir,
                 PrivateBinPath = rootDir,
+                 
             };
             _context = AppDomainContext.Create(setupInfo);
             _context.LoadAssembly(LoadMethod.LoadFile, dllpath);

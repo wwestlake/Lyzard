@@ -50,5 +50,11 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lyzard.PluginFramework\Lyzard.PluginFramework.csproj">
+      <Project>{0B6A580A-FC50-4F97-A652-E89BEA5CC68A}</Project>
+      <Name>Lyzard.PluginFramework</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -15,15 +15,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Lyzard.PluginFramework
 {
-    public class Class1
+    /// <summary>
+    /// The View in the plugin must implement this interface
+    /// </summary>
+    public interface IPluginDocumentView
     {
+        /// <summary>
+        /// THe view model to attach to the view
+        /// </summary>
+        IPluginDocumentViewModel ViewModel { get; set; }
     }
 }

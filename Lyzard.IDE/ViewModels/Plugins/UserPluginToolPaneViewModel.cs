@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 
 namespace Lyzard.IDE.ViewModels.Plugins
 {
-    public class UserPluginToolPaneViewModel : PaneViewModel
+    public class UserPluginToolPaneViewModel : ExplorerViewModelBase
     {
         private IPluginToolPaneView _userControl;
         private IPluginToolPaneViewModel _viewModel;
+
+        public new string Title { get { return _viewModel.Title; } set { } }
 
         public IPluginToolPaneView Content
         {

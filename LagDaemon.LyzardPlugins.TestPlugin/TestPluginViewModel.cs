@@ -7,26 +7,26 @@ using System.Threading.Tasks;
 
 namespace LagDaemon.LyzardPlugins.TestPlugin
 {
-    public class TestPluginViewModel : ViewModelBase
+    public class TestPluginViewModel : ViewModelBase, IPluginDocumentViewModel
     {
         public string MyProperty { get; set; } = "This is my property";
-        public override string Title { get => "My Plugin"; set { } }
-        public override bool CanClose { get => true; set { } }
+        public bool CanClose { get => false; set { } }
+        public string Title { get => "Plugin Document"; set { } }
 
-        public override bool CanSave(object param)
+        public bool CanSave(object param)
         {
-            return false;
+            return true;
         }
 
-        public override void Close()
-        {
-        }
-
-        public override void Save(object param)
+        public void Close()
         {
         }
 
-        public override void SaveAs(object param)
+        public void Save(object param)
+        {
+        }
+
+        public void SaveAs(object param)
         {
         }
     }

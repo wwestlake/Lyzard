@@ -8,6 +8,10 @@ namespace Lyzard.IDE.ViewModels
 {
     public class CommandConsoleViewModel : ConsoleViewModelBase
     {
+        public CommandConsoleViewModel()
+        {
+            
+        }
 
     }
 }

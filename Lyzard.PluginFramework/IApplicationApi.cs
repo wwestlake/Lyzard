@@ -37,5 +37,8 @@ namespace Lyzard.PluginFramework
         /// </summary>
         /// <param name="view">The view to display</param>
         void CreateToolPane(IPluginToolPaneView view, IPluginToolPaneViewModel model);
+
+        IMainRibbonApi MainRibbon { get; }
+
     }
 }

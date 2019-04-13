@@ -1,7 +1,12 @@
 ﻿using Lyzard.FileSystem;
 using Lyzard.IDE.ViewModels;
+using Lyzard.PluginFramework;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Ribbon;
+using System.Windows.Data;
 using Xceed.Wpf.AvalonDock.Layout.Serialization;
 
 namespace Lyzard.IDE.Views
@@ -9,14 +14,17 @@ namespace Lyzard.IDE.Views
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IMainRibbonApi
     {
+        public static IMainRibbonApi MainWindowApi { get; private set; }
+
         public MainWindow()
         {
             InitializeComponent();
 
             Loaded += (s, e) =>
             {
+                MainWindowApi = this;
                 DataContext = new MainWindowViewModel();
                 //LoadLayout();
             };
@@ -58,5 +66,18 @@ namespace Lyzard.IDE.Views
         {
             LoadLayout();
         }
+
+
+        public RibbonTab AddTabToRibbon(string header, object dataContext)
+        {
+            var tab = new RibbonTab() { Header = header, DataContext = dataContext, IsEnabled = true };
+            MainRibbon.Items.Add(tab);
+            return tab;
+        }
+
+
     }
+
+    
+
 }

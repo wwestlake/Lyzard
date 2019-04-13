@@ -41,6 +41,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Controls.Ribbon" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -59,6 +60,9 @@
       <DependentUpon>PluginDocument.xaml</DependentUpon>
     </Compile>
     <Compile Include="PluginMain.cs" />
+    <Compile Include="PluginPane.xaml.cs">
+      <DependentUpon>PluginPane.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -72,6 +76,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="TestPluginPaneViewModel.cs" />
     <Compile Include="TestPluginViewModel.cs" />
     <Compile Include="ViewModelBase.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -85,6 +90,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="PluginDocument.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PluginPane.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

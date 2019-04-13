@@ -1,4 +1,5 @@
 ﻿using Lyzard.IDE.ViewModels.Plugins;
+using Lyzard.IDE.Views;
 using Lyzard.PluginFramework;
 using System;
 using System.Collections.Generic;
@@ -47,6 +48,8 @@ namespace Lyzard.IDE.ViewModels
             };
             DocumentManager.Anchorables.Add(vm);
         }
+
+        public IMainRibbonApi MainRibbon { get { return MainWindow.MainWindowApi; } }
 
         public ObservableCollection<DocumentViewModelBase> Documents
         {

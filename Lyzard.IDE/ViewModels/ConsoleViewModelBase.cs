@@ -8,5 +8,9 @@ namespace Lyzard.IDE.ViewModels
 {
     public class ConsoleViewModelBase : PaneViewModel
     {
+        public ConsoleViewModelBase()
+        {
+
+        }
     }
 }

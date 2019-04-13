@@ -33,7 +33,7 @@ namespace Lyzard.IDE.ViewModels
 
         public MainWindowViewModel()
         {
-            _dockManager = new DockManagerViewModel();
+            DockManager = new DockManagerViewModel();
             Title = "Lyzard Developer";
 
             DockManager.Anchorables.Add(_console);

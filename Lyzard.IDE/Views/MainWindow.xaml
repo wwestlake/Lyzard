@@ -23,11 +23,22 @@
         <conv:BooleanNotConverter x:Key="BooleanNotConverter" />
         <dock:BoolToVisibilityConverter x:Key="btvc"/>
 
+        <Style TargetType="RibbonGroup" x:Key="ToolControl">
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <RibbonCheckBox Label="{Binding Path=Title, Mode=OneWay}"   
+                                    IsChecked="{Binding Path=IsVisible, Mode=TwoWay}" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
     </Window.Resources>
 
     <DockPanel>
 
-        <Ribbon DockPanel.Dock="Top">
+        <Ribbon DockPanel.Dock="Top" x:Name="MainRibbon">
 
             <Ribbon.HelpPaneContent>
                 <RibbonButton SmallImageSource="/Resources/Images/Help.png" Command="{Binding HelpCommand}" />
@@ -51,7 +62,7 @@
             </Ribbon.ApplicationMenu>
 
 
-            <RibbonTab Header="File">
+            <RibbonTab Header="Home">
                 <RibbonGroup Header="New">
                     <RibbonMenuItem Header="New File" Command="{Binding FileNew}" />
                     <RibbonMenuItem Header="Save Layout" Click="RibbonMenuItem_Click" />
@@ -63,13 +74,14 @@
                 </RibbonGroup>
             </RibbonTab>
             <RibbonTab Header="View">
-                <RibbonGroup Header="Tools">
-                    <RibbonCheckBox Label="File Explorer" IsChecked="{Binding FileExplorerVisibility}" />
+                <RibbonGroup Style="{StaticResource ToolControl}" Header="Tools" ItemsSource="{Binding Path=DockManager.Anchorables,Mode=OneWay}" />
+
+                <!--<RibbonCheckBox Label="File Explorer" IsChecked="{Binding FileExplorerVisibility}" />
                     <RibbonCheckBox Label="Project Explorer"  IsChecked="{Binding ProjectExplorerVisibility}" />
                     <RibbonCheckBox Label="Properties"  IsChecked="{Binding PropertiesExplorerVisibility}" />
                     <RibbonMenuItem Header="Save Layout" Click="RibbonMenuItem_Click" />
-                    <RibbonMenuItem Header="Load Layout" Click="RibbonMenuItem_Click_1" />
-                </RibbonGroup>
+                    <RibbonMenuItem Header="Load Layout" Click="RibbonMenuItem_Click_1" />-->
+
                 <RibbonGroup Header="Styling">
                     <RibbonComboBox>
                         <RibbonGallery SelectedItem="{Binding SelectedStyle, Mode=TwoWay}">
@@ -148,7 +160,7 @@
                     </pane:PanesStyleSelector.ExplorerStyle>
                     <pane:PanesStyleSelector.ConsoleStyle>
                         <Style TargetType="{x:Type dock:LayoutAnchorableItem}">
-                            <Setter Property="Visibility" Value="{Binding Model.IsVisible, Mode=TwoWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}"/>
+                            <Setter Property="Visibility" Value="{Binding Model.IsVisible, Mode=TwoWay, Converter={StaticResource btvc}, ConverterParameter={x:Static Visibility.Hidden}}"/>
                             <Setter Property="ContentId" Value="{Binding Model.ContentId}"/>
                             <Setter Property="IsSelected" Value="{Binding Model.IsSelected, Mode=TwoWay}"/>
                             <Setter Property="IsActive" Value="{Binding Model.IsActive, Mode=TwoWay}"/>

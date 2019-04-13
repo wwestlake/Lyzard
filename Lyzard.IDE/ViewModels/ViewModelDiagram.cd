@@ -3,7 +3,7 @@
   <Class Name="Lyzard.IDE.ViewModels.CodeEditorViewModel" Collapsed="true">
     <Position X="5.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAIAAAAAAAAAAAAAAAAACAAAAAAAAABAAAACAEAA=</HashCode>
+      <HashCode>AAAAAIgAAEAAAAAAAAAAAAACAAAAAAACABAAAACAEAA=</HashCode>
       <FileName>ViewModels\CodeEditorViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -32,9 +32,10 @@
   <Class Name="Lyzard.IDE.ViewModels.DockManagerViewModel" Collapsed="true">
     <Position X="6.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAgAAAAAgBCAAEBgAAAAgAAAQAAAAACEAAAAAAAAAA=</HashCode>
+      <HashCode>AgAgAABABgBCAAEBgAAAAgAAAQAAEAACEAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\DockManagerViewModel.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Lyzard.IDE.ViewModels.DocumentViewModelBase" Collapsed="true">
     <Position X="5.5" Y="5" Width="1.5" />
@@ -60,7 +61,7 @@
   <Class Name="Lyzard.IDE.ViewModels.MainWindowViewModel" Collapsed="true">
     <Position X="8.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>MAAJAICRAKAAEUAAACEAAAAAgBAhAAAAAAAAEiIEAAA=</HashCode>
+      <HashCode>MAAJAIGRAKAAEUAAACEAAAAAgBAhAAAAAAAAEiIEAAA=</HashCode>
       <FileName>ViewModels\MainWindowViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -97,6 +98,14 @@
     <TypeIdentifier>
       <HashCode>AAAAAAEAAAgAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\ViewModelBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Lyzard.IDE.ViewModels.DialogViewModelBase" Collapsed="true">
+    <Position X="3.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\DialogViewModelBase.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Delegate Name="Lyzard.IDE.ViewModels.ToolWindowHiddenEventHandler" Collapsed="true">

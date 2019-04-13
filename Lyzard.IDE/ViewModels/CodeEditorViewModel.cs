@@ -1,4 +1,5 @@
-﻿using Lyzard.IDE.Messages;
+﻿using ICSharpCode.AvalonEdit.Document;
+using Lyzard.IDE.Messages;
 using Lyzard.Interfaces;
 using Lyzard.MessageBus;
 using System;
@@ -17,11 +18,29 @@ namespace Lyzard.IDE.ViewModels
     {
 
         private string _file = "";
+        private TextDocument _document = new TextDocument();
 
         public CodeEditorViewModel()
         {
             Title = "New Editor";
             IconSource = new BitmapImage((new Uri($"pack://application:,,/Resources/Images/Document-1.png")));
+        }
+
+        public ICommand Check => new DelegateCommand((x) => {
+            var a = _document.Text;
+        });
+
+        public TextDocument Document
+        {
+            get
+            {
+                return _document;
+            }
+            set
+            {
+                _document = value;
+                FirePropertyChanged();
+            }
         }
 
         public override bool CanSave(object param)

@@ -15,7 +15,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+using System;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace Lyzard.FileSystem
 {
@@ -34,7 +36,7 @@ namespace Lyzard.FileSystem
             FullPath = filepath;
             FilePath = Path.GetDirectoryName(filepath);
             FileName = Path.GetFileName(filepath);
-            Extension = Path.GetExtension(FilePath);
+            Extension = Path.GetExtension(FileName);
             _watcher = new FileSystemSafeWatcher(FilePath, FileName);
             _watcher.Changed += OnChanged;
             _watcher.EnableRaisingEvents = true;
@@ -69,5 +71,19 @@ namespace Lyzard.FileSystem
             _watcher.EnableRaisingEvents = true;
         }
         
+        public void Save<T>(T item)
+        {
+            Save(JsonConvert.SerializeObject(item, Formatting.Indented));
+        }
+
+        public T Load<T>()
+        {
+            return JsonConvert.DeserializeObject<T>(Load());
+        }
+
+        public void Save(object instance)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

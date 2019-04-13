@@ -45,6 +45,14 @@
   <ItemGroup>
     <Compile Include="Settings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StateManager.cs" />
+    <Compile Include="SystemState.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lyzard.FileSystem\Lyzard.FileSystem.csproj">
+      <Project>{7ac24e59-0f41-496e-b9ea-bf6c2c51724d}</Project>
+      <Name>Lyzard.FileSystem</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

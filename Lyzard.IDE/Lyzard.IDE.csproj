@@ -40,6 +40,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Controls.Ribbon" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -80,6 +81,9 @@
     <Compile Include="Converters\BooleanConverter.cs" />
     <Compile Include="Converters\BooleanNotConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Dialogs\DialogManager.cs" />
+    <Compile Include="Folding\BraceFoldingStrategy.cs" />
+    <Compile Include="Folding\RegionFoldingStrategy.cs" />
     <Compile Include="Messages\DocumentActivatedMessage.cs" />
     <Compile Include="Messages\FileCreatedMessage.cs" />
     <Compile Include="Messages\FileSavedMessage.cs" />
@@ -219,9 +223,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj">
+      <Project>{6c55b776-26d4-4db3-a6ab-87e783b2f3d1}</Project>
+      <Name>ICSharpCode.AvalonEdit</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lyzard.AppDominaControl\Lyzard.AppDominaControl.csproj">
       <Project>{E74F74F1-74D8-46E5-9EA1-156AB6DB7AAF}</Project>
       <Name>Lyzard.AppDominaControl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lyzard.Config\Lyzard.Config.csproj">
+      <Project>{1269A2D2-4FE0-461A-BB9F-9CAF7738A6C7}</Project>
+      <Name>Lyzard.Config</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lyzard.CustomControls\Lyzard.CustomControls.csproj">
       <Project>{e84c9051-20b8-458d-ab9e-92690d32e571}</Project>
@@ -270,6 +282,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\quit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Dialogs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

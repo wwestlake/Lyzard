@@ -72,6 +72,10 @@
       <Project>{17edc774-3293-4270-9d94-450f80b25504}</Project>
       <Name>Lyzard.Compiler</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lyzard.Config\Lyzard.Config.csproj">
+      <Project>{1269a2d2-4fe0-461a-bb9f-9caf7738a6c7}</Project>
+      <Name>Lyzard.Config</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lyzard.Core\Lyzard.Core.csproj">
       <Project>{4dde0941-3567-40ef-9373-2a1f02695327}</Project>
       <Name>Lyzard.Core</Name>
@@ -83,6 +87,10 @@
     <ProjectReference Include="..\Lyzard.FileSystem\Lyzard.FileSystem.csproj">
       <Project>{7ac24e59-0f41-496e-b9ea-bf6c2c51724d}</Project>
       <Name>Lyzard.FileSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lyzard.IDE\Lyzard.IDE.csproj">
+      <Project>{F10700B9-3243-4E28-9360-B3D3B777BA20}</Project>
+      <Name>Lyzard.IDE</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lyzard.Interfaces\Lyzard.Interfaces.csproj">
       <Project>{242df884-d9f1-4b8d-891b-56d973cbb1d4}</Project>

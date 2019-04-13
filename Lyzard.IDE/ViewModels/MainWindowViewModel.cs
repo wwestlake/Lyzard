@@ -134,7 +134,6 @@ namespace Lyzard.IDE.ViewModels
         public ICommand FileNew => new DelegateCommand((x) =>
         {
             _dockManager.Documents.Add(new CodeEditorViewModel());
-            //FirePropertyChanged("SaveCommand");
         });
 
         public bool FileExplorerVisibility

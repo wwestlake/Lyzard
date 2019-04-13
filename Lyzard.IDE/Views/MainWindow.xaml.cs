@@ -1,4 +1,5 @@
-﻿using Lyzard.FileSystem;
+﻿using Lyzard.Config;
+using Lyzard.FileSystem;
 using Lyzard.IDE.ViewModels;
 using Lyzard.PluginFramework;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace Lyzard.IDE.Views
     public partial class MainWindow : Window, IMainRibbonApi
     {
         public static IMainRibbonApi MainWindowApi { get; private set; }
+        internal static MainWindow CurrentWindow { get; private set; }
 
         public MainWindow()
         {
@@ -25,8 +27,14 @@ namespace Lyzard.IDE.Views
             Loaded += (s, e) =>
             {
                 MainWindowApi = this;
+                CurrentWindow = this;
                 DataContext = new MainWindowViewModel();
-                //LoadLayout();
+                LoadLayout();
+            };
+
+            Closing += (s, e) =>
+            {
+                SaveLayout();
             };
 
         }
@@ -35,18 +43,19 @@ namespace Lyzard.IDE.Views
         public void SaveLayout()
         {
             XmlLayoutSerializer serializer = new XmlLayoutSerializer(_dockManager);
-            using (var stream = File.OpenWrite(CommonFolders.LyzardLayout))
+            using (var stream = new StringWriter())
             {
                 serializer.Serialize(stream);
+                StateManager.SystemState.Layout = stream.ToString();
             }
         }
 
         public void LoadLayout()
         {
-            if (!File.Exists(CommonFolders.LyzardLayout)) return;
+            if (string.IsNullOrEmpty(StateManager.SystemState.Layout)) return;
             XmlLayoutSerializer layoutSerializer = new XmlLayoutSerializer(_dockManager);
             layoutSerializer.LayoutSerializationCallback += LayoutSerializer_LayoutSerializationCallback;
-            using (var reader = File.OpenRead(CommonFolders.LyzardLayout))
+            using (var reader = new StringReader(StateManager.SystemState.Layout))
             {
                 layoutSerializer.Deserialize(reader);
             }

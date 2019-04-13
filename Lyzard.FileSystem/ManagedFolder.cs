@@ -49,6 +49,7 @@ namespace Lyzard.FileSystem
             _watcher.EnableRaisingEvents = true;
         }
 
+        public string Path { get { return _path; } }
         public IList<ManagedFolder> SubFolders { get; set; } = new List<ManagedFolder>();
         public IList<ManagedFile> Files { get; set; } = new List<ManagedFile>();
 

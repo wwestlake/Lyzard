@@ -18,7 +18,9 @@
 using Lyzard.AppDominaControl;
 using Lyzard.Collections;
 using Lyzard.Compiler;
+using Lyzard.Config;
 using Lyzard.FileSystem;
+using Lyzard.IDE.Dialogs;
 using Lyzard.MessageBus;
 using Lyzard.ProjectManager;
 using System;
@@ -31,13 +33,34 @@ namespace Lyzard.TestConsole
 {
     class Program
     {
+        [STAThread]
+        public static void Main(string[] args)
+        {
+            var folder = DialogManager.SelectManagedFolder();
+
+            if (folder != null)
+                Console.WriteLine(folder.Path);
+
+            pause("Press a key");
+        }
+
+        public static void TestState(string[] args)
+        {
+            var state = StateManager.SystemState;
+            state.AddRecentFile("Test File");
+
+            Console.WriteLine(state.RecentFiles[0]);
+
+
+        }
+
 
         class MyMessage
         {
             public string Message { get; set; }
         }
 
-        static void Main(string[] args)
+        static void CompilerTest(string[] args)
         {
             var compiler = new CSharpCompiler();
             var dllPath = Path.GetFullPath("TestClasses") + CommonFolders.Sep + "TestApp.dll";
@@ -66,7 +89,6 @@ namespace Lyzard.TestConsole
 
             }
 
-            pause("Press a key");
         }
 
         static void MessageBrokerTests(string[] args)

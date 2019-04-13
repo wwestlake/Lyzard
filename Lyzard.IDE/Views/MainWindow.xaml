@@ -70,18 +70,10 @@
                     <RibbonMenuItem Header="Save" Command="{Binding SaveCommand}" />
                     <RibbonMenuItem Header="Save As" Command="{Binding SaveAsCommand}" />
                     <RibbonMenuItem Header="Save All" Command="{Binding SaveAllCommand}" />
-                    <RibbonMenuItem Header="Test Load Plugin" Command="{Binding TestLoadPlugin}" />
                 </RibbonGroup>
             </RibbonTab>
             <RibbonTab Header="View">
                 <RibbonGroup Style="{StaticResource ToolControl}" Header="Tools" ItemsSource="{Binding Path=DockManager.Anchorables,Mode=OneWay}" />
-
-                <!--<RibbonCheckBox Label="File Explorer" IsChecked="{Binding FileExplorerVisibility}" />
-                    <RibbonCheckBox Label="Project Explorer"  IsChecked="{Binding ProjectExplorerVisibility}" />
-                    <RibbonCheckBox Label="Properties"  IsChecked="{Binding PropertiesExplorerVisibility}" />
-                    <RibbonMenuItem Header="Save Layout" Click="RibbonMenuItem_Click" />
-                    <RibbonMenuItem Header="Load Layout" Click="RibbonMenuItem_Click_1" />-->
-
                 <RibbonGroup Header="Styling">
                     <RibbonComboBox>
                         <RibbonGallery SelectedItem="{Binding SelectedStyle, Mode=TwoWay}">

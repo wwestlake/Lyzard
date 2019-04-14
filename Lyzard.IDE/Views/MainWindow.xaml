@@ -203,9 +203,7 @@
         <ContentControl Content="{Binding DockManager.Dialog}">
             <ContentControl.Resources>
                 <DataTemplate DataType="{x:Type dlgvm:NewProjectDlgViewModel}">
-                    <Border Background="Black" Opacity="0.6">
-                        <dlgviews:NewProjectDlg />
-                    </Border>
+                    <dlgviews:NewProjectDlg />
                 </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>

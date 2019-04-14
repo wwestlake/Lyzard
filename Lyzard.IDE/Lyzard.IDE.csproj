@@ -36,6 +36,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>lyzardicon_L9T_10.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ConsoleControl.WPF, Version=1.2.1.0, Culture=neutral, PublicKeyToken=bb812711dbc508e1, processorArchitecture=MSIL">
       <HintPath>..\packages\ConsoleControl.WPF.1.2.1\lib\net40-client\ConsoleControl.WPF.dll</HintPath>
@@ -43,10 +46,19 @@
     <Reference Include="ConsoleControlAPI, Version=1.2.1.0, Culture=neutral, PublicKeyToken=7c86b8a36b9c33e2, processorArchitecture=MSIL">
       <HintPath>..\packages\ConsoleControlAPI.1.2.1\lib\net40\ConsoleControlAPI.dll</HintPath>
     </Reference>
+    <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net462\ControlzEx.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=1.6.5.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.6.5\lib\net47\MahApps.Metro.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Controls.Ribbon" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net462\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -90,6 +102,9 @@
     <Compile Include="Dialogs\DialogManager.cs" />
     <Compile Include="Folding\BraceFoldingStrategy.cs" />
     <Compile Include="Folding\RegionFoldingStrategy.cs" />
+    <Compile Include="LyzardSplash.xaml.cs">
+      <DependentUpon>LyzardSplash.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Messages\DocumentActivatedMessage.cs" />
     <Compile Include="Messages\FileCreatedMessage.cs" />
     <Compile Include="Messages\FileSavedMessage.cs" />
@@ -143,6 +158,10 @@
     <Compile Include="Views\ToolBoxView.xaml.cs">
       <DependentUpon>ToolBoxView.xaml</DependentUpon>
     </Compile>
+    <Page Include="LyzardSplash.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\PluginDocumentViewWrapper.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -269,6 +288,10 @@
       <Project>{0b6a580a-fc50-4f97-a652-e89bea5cc68a}</Project>
       <Name>Lyzard.PluginFramework</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lyzard.SystemIO\Lyzard.SystemIO.csproj">
+      <Project>{F3F22409-4AE8-4A08-BF70-5BFC04716F19}</Project>
+      <Name>Lyzard.SystemIO</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Help.png" />
@@ -297,6 +320,31 @@
   <ItemGroup>
     <Resource Include="Resources\Images\quit.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Images\LyzardSplash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\LyzardIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Icons\lyzardicon_L9T_1.ico" />
+    <Resource Include="Resources\Images\Icons\lyzardicon_L9T_10.ico" />
+    <Resource Include="Resources\Images\Icons\lyzardicon_L9T_11.ico" />
+    <Resource Include="Resources\Images\Icons\lyzardicon_L9T_12.ico" />
+    <Resource Include="Resources\Images\Icons\lyzardicon_L9T_2.ico" />
+    <Resource Include="Resources\Images\Icons\lyzardicon_L9T_3.ico" />
+    <Resource Include="Resources\Images\Icons\lyzardicon_L9T_4.ico" />
+    <Resource Include="Resources\Images\Icons\lyzardicon_L9T_5.ico" />
+    <Resource Include="Resources\Images\Icons\lyzardicon_L9T_6.ico" />
+    <Resource Include="Resources\Images\Icons\lyzardicon_L9T_7.ico" />
+    <Resource Include="Resources\Images\Icons\lyzardicon_L9T_8.ico" />
+    <Resource Include="Resources\Images\Icons\lyzardicon_L9T_9.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="lyzardicon_L9T_12.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="lyzardicon_L9T_10.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

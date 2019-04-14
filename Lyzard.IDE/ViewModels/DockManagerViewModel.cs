@@ -3,6 +3,7 @@ using Lyzard.IDE.ViewModels.Plugins;
 using Lyzard.IDE.Views;
 using Lyzard.IDE.Views.Dialogs;
 using Lyzard.PluginFramework;
+using Lyzard.SystemIO;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using Xceed.Wpf.AvalonDock.Themes;
 
 namespace Lyzard.IDE.ViewModels
@@ -154,7 +156,7 @@ namespace Lyzard.IDE.ViewModels
 
         private void CreateProject(NewProjectDlgViewModel newProjectDlgViewModel)
         {
-            
+            ConsoleIO.WriteOutput("Creating Project", Colors.Red);
         }
     }
 }

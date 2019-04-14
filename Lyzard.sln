@@ -51,6 +51,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LagDaemon.LyzardPlugins.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSharpCode.AvalonEdit", "ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj", "{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lyzard.SystemIO", "Lyzard.SystemIO\Lyzard.SystemIO.csproj", "{F3F22409-4AE8-4A08-BF70-5BFC04716F19}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -131,6 +133,10 @@ Global
 		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3F22409-4AE8-4A08-BF70-5BFC04716F19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3F22409-4AE8-4A08-BF70-5BFC04716F19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3F22409-4AE8-4A08-BF70-5BFC04716F19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3F22409-4AE8-4A08-BF70-5BFC04716F19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -155,6 +161,7 @@ Global
 		{E74F74F1-74D8-46E5-9EA1-156AB6DB7AAF} = {F2306309-E114-467F-8243-C191D6A62F8E}
 		{69643A4F-D7DE-49FD-B7A5-353BCB5528A9} = {8E34F7F1-CE24-4B80-BAFD-8D58C0F1C993}
 		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1} = {F2306309-E114-467F-8243-C191D6A62F8E}
+		{F3F22409-4AE8-4A08-BF70-5BFC04716F19} = {F2306309-E114-467F-8243-C191D6A62F8E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AE90B002-DEBC-4C09-A6E4-E8CB054DA0DF}

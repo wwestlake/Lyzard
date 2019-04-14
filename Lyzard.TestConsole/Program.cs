@@ -47,7 +47,7 @@ namespace Lyzard.TestConsole
         public static void TestState(string[] args)
         {
             var state = StateManager.SystemState;
-            state.AddRecentFile("Test File");
+            state.RecentFiles.Add("Test File");
 
             Console.WriteLine(state.RecentFiles[0]);
 

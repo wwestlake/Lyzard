@@ -10,7 +10,7 @@ namespace Lyzard.IDE.ViewModels
     {
         public CommandConsoleViewModel()
         {
-            
+            ContentId = "CommandConsole";
         }
 
     }

@@ -8,5 +8,10 @@ namespace Lyzard.IDE.ViewModels
 {
     public class OutputViewModel : ConsoleViewModelBase
     {
+        public OutputViewModel()
+        {
+            ContentId = "Output";
+        }
+
     }
 }

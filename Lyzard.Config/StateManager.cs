@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 
 namespace Lyzard.Config
 {
@@ -16,30 +17,36 @@ namespace Lyzard.Config
         private static ManagedFile _stateFile;
         private static SystemState _stateInstance;
 
+        static StateManager()
+        {
+            ScheduleSaveState();
+        }
+
         public static SystemState SystemState
         {
             get
             {
                 if (_stateInstance != null) return _stateInstance;
-                _stateFile = new ManagedFile(StateFile);
+                _stateFile = ManagedFile.Create(StateFile);
                 if (_stateFile.Load().Length == 0)
                 {
                     _stateInstance = new SystemState();
-                    _stateInstance.Changed += _stateInstance_Changed;
                     SaveState();
                 }
                 else
                 {
                     LoadState();
-                    _stateInstance.Changed += _stateInstance_Changed;
                 }
                 return _stateInstance;
             }
         }
 
-        private static void _stateInstance_Changed(object sender, EventArgs e)
+        private static void ScheduleSaveState()
         {
-            SaveState();
+            var timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(20);
+            timer.Tick += SaveState;
+            timer.Start();
         }
 
         private static void LoadState()
@@ -47,9 +54,15 @@ namespace Lyzard.Config
             _stateInstance = _stateFile.Load<SystemState>();
         }
 
-        private static void SaveState()
+        public static void SaveState()
         {
             _stateFile.Save(_stateInstance);
+        }
+
+
+        private static void SaveState(object sender, EventArgs e)
+        {
+            SaveState();
         }
     }
 }

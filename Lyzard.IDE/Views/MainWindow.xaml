@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lyzard.IDE"
         xmlns:views="clr-namespace:Lyzard.IDE.Views"
+        xmlns:dlgviews="clr-namespace:Lyzard.IDE.Views.Dialogs"
         xmlns:plgviews="clr-namespace:Lyzard.IDE.UserControls"
         xmlns:pane="clr-namespace:Lyzard.IDE.Views.Pane"
         xmlns:conv="clr-namespace:Lyzard.IDE.Converters"
@@ -13,8 +14,10 @@
         xmlns:dock="http://schemas.xceed.com/wpf/xaml/avalondock"
         xmlns:dockctrl="http://schemas.xceed.com/wpf/xaml/avalondock"
         xmlns:vm="clr-namespace:Lyzard.IDE.ViewModels"
+        xmlns:dlgvm="clr-namespace:Lyzard.IDE.ViewModels.DialogsViewModels"
         xmlns:plgvm="clr-namespace:Lyzard.IDE.ViewModels.Plugins"
         mc:Ignorable="d"
+        WindowState="Maximized"
         Title="{Binding Title}" Height="450" Width="800">
 
     <Window.Resources>
@@ -36,160 +39,175 @@
         
     </Window.Resources>
 
-    <DockPanel>
+    <Grid>
+        <DockPanel>
 
-        <Ribbon DockPanel.Dock="Top" x:Name="MainRibbon">
+            <Ribbon DockPanel.Dock="Top" x:Name="MainRibbon">
 
-            <Ribbon.HelpPaneContent>
-                <RibbonButton SmallImageSource="/Resources/Images/Help.png" Command="{Binding HelpCommand}" />
-            </Ribbon.HelpPaneContent>
+                <Ribbon.HelpPaneContent>
+                    <RibbonButton SmallImageSource="/Resources/Images/Help.png" Command="{Binding HelpCommand}" />
+                </Ribbon.HelpPaneContent>
 
-            <Ribbon.QuickAccessToolBar>
-                <RibbonQuickAccessToolBar>
-                    <RibbonButton x:Name ="Save" SmallImageSource="/Resources/Images/save.png" Command="{Binding SaveCommand}" />
-                    <RibbonSplitButton x:Name ="Undo" SmallImageSource="/Resources/Images/undo.png">
-                    </RibbonSplitButton>
-                    <RibbonSplitButton x:Name="Redo" SmallImageSource="/Resources/Images/redo.png" >
-                    </RibbonSplitButton>
-                </RibbonQuickAccessToolBar>
-            </Ribbon.QuickAccessToolBar>
-            <!-- Application Menu, located at the left-hand side (down arrow) -->
-            <Ribbon.ApplicationMenu>
-                <RibbonApplicationMenu KeyTip="F">
-                    <RibbonApplicationMenuItem Header="Options" ImageSource="/Resources/Images/options.png" />
-                    <RibbonApplicationMenuItem Header="Exit" ImageSource="/Resources/Images/quit.png" />
-                </RibbonApplicationMenu>
-            </Ribbon.ApplicationMenu>
-
-
-            <RibbonTab Header="Home">
-                <RibbonGroup Header="New">
-                    <RibbonMenuItem Header="New File" Command="{Binding FileNew}" />
-                    <RibbonMenuItem Header="Save Layout" Click="RibbonMenuItem_Click" />
-                    <RibbonMenuItem Header="Load Layout" Click="RibbonMenuItem_Click_1" />
-                    <RibbonMenuItem Header="Save" Command="{Binding SaveCommand}" />
-                    <RibbonMenuItem Header="Save As" Command="{Binding SaveAsCommand}" />
-                    <RibbonMenuItem Header="Save All" Command="{Binding SaveAllCommand}" />
-                </RibbonGroup>
-            </RibbonTab>
-            <RibbonTab Header="View">
-                <RibbonGroup Style="{StaticResource ToolControl}" Header="Tools" ItemsSource="{Binding Path=DockManager.Anchorables,Mode=OneWay}" />
-                <RibbonGroup Header="Styling">
-                    <RibbonComboBox>
-                        <RibbonGallery SelectedItem="{Binding SelectedStyle, Mode=TwoWay}">
-                            <RibbonGalleryCategory ItemsSource="{Binding ThemeNames}" />
-                        </RibbonGallery>
-                                       
-                    </RibbonComboBox>
-                </RibbonGroup>
-            </RibbonTab>
-
-        </Ribbon>
-        <StatusBar DockPanel.Dock="Bottom">
-            <Label Content="Ready" />
-        </StatusBar>
-        
-        <dock:DockingManager x:Name="_dockManager"
-            DataContext="{Binding DockManager}"  
-            AllowMixedOrientation="True" 
-            DocumentsSource="{Binding Path=Documents, Mode=TwoWay}"
-            AnchorablesSource="{Binding Path=Anchorables, Mode=TwoWay}"
-            ActiveContent="{Binding Path=ActiveDocument, Mode=TwoWay, Converter={StaticResource ActiveDocumentConverter}}"
-            Theme="{Binding CurrentTheme}"                 
-            >
+                <Ribbon.QuickAccessToolBar>
+                    <RibbonQuickAccessToolBar>
+                        <RibbonButton x:Name ="Save" SmallImageSource="/Resources/Images/save.png" Command="{Binding SaveCommand}" />
+                        <RibbonSplitButton x:Name ="Undo" SmallImageSource="/Resources/Images/undo.png">
+                        </RibbonSplitButton>
+                        <RibbonSplitButton x:Name="Redo" SmallImageSource="/Resources/Images/redo.png" >
+                        </RibbonSplitButton>
+                    </RibbonQuickAccessToolBar>
+                </Ribbon.QuickAccessToolBar>
+                <!-- Application Menu, located at the left-hand side (down arrow) -->
+                <Ribbon.ApplicationMenu>
+                    <RibbonApplicationMenu KeyTip="F">
+                        <RibbonApplicationMenuItem Header="Options" ImageSource="/Resources/Images/options.png" />
+                        <RibbonApplicationMenuItem Header="Exit" ImageSource="/Resources/Images/quit.png" />
+                    </RibbonApplicationMenu>
+                </Ribbon.ApplicationMenu>
 
 
-            <dock:DockingManager.Resources>
-                <DataTemplate DataType="{x:Type vm:CodeEditorViewModel}">
-                   <views:CodeEditorView />
+                <RibbonTab Header="Home">
+                    <RibbonGroup Header="New">
+                        <RibbonMenuItem Header="New File" Command="{Binding FileNew}" />
+                        <RibbonMenuItem Header="New Project" Command="{Binding NewProject}" />
+                        <RibbonMenuItem Header="Save" Command="{Binding SaveCommand}" />
+                        <RibbonMenuItem Header="Save As" Command="{Binding SaveAsCommand}" />
+                        <RibbonMenuItem Header="Save All" Command="{Binding SaveAllCommand}" />
+                    </RibbonGroup>
+                    <RibbonGroup Header="New">
+                        <RibbonMenuItem Header="Open File" Command="{Binding OpenFile}" />
+                    </RibbonGroup>
+                </RibbonTab>
+                <RibbonTab Header="View">
+                    <RibbonGroup Style="{StaticResource ToolControl}" Header="Tools" ItemsSource="{Binding Path=DockManager.Anchorables,Mode=OneWay}" />
+                    <RibbonGroup Header="Styling">
+                        <RibbonComboBox>
+                            <RibbonGallery SelectedItem="{Binding SelectedStyle, Mode=TwoWay}">
+                                <RibbonGalleryCategory ItemsSource="{Binding ThemeNames}" />
+                            </RibbonGallery>
+                                           
+                        </RibbonComboBox>
+                    </RibbonGroup>
+                </RibbonTab>
+
+            </Ribbon>
+            <StatusBar DockPanel.Dock="Bottom">
+                <Label Content="Ready" />
+            </StatusBar>
+            
+            <dock:DockingManager x:Name="_dockManager"
+                DataContext="{Binding DockManager}"  
+                AllowMixedOrientation="True" 
+                DocumentsSource="{Binding Path=Documents, Mode=TwoWay}"
+                AnchorablesSource="{Binding Path=Anchorables, Mode=TwoWay}"
+                ActiveContent="{Binding Path=ActiveDocument, Mode=TwoWay, Converter={StaticResource ActiveDocumentConverter}}"
+                Theme="{Binding CurrentTheme}"                 
+                >
+
+
+                <dock:DockingManager.Resources>
+                    <DataTemplate DataType="{x:Type vm:CodeEditorViewModel}">
+                       <views:CodeEditorView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:CommandConsoleViewModel}">
+                        <views:ConsoleView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:FileExplorerViewModel}">
+                        <views:FileExplorerView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:OutputViewModel}">
+                        <views:OutputView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:PropertiesViewModel}">
+                        <views:PropertiesView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type plgvm:UserPluginDocumentViewModel}">
+                        <plgviews:PluginDocumentViewWrapper />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type plgvm:UserPluginToolPaneViewModel}">
+                        <plgviews:PluginToolPaneViewWrapper />
+                    </DataTemplate>
+
+                </dock:DockingManager.Resources>
+
+
+                <dock:DockingManager.DocumentHeaderTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Height="16" Source="{Binding Content.IconSource}" Margin="0 0 4 0" />
+                            <TextBlock Text="{Binding Content.Title}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </dock:DockingManager.DocumentHeaderTemplate>
+
+
+
+                <dock:DockingManager.LayoutItemContainerStyleSelector>
+                    <pane:PanesStyleSelector>
+                        <pane:PanesStyleSelector.ExplorerStyle>
+                            <Style TargetType="{x:Type dock:LayoutAnchorableItem}">
+                                <Setter Property="Visibility" Value="{Binding Model.IsVisible, Mode=TwoWay, Converter={StaticResource btvc}, ConverterParameter={x:Static Visibility.Hidden}}"/>
+                                <Setter Property="ContentId" Value="{Binding Model.ContentId}"/>
+                                <Setter Property="IsSelected" Value="{Binding Model.IsSelected, Mode=TwoWay}"/>
+                                <Setter Property="IsActive" Value="{Binding Model.IsActive, Mode=TwoWay}"/>
+                                <Setter Property="HideCommand" Value="{Binding Model.HideCommand}" />
+                                <Setter Property="CanHide" Value="{Binding Model.CanHide, diag:PresentationTraceSources.TraceLevel=High}" />
+                                <Setter Property="Title" Value="{Binding Model.Title}" />
+                                <Setter Property="IconSource" Value="{Binding Model.IconSource, diag:PresentationTraceSources.TraceLevel=High}" />
+                            </Style>
+                        </pane:PanesStyleSelector.ExplorerStyle>
+                        <pane:PanesStyleSelector.ConsoleStyle>
+                            <Style TargetType="{x:Type dock:LayoutAnchorableItem}">
+                                <Setter Property="Visibility" Value="{Binding Model.IsVisible, Mode=TwoWay, Converter={StaticResource btvc}, ConverterParameter={x:Static Visibility.Hidden}}"/>
+                                <Setter Property="ContentId" Value="{Binding Model.ContentId}"/>
+                                <Setter Property="IsSelected" Value="{Binding Model.IsSelected, Mode=TwoWay}"/>
+                                <Setter Property="IsActive" Value="{Binding Model.IsActive, Mode=TwoWay}"/>
+                                <Setter Property="HideCommand" Value="{Binding Model.HideCommand}" />
+                                <Setter Property="CanHide" Value="{Binding Model.CanHide, diag:PresentationTraceSources.TraceLevel=High}" />
+                                <Setter Property="Title" Value="{Binding Model.Title}" />
+                                <Setter Property="IconSource" Value="{Binding Model.IconSource, diag:PresentationTraceSources.TraceLevel=High}" />
+                            </Style>
+                        </pane:PanesStyleSelector.ConsoleStyle>
+                        <pane:PanesStyleSelector.FileStyle>
+                            <Style TargetType="{x:Type dock:LayoutItem}">
+                                <Setter Property="ToolTip" Value="{Binding Model.FilePath}"/>
+                                <Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}"/>
+                                <Setter Property="ContentId" Value="{Binding Model.ContentId}"/>
+                                <Setter Property="IconSource" Value="{Binding Model.IconSource}" />
+                                <Setter Property="IsSelected" Value="{Binding Model.IsSelected, Mode=TwoWay}"/>
+                                <Setter Property="IsActive" Value="{Binding Model.IsActive, Mode=TwoWay}"/>
+                            </Style>
+                        </pane:PanesStyleSelector.FileStyle>
+                    </pane:PanesStyleSelector>
+                </dock:DockingManager.LayoutItemContainerStyleSelector>
+
+
+                <dock:DockingManager.LayoutUpdateStrategy>
+                    <views:LayoutInitializer />
+                </dock:DockingManager.LayoutUpdateStrategy>
+
+
+                <dock:LayoutRoot x:Name="_layoutRoot">
+                    
+                    <dock:LayoutPanel Orientation="Horizontal">
+                        <dock:LayoutDocumentPane>
+                        </dock:LayoutDocumentPane>
+                    </dock:LayoutPanel>
+                    
+                    
+                </dock:LayoutRoot>
+            </dock:DockingManager>
+        </DockPanel>
+
+
+        <ContentControl Content="{Binding DockManager.Dialog}">
+            <ContentControl.Resources>
+                <DataTemplate DataType="{x:Type dlgvm:NewProjectDlgViewModel}">
+                    <Border Background="Black" Opacity="0.6">
+                        <dlgviews:NewProjectDlg />
+                    </Border>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type vm:CommandConsoleViewModel}">
-                    <views:ConsoleView />
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type vm:FileExplorerViewModel}">
-                    <views:FileExplorerView />
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type vm:OutputViewModel}">
-                    <views:OutputView />
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type vm:PropertiesViewModel}">
-                    <views:PropertiesView />
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type plgvm:UserPluginDocumentViewModel}">
-                    <plgviews:PluginDocumentViewWrapper />
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type plgvm:UserPluginToolPaneViewModel}">
-                    <plgviews:PluginToolPaneViewWrapper />
-                </DataTemplate>
-
-            </dock:DockingManager.Resources>
-
-
-            <dock:DockingManager.DocumentHeaderTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Height="16" Source="{Binding Content.IconSource}" Margin="0 0 4 0" />
-                        <TextBlock Text="{Binding Content.Title}" />
-                    </StackPanel>
-                </DataTemplate>
-            </dock:DockingManager.DocumentHeaderTemplate>
-
-
-
-            <dock:DockingManager.LayoutItemContainerStyleSelector>
-                <pane:PanesStyleSelector>
-                    <pane:PanesStyleSelector.ExplorerStyle>
-                        <Style TargetType="{x:Type dock:LayoutAnchorableItem}">
-                            <Setter Property="Visibility" Value="{Binding Model.IsVisible, Mode=TwoWay, Converter={StaticResource btvc}, ConverterParameter={x:Static Visibility.Hidden}}"/>
-                            <Setter Property="ContentId" Value="{Binding Model.ContentId}"/>
-                            <Setter Property="IsSelected" Value="{Binding Model.IsSelected, Mode=TwoWay}"/>
-                            <Setter Property="IsActive" Value="{Binding Model.IsActive, Mode=TwoWay}"/>
-                            <Setter Property="HideCommand" Value="{Binding Model.HideCommand}" />
-                            <Setter Property="CanHide" Value="{Binding Model.CanHide, diag:PresentationTraceSources.TraceLevel=High}" />
-                            <Setter Property="Title" Value="{Binding Model.Title}" />
-                            <Setter Property="IconSource" Value="{Binding Model.IconSource, diag:PresentationTraceSources.TraceLevel=High}" />
-                        </Style>
-                    </pane:PanesStyleSelector.ExplorerStyle>
-                    <pane:PanesStyleSelector.ConsoleStyle>
-                        <Style TargetType="{x:Type dock:LayoutAnchorableItem}">
-                            <Setter Property="Visibility" Value="{Binding Model.IsVisible, Mode=TwoWay, Converter={StaticResource btvc}, ConverterParameter={x:Static Visibility.Hidden}}"/>
-                            <Setter Property="ContentId" Value="{Binding Model.ContentId}"/>
-                            <Setter Property="IsSelected" Value="{Binding Model.IsSelected, Mode=TwoWay}"/>
-                            <Setter Property="IsActive" Value="{Binding Model.IsActive, Mode=TwoWay}"/>
-                            <Setter Property="HideCommand" Value="{Binding Model.HideCommand}" />
-                            <Setter Property="CanHide" Value="{Binding Model.CanHide, diag:PresentationTraceSources.TraceLevel=High}" />
-                            <Setter Property="Title" Value="{Binding Model.Title}" />
-                            <Setter Property="IconSource" Value="{Binding Model.IconSource, diag:PresentationTraceSources.TraceLevel=High}" />
-                        </Style>
-                    </pane:PanesStyleSelector.ConsoleStyle>
-                    <pane:PanesStyleSelector.FileStyle>
-                        <Style TargetType="{x:Type dock:LayoutItem}">
-                            <Setter Property="ToolTip" Value="{Binding Model.FilePath}"/>
-                            <Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}"/>
-                            <Setter Property="ContentId" Value="{Binding Model.ContentId}"/>
-                            <Setter Property="IconSource" Value="{Binding Model.IconSource}" />
-                            <Setter Property="IsSelected" Value="{Binding Model.IsSelected, Mode=TwoWay}"/>
-                            <Setter Property="IsActive" Value="{Binding Model.IsActive, Mode=TwoWay}"/>
-                        </Style>
-                    </pane:PanesStyleSelector.FileStyle>
-                </pane:PanesStyleSelector>
-            </dock:DockingManager.LayoutItemContainerStyleSelector>
-
-
-            <dock:DockingManager.LayoutUpdateStrategy>
-                <views:LayoutInitializer />
-            </dock:DockingManager.LayoutUpdateStrategy>
-
-
-            <dock:LayoutRoot x:Name="_layoutRoot">
-                
-                <dock:LayoutPanel Orientation="Horizontal">
-                    <dock:LayoutDocumentPane>
-                    </dock:LayoutDocumentPane>
-                </dock:LayoutPanel>
-                
-                
-            </dock:LayoutRoot>
-        </dock:DockingManager>
-    </DockPanel>
+            </ContentControl.Resources>
+        </ContentControl>
+    </Grid>
 </Window>

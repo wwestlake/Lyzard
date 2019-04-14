@@ -14,11 +14,14 @@ namespace Lyzard.IDE.ViewModels
 
         public FileExplorerViewModel()
         {
+            ContentId = "FileExplorer";
             Title = "File Explorer";
             IconSource = new BitmapImage(new Uri($"pack://application:,,/Resources/Images/FileExplore.png"));
         }
 
-
+        public ICommand TestCommand => new DelegateCommand((x) => {
+            var a = 1;
+        });
 
         public bool CanHide
         {

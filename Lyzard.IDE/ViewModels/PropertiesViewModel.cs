@@ -8,5 +8,9 @@ namespace Lyzard.IDE.ViewModels
 {
     public class PropertiesViewModel : ExplorerViewModelBase
     {
+        public PropertiesViewModel()
+        {
+            ContentId = "Properties";
+        }
     }
 }

@@ -35,6 +35,7 @@ namespace Lyzard.IDE.Views
             Closing += (s, e) =>
             {
                 SaveLayout();
+                StateManager.SaveState();
             };
 
         }
@@ -63,7 +64,37 @@ namespace Lyzard.IDE.Views
 
         private void LayoutSerializer_LayoutSerializationCallback(object sender, LayoutSerializationCallbackEventArgs e)
         {
-            var o = e.Content;
+            var vm = DataContext as MainWindowViewModel;
+
+            switch (e.Model.ContentId)
+            {
+                case "FileExplorer":
+                    e.Content = vm.DockManager._fileexpl;
+                    break;
+                case "CommandConsole":
+                    e.Content = vm.DockManager._console;
+                    break;
+                case "Output":
+                    e.Content = vm.DockManager._output;
+                    break;
+                case "Project":
+                    e.Content = vm.DockManager._project;
+                    break;
+                case "Properties":
+                    e.Content = vm.DockManager._properties;
+                    break;
+                default:
+                    if (e.Model.ContentId.StartsWith("file://"))
+                    {
+                        var path = e.Model.ContentId.Substring(7);
+                        e.Content = new CodeEditorViewModel(path);
+                        DockManagerViewModel.DocumentManager.Documents.Add(e.Content as CodeEditorViewModel);
+                    } else
+                    {
+                        e.Cancel = true;
+                    }
+                    break;
+            }
         }
 
         private void RibbonMenuItem_Click(object sender, RoutedEventArgs e)

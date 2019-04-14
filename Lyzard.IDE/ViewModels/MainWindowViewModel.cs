@@ -1,5 +1,7 @@
 ﻿using Lyzard.AppDominaControl;
+using Lyzard.IDE.Dialogs;
 using Lyzard.IDE.Messages;
+using Lyzard.IDE.Views.Dialogs;
 using Lyzard.Interfaces;
 using Lyzard.MessageBus;
 using Lyzard.PluginFramework;
@@ -11,6 +13,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 using Xceed.Wpf.AvalonDock.Themes;
@@ -25,22 +28,12 @@ namespace Lyzard.IDE.ViewModels
         private Dictionary<string, Theme> _themes = new Dictionary<string, Theme>();
         private DockManagerViewModel _dockManager;
 
-        private readonly CommandConsoleViewModel _console = new CommandConsoleViewModel() { Title = "Console" };
-        private readonly FileExplorerViewModel _fileexpl = new FileExplorerViewModel() { Title = "File Explorer" };
-        private readonly OutputViewModel _output = new OutputViewModel() { Title = "Output" };
-        private readonly ProjectExplorerViewModel _project = new ProjectExplorerViewModel() { Title = "Project Explorer" };
-        private readonly PropertiesViewModel _properties = new PropertiesViewModel() { Title = "Properties" };
 
         public MainWindowViewModel()
         {
             DockManager = new DockManagerViewModel();
             Title = "Lyzard Developer";
 
-            DockManager.Anchorables.Add(_console);
-            DockManager.Anchorables.Add(_fileexpl);
-            DockManager.Anchorables.Add(_output);
-            DockManager.Anchorables.Add(_project);
-            DockManager.Anchorables.Add(_properties);
 
             _themes.Add("Aero", new AeroTheme());
             _themes.Add("VS 2010", new VS2010Theme());
@@ -57,9 +50,9 @@ namespace Lyzard.IDE.ViewModels
 
         private void RegisterHandlers()
         {
-            _fileexpl.ToolWindowHidden += (s, e) => { DoToggleFileManager(); };
+            DockManager._fileexpl.ToolWindowHidden += (s, e) => { DoToggleFileManager(); };
 
-            _dockManager.ActiveDocumentChanged += _dockManager_ActiveDocumentChanged;
+            DockManager.ActiveDocumentChanged += _dockManager_ActiveDocumentChanged;
 
             MessageBroker.Instance.Subscribe<FileSavedMessage>((msg) => {
                 MessageBroker.Instance.Reply(this, msg, new FileSavedMessage() { Vm = null });
@@ -76,6 +69,9 @@ namespace Lyzard.IDE.ViewModels
 
         public string Title { get { return _title; } set { _title = value; FirePropertyChanged(); } }
 
+        public ICommand NewProject  => new DelegateCommand((x) => {
+            DockManager.CreateProject();
+        });
 
         public IList<string> ThemeNames
         {
@@ -136,41 +132,49 @@ namespace Lyzard.IDE.ViewModels
             _dockManager.Documents.Add(new CodeEditorViewModel());
         });
 
+        public ICommand OpenFile => new DelegateCommand((x) => {
+            var file = DialogManager.OpenFile();
+            if (file != null)
+            {
+                DockManager.Documents.Add(new CodeEditorViewModel(file));
+            }
+        });
+
         public bool FileExplorerVisibility
         {
-            get { return _fileexpl.IsVisible; }
+            get { return DockManager._fileexpl.IsVisible; }
             set
             {
                 if (value)
-                    _fileexpl.IsVisible = true;
+                    DockManager._fileexpl.IsVisible = true;
                 else
-                    _fileexpl.IsVisible = false;
+                    DockManager._fileexpl.IsVisible = false;
                 FirePropertyChanged();
             }
         }
 
         public bool ProjectExplorerVisibility
         {
-            get { return _project.IsVisible; }
+            get { return DockManager._project.IsVisible; }
             set
             {
                 if (value)
-                    _project.IsVisible = true;
+                    DockManager._project.IsVisible = true;
                 else
-                    _project.IsVisible = false;
+                    DockManager._project.IsVisible = false;
                 FirePropertyChanged();
             }
         }
 
         public bool PropertiesExplorerVisibility
         {
-            get { return _properties.IsVisible; }
+            get { return DockManager._properties.IsVisible; }
             set
             {
                 if (value)
-                    _properties.IsVisible = true;
+                    DockManager._properties.IsVisible = true;
                 else
-                    _properties.IsVisible = false;
+                    DockManager._properties.IsVisible = false;
                 FirePropertyChanged();
             }
         }
@@ -201,13 +205,13 @@ namespace Lyzard.IDE.ViewModels
 
         public void DoToggleFileManager()
         {
-            if (!_dockManager.Anchorables.Contains(_fileexpl))
+            if (!_dockManager.Anchorables.Contains(DockManager._fileexpl))
             {
-                _dockManager.Anchorables.Add(_fileexpl);
+                _dockManager.Anchorables.Add(DockManager._fileexpl);
             }
-            _fileexpl.IsVisible = !_fileexpl.IsVisible;
+            DockManager._fileexpl.IsVisible = !DockManager._fileexpl.IsVisible;
             ToggleFileManagerHeader =
-                _fileexpl.IsVisible ? "Hide File Explorer" : "Show File Explorer";
+                DockManager._fileexpl.IsVisible ? "Hide File Explorer" : "Show File Explorer";
 
         }
 

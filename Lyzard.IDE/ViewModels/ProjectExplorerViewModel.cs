@@ -8,5 +8,9 @@ namespace Lyzard.IDE.ViewModels
 {
     public class ProjectExplorerViewModel : ExplorerViewModelBase
     {
+        public ProjectExplorerViewModel()
+        {
+            ContentId = "Project";
+        }
     }
 }

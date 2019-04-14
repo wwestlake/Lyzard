@@ -26,14 +26,14 @@ namespace Lyzard.IDE.Dialogs
             var result = dlg.ShowDialog();
             if (result == DialogResult.OK)
             {
-                file = new ManagedFile(dlg.FileName);
+                file = ManagedFile.Create(dlg.FileName);
                 StateManager.SystemState.LastFileOpenLocation = file.FilePath;
                 if (file.Extension == ".lyzard")
                 {
-                    StateManager.SystemState.AddRecentProject(file.FullPath);
+                    StateManager.SystemState.RecentProjects.Add(file.FullPath);
                 } else
                 {
-                    StateManager.SystemState.AddRecentFile(file.FullPath);
+                    StateManager.SystemState.RecentFiles.Add(file.FullPath);
                 }
             }
             return file;
@@ -52,16 +52,16 @@ namespace Lyzard.IDE.Dialogs
             var result = dlg.ShowDialog();
             if (result == DialogResult.OK)
             {
-                file = new ManagedFile(dlg.FileName);
+                file = ManagedFile.Create(dlg.FileName);
                 file.Save(text);
                 StateManager.SystemState.LastFileOpenLocation = file.FilePath;
                 if (file.Extension == ".lyzard")
                 {
-                    StateManager.SystemState.AddRecentProject(file.FullPath);
+                    StateManager.SystemState.RecentProjects.Add(file.FullPath);
                 }
                 else
                 {
-                    StateManager.SystemState.AddRecentFile(file.FullPath);
+                    StateManager.SystemState.RecentFiles.Add(file.FullPath);
                 }
             }
             return file;

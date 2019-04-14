@@ -33,7 +33,11 @@ namespace Lyzard.IDE.Views
 
             Loaded += (s, e) =>
             {
-                foldingManager = FoldingManager.Install(textEditor.TextArea);
+                if (foldingManager == null)
+                {
+                    foldingManager = FoldingManager.Install(textEditor.TextArea);
+                }
+
                 braceStrategy = new BraceFoldingStrategy();
                 regionStrategy = new RegionFoldingStrategy();
                 textEditor.TextArea.IndentationStrategy = new ICSharpCode.AvalonEdit.Indentation.CSharp.CSharpIndentationStrategy(textEditor.Options);

@@ -1,5 +1,7 @@
-﻿using Lyzard.IDE.ViewModels.Plugins;
+﻿using Lyzard.IDE.ViewModels.DialogsViewModels;
+using Lyzard.IDE.ViewModels.Plugins;
 using Lyzard.IDE.Views;
+using Lyzard.IDE.Views.Dialogs;
 using Lyzard.PluginFramework;
 using System;
 using System.Collections.Generic;
@@ -7,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Xceed.Wpf.AvalonDock.Themes;
 
@@ -17,14 +20,40 @@ namespace Lyzard.IDE.ViewModels
         private ObservableCollection<DocumentViewModelBase> _editors;
         private ObservableCollection<PaneViewModel> _tools;
         private Theme _theme;
+        internal CommandConsoleViewModel _console = new CommandConsoleViewModel() { Title = "Console" };
+        internal FileExplorerViewModel _fileexpl = new FileExplorerViewModel() { Title = "File Explorer" };
+        internal OutputViewModel _output = new OutputViewModel() { Title = "Output" };
+        internal ProjectExplorerViewModel _project = new ProjectExplorerViewModel() { Title = "Project Explorer" };
+        internal PropertiesViewModel _properties = new PropertiesViewModel() { Title = "Properties" };
 
-        private static DockManagerViewModel DocumentManager;
+        internal static DockManagerViewModel DocumentManager;
 
         public DockManagerViewModel()
         {
             DocumentManager = this;
             _editors = new ObservableCollection<DocumentViewModelBase>();
             _tools = new ObservableCollection<PaneViewModel>();
+
+            Anchorables.Add(_console);
+            Anchorables.Add(_fileexpl);
+            Anchorables.Add(_output);
+            Anchorables.Add(_project);
+            Anchorables.Add(_properties);
+
+
+        }
+
+        public ViewModelBase Dialog
+        {
+            get
+            {
+                return _dialog;
+            }
+            set
+            {
+                _dialog = value;
+                FirePropertyChanged();
+            }
         }
 
         public void CreateDocument(IPluginDocumentView view, IPluginDocumentViewModel model)
@@ -79,6 +108,7 @@ namespace Lyzard.IDE.ViewModels
         }
 
         DocumentViewModelBase _activeDocument;
+        private ViewModelBase _dialog;
 
         public DocumentViewModelBase ActiveDocument
         {
@@ -108,8 +138,23 @@ namespace Lyzard.IDE.ViewModels
             return _editors.Any(editor => editor.IsDirty);
         }
 
+        internal void CreateProject()
+        {
+            Dialog = new NewProjectDlgViewModel() {
+                Completed = (x) => 
+                {
+                    if (x)
+                    {
+                        CreateProject(Dialog as NewProjectDlgViewModel);
+                    }
+                    Dialog = null;
+                }
+            };
+        }
 
-
-
+        private void CreateProject(NewProjectDlgViewModel newProjectDlgViewModel)
+        {
+            
+        }
     }
 }

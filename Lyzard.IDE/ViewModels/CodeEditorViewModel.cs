@@ -1,4 +1,5 @@
 ﻿using ICSharpCode.AvalonEdit.Document;
+using Lyzard.FileSystem;
 using Lyzard.IDE.Messages;
 using Lyzard.Interfaces;
 using Lyzard.MessageBus;
@@ -17,14 +18,39 @@ namespace Lyzard.IDE.ViewModels
     public class CodeEditorViewModel : DocumentViewModelBase
     {
 
-        private string _file = "";
         private TextDocument _document = new TextDocument();
+        private ManagedFile _file;
 
         public CodeEditorViewModel()
         {
             Title = "New Editor";
             IconSource = new BitmapImage((new Uri($"pack://application:,,/Resources/Images/Document-1.png")));
         }
+
+        public CodeEditorViewModel(string path)
+        {
+            _file = ManagedFile.Create(path);
+            if (_file != null)
+            {
+                Document.Text = _file.Load();
+                Title = _file.FileName;
+                ContentId = $"file://{_file.FullPath}";
+                //FirePropertyChanged("Document");
+            }
+        }
+
+        public CodeEditorViewModel(ManagedFile file)
+        {
+            _file = file;
+            if (_file != null)
+            {
+                Document.Text = _file.Load();
+                Title = _file.FileName;
+                ContentId = $"file://{_file.FullPath}";
+                //FirePropertyChanged("Document");
+            }
+        }
+
 
         public ICommand Check => new DelegateCommand((x) => {
             var a = _document.Text;
@@ -50,34 +76,23 @@ namespace Lyzard.IDE.ViewModels
 
         public override void Close()
         {
-            if (IsDirty)
+            if (!IsDirty)
             {
-                switch (ShowMessageBox($"File '{_file}' has changed, do you want to Save the File.", "File Not Saved", MessageBoxButtons.YesNoCancel))
-                {
-                    case MessageBoxResults.Yes:
-                        Save(null);
-                        break;
-                    case MessageBoxResults.No:
-
-                        break;
-                    case MessageBoxResults.Cancel:
-                        return;
-                }
+                DockManagerViewModel.DocumentManager.Documents.Remove(this);
+            } else
+            {
+                //dialog
             }
         }
 
         public override void Save(object param)
         {
             IsDirty = false;
-            //MessageBroker.Instance.Publish(this, new FileSavedMessage());
 
         }
 
         public override void SaveAs(object param)
         {
-            MessageBroker.Instance.Publish(this, new FileSavedMessage(), (msg) => {
-                Console.WriteLine("SaveAs Got Callback");
-            });
         }
     }
 }

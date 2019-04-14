@@ -55,7 +55,7 @@ namespace Lyzard.FileSystem
 
         public ManagedFile CreateFile(string filename)
         {
-            var file = new ManagedFile($"{_path}\\{filename}");
+            var file = ManagedFile.Create($"{_path}\\{filename}");
             Files.Add(file);
             return file;
         }

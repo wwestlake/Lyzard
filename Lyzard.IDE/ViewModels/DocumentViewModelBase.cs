@@ -23,7 +23,7 @@ namespace Lyzard.IDE.ViewModels
             Close();
         });
 
-        public bool IsDirty { get; set; } = true;
+        public bool IsDirty { get; set; } = false;
 
         public string FilePath
         {

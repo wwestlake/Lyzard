@@ -28,7 +28,7 @@ namespace Lyzard.FileSystem
 
         private FileSystemSafeWatcher _watcher;
 
-        public ManagedFile(string filepath)
+        private ManagedFile(string filepath)
         {
             var folder = Path.GetDirectoryName(filepath);
             if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
@@ -41,6 +41,18 @@ namespace Lyzard.FileSystem
             _watcher.Changed += OnChanged;
             _watcher.EnableRaisingEvents = true;
             _watcher.NotifyFilter = NotifyFilters.LastWrite;
+        }
+
+        public static ManagedFile Create(string filepath)
+        {
+            try
+            {
+                return new ManagedFile(filepath);
+            } catch (Exception)
+            {
+                return null;
+            }
+
         }
 
 

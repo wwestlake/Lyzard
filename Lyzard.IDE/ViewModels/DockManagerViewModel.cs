@@ -145,10 +145,7 @@ namespace Lyzard.IDE.ViewModels
             Dialog = new NewProjectDlgViewModel() {
                 Completed = (x) => 
                 {
-                    if (x)
-                    {
-                        CreateProject(Dialog as NewProjectDlgViewModel);
-                    }
+                    CreateProject(Dialog as NewProjectDlgViewModel);
                     Dialog = null;
                 }
             };
@@ -158,5 +155,17 @@ namespace Lyzard.IDE.ViewModels
         {
             ConsoleIO.WriteOutput("Creating Project", Colors.Red);
         }
+
+        public void ShowDialog<Vm>(Vm viewModel) where Vm: DialogViewModelBase
+        {
+            if (Dialog != null) throw new InvalidOperationException("Can not show dialog while another dialog is visible");
+            Dialog = viewModel;
+        }
+
+        public void HideDialog()
+        {
+            Dialog = null;
+        }
+
     }
 }

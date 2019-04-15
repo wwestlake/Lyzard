@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimulationContract.cs" />
     <Compile Include="SummulationRunner.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,6 @@
 ﻿using ICSharpCode.AvalonEdit.Folding;
 using Lyzard.IDE.Folding;
+using Lyzard.IDE.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,6 +57,15 @@ namespace Lyzard.IDE.Views
             if (braceStrategy != null && regionStrategy != null)
             {
                 braceStrategy.UpdateFoldings(foldingManager, textEditor.Document, regionStrategy);
+            }
+        }
+
+        private void TextEditor_DocumentChanged(object sender, EventArgs e)
+        {
+            var vm = DataContext as CodeEditorViewModel;
+            if (vm != null)
+            {
+                vm.IsDirty = true;
             }
         }
     }

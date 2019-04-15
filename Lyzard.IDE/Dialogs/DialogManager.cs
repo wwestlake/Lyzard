@@ -22,7 +22,7 @@ namespace Lyzard.IDE.Dialogs
             var dlg = new OpenFileDialog();
             dlg.InitialDirectory = lastPath;
             dlg.DefaultExt = ".lyzard";
-            dlg.Filter = "Lyzard Project (*.lyzard)|*.lyzard|C Sharp (*.cs)|*.cs|Visual Basic (*.vb)|*.vb|All File (*.*)|*.*";
+            dlg.Filter = "C Sharp (*.cs)|*.cs|Visual Basic (*.vb)|*.vb|Lyzard Project (*.lyzard)|*.lyzard|All File (*.*)|*.*";
             var result = dlg.ShowDialog();
             if (result == DialogResult.OK)
             {

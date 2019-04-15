@@ -10,12 +10,12 @@
     
     <edit:TextEditor 
         x:Name="textEditor" 
-        SyntaxHighlighting="C#" 
+        SyntaxHighlighting="{Binding SyntaxHighlighting}" 
         FontSize="24" 
         ShowLineNumbers="True" 
-        LineNumbersForeground="Yellow" 
-        Background="#111111" 
-        Foreground="White" 
+        LineNumbersForeground="Blue" 
+        Background="#EEEEEE" 
+        TextChanged="TextEditor_DocumentChanged"
         Document="{Binding Path=Document, Mode=TwoWay}"/>
     
 </UserControl>

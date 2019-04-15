@@ -118,6 +118,8 @@
     <Compile Include="ViewModels\CommandConsoleViewModel.cs" />
     <Compile Include="ViewModels\ConsoleViewModelBase.cs" />
     <Compile Include="ViewModels\DelegateCommand.cs" />
+    <Compile Include="ViewModels\DialogsViewModels\DialogViewModelBase.cs" />
+    <Compile Include="ViewModels\DialogsViewModels\LyzardMessageDlgViewModel.cs" />
     <Compile Include="ViewModels\DialogsViewModels\NewProjectDlgViewModel.cs" />
     <Compile Include="ViewModels\DockManagerViewModel.cs" />
     <Compile Include="ViewModels\DocumentViewModelBase.cs" />
@@ -137,6 +139,9 @@
     </Compile>
     <Compile Include="Views\ConsoleView.xaml.cs">
       <DependentUpon>ConsoleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\LyzardMessage.xaml.cs">
+      <DependentUpon>LyzardMessage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Dialogs\NewProjectDlg.xaml.cs">
       <DependentUpon>NewProjectDlg.xaml</DependentUpon>
@@ -167,6 +172,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\PluginToolPaneViewWrapper.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\LyzardMessage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -84,6 +84,11 @@ namespace Lyzard.IDE.Views
                     e.Content = vm.DockManager._properties;
                     break;
                 default:
+                    if (e.Model.ContentId == null)
+                    {
+                        e.Cancel = true;
+                        break;
+                    }
                     if (e.Model.ContentId.StartsWith("file://"))
                     {
                         var path = e.Model.ContentId.Substring(7);

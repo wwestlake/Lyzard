@@ -202,6 +202,9 @@
 
         <ContentControl Content="{Binding DockManager.Dialog}">
             <ContentControl.Resources>
+                <DataTemplate DataType="{x:Type dlgvm:LyzardMessageDlgViewModel}">
+                    <dlgviews:LyzardMessage />
+                </DataTemplate>
                 <DataTemplate DataType="{x:Type dlgvm:NewProjectDlgViewModel}">
                     <dlgviews:NewProjectDlg />
                 </DataTemplate>

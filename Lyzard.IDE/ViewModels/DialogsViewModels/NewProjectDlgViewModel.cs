@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace Lyzard.IDE.ViewModels.DialogsViewModels
 {
-    public class NewProjectDlgViewModel : ViewModelBase
+    public class NewProjectDlgViewModel : DialogViewModelBase
     {
         private string _title;
 
@@ -18,15 +18,13 @@ namespace Lyzard.IDE.ViewModels.DialogsViewModels
             Title = "Create Project";
             ProjectPath = CommonFolders.UserProjects;
         }
-
-        internal Action<bool> Completed { get; set; }
-
+        
         public ICommand Close => new DelegateCommand((x) => {
-            Completed?.Invoke(false);
+            Completed?.Invoke(this);
         });
 
         public ICommand Create => new DelegateCommand((x) => {
-            Completed?.Invoke(true);
+            Completed?.Invoke(this);
         });
 
         public ICommand SelectFolder => new DelegateCommand((x) => {

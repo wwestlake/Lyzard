@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:Lyzard.IDE.Views.Dialogs"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             
              Background="Transparent"
              >
     <Border Width="700" Height="600" Background="Black" BorderBrush="AliceBlue" BorderThickness="2"  CornerRadius="8">

@@ -35,7 +35,7 @@ namespace Lyzard.IDE
 
 
                     // Load plugins and other resources here
-                    System.Threading.Thread.Sleep(delay);
+                    //System.Threading.Thread.Sleep(delay);
 
                     //because we're not on the UI thread, we need to use the Dispatcher
                     //associated with the splash screen to update the progress bar

@@ -12,6 +12,8 @@ namespace Lyzard.IDE.ViewModels
     public abstract class DocumentViewModelBase : PaneViewModel
     {
         private string _filePath;
+        protected bool initialLoad = false;
+        private bool _isDirty;
 
         public DocumentViewModelBase()
         {
@@ -23,7 +25,16 @@ namespace Lyzard.IDE.ViewModels
             Close();
         });
 
-        public bool IsDirty { get; set; } = false;
+        public bool IsDirty
+        {
+            get { return _isDirty; }
+            set {
+                if (!initialLoad)
+                    _isDirty = value;
+                else
+                    initialLoad = false;
+            }
+        }
 
         public string FilePath
         {

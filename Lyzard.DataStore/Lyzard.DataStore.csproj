@@ -4,15 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A3A0407F-890A-4F60-85D8-9E02B2389117}</ProjectGuid>
+    <ProjectGuid>{54C66679-4560-4E63-A40A-44C17666B043}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lyzard.ProjectManager</RootNamespace>
-    <AssemblyName>Lyzard.ProjectManager</AssemblyName>
+    <RootNamespace>Lyzard.DataStore</RootNamespace>
+    <AssemblyName>Lyzard.DataStore</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,7 +21,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Lyzard.ProjectManager.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -46,25 +44,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Project.cs" />
+    <Compile Include="IStorageContract.cs" />
+    <Compile Include="IStorageSettings.cs" />
+    <Compile Include="Storage.cs" />
+    <Compile Include="StorageSettings.cs" />
+    <Compile Include="SystemStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserStorage.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lyzard.FileSystem\Lyzard.FileSystem.csproj">
-      <Project>{7ac24e59-0f41-496e-b9ea-bf6c2c51724d}</Project>
+      <Project>{7AC24E59-0F41-496E-B9EA-BF6C2C51724D}</Project>
       <Name>Lyzard.FileSystem</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lyzard.Interfaces\Lyzard.Interfaces.csproj">
-      <Project>{242df884-d9f1-4b8d-891b-56d973cbb1d4}</Project>
-      <Name>Lyzard.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lyzard.MessageBus\Lyzard.MessageBus.csproj">
-      <Project>{8e731891-6390-42c7-9a5b-9d5ae408805f}</Project>
-      <Name>Lyzard.MessageBus</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lyzard.Utilities\Lyzard.Utilities.csproj">
-      <Project>{5f586ddb-cdf7-47b0-a6cf-b1105ffc177f}</Project>
-      <Name>Lyzard.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

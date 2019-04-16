@@ -80,6 +80,10 @@
       <Project>{4dde0941-3567-40ef-9373-2a1f02695327}</Project>
       <Name>Lyzard.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lyzard.DataStore\Lyzard.DataStore.csproj">
+      <Project>{54c66679-4560-4e63-a40a-44c17666b043}</Project>
+      <Name>Lyzard.DataStore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lyzard.Executive\Lyzard.Executive.csproj">
       <Project>{6353b145-57c3-4d16-bd7f-8b29d2fda386}</Project>
       <Name>Lyzard.Executive</Name>
@@ -99,10 +103,6 @@
     <ProjectReference Include="..\Lyzard.MessageBus\Lyzard.MessageBus.csproj">
       <Project>{8e731891-6390-42c7-9a5b-9d5ae408805f}</Project>
       <Name>Lyzard.MessageBus</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lyzard.ProjectManager\Lyzard.ProjectManager.csproj">
-      <Project>{A3A0407F-890A-4F60-85D8-9E02B2389117}</Project>
-      <Name>Lyzard.ProjectManager</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lyzard.Utilities\Lyzard.Utilities.csproj">
       <Project>{5f586ddb-cdf7-47b0-a6cf-b1105ffc177f}</Project>

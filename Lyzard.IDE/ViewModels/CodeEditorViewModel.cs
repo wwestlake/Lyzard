@@ -42,11 +42,11 @@ namespace Lyzard.IDE.ViewModels
             if (_file != null)
             {
                 Document.Text = _file.Load();
-                Title = _file.FileName;
                 ContentId = $"file://{_file.FullPath}";
                 SyntaxHighlighting = HighlightingManager.Instance.GetDefinitionByExtension(
                     _file.Extension
                     );
+                Title = _file.FileName + $" - ({SyntaxHighlighting.Name})";
                 initialLoad = true;
             }
         }
@@ -62,6 +62,7 @@ namespace Lyzard.IDE.ViewModels
                 SyntaxHighlighting = HighlightingManager.Instance.GetDefinitionByExtension(
                     _file.Extension
                     );
+                Title = _file.FileName + $" - ({SyntaxHighlighting.Name})";
                 initialLoad = true;
             }
         }
@@ -108,23 +109,19 @@ namespace Lyzard.IDE.ViewModels
                 DockManagerViewModel.DocumentManager.Documents.Remove(this);
             } else
             {
-                if (_file != null)
-                {
-                    var vm = new LyzardMessageDlgViewModel();
-                    DockManagerViewModel.DocumentManager.ShowDialog(vm);
-                    vm.Title = "Save File";
-                    vm.TextVisible = true;
-                    vm.ListVisible = false;
-                    vm.Message = $"The file '{_file.FileName}' is not saved, do you want to save it?";
-                    vm.YesVisible = true;
-                    vm.NoVisible = true;
-                    vm.CancelVisible = true;
-                    vm.OkVisible = false;
-                    vm.Completed = CloseDecision;
-                } else
-                {
-                    SaveAs(null);
-                }
+                var filename = _file != null ? _file.FileName : "New File";
+
+                var vm = new LyzardMessageDlgViewModel();
+                DockManagerViewModel.DocumentManager.ShowDialog(vm);
+                vm.Title = "Save File";
+                vm.TextVisible = true;
+                vm.ListVisible = false;
+                vm.Message = $"The file '{filename}' is not saved, do you want to save it?";
+                vm.YesVisible = true;
+                vm.NoVisible = true;
+                vm.CancelVisible = true;
+                vm.OkVisible = false;
+                vm.Completed = CloseDecision;
             }
         }
 
@@ -141,7 +138,10 @@ namespace Lyzard.IDE.ViewModels
                     case LyzardMessageResult.Yes:
                         DockManagerViewModel.DocumentManager.HideDialog();
                         DockManagerViewModel.DocumentManager.Documents.Remove(this);
-                        Save(null);
+                        if (_file != null)
+                            Save(null);
+                        else
+                            SaveAs(null);
                         break;
                     case LyzardMessageResult.No:
                         DockManagerViewModel.DocumentManager.HideDialog();

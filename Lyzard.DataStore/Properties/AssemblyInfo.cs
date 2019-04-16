@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Lyzard.ProjectManager")]
+[assembly: AssemblyTitle("Lyzard.DataStore")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Lyzard.ProjectManager")]
+[assembly: AssemblyProduct("Lyzard.DataStore")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("a3a0407f-890a-4f60-85d8-9e02b2389117")]
+[assembly: Guid("54c66679-4560-4e63-a40a-44c17666b043")]
 
 // Version information for an assembly consists of the following four values:
 //

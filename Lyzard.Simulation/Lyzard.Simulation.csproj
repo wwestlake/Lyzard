@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Lyzard.Simulation.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -41,8 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompletionCriteria.cs" />
+    <Compile Include="InitialConditions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimulationContract.cs" />
+    <Compile Include="SimulationEventArgs.cs" />
+    <Compile Include="SimulationEventHandler.cs" />
     <Compile Include="SummulationRunner.cs" />
   </ItemGroup>
   <ItemGroup>

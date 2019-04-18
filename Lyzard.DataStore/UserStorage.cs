@@ -7,19 +7,15 @@ using System.Threading.Tasks;
 
 namespace Lyzard.DataStore
 {
-    public class UserStorage : StorageContract
+    public class UserStorage<T> : StorageContract<T>
+        where T : class
     {
-        private static UserStorage _instance;
-
-
-        private UserStorage(string container) : base()
+        public UserStorage() : base(new UserStorageManager<T>())
         {
-            Settings.BaseLocation = CommonFolders.UserDataStore + CommonFolders.Sep + container;
         }
 
-        public static IStorageContract Create(string container)
+        public UserStorage(IStorageContract<MetaData<T>> manager) : base(manager)
         {
-            return _instance ?? (_instance = new UserStorage(container));
         }
     }
 }

@@ -44,9 +44,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CacheManager.cs" />
     <Compile Include="IStorageContract.cs" />
     <Compile Include="IStorageSettings.cs" />
+    <Compile Include="MetaData.cs" />
     <Compile Include="Storage.cs" />
+    <Compile Include="StorageFactory.cs" />
+    <Compile Include="StorageManager.cs" />
+    <Compile Include="UserStorageManager.cs" />
+    <Compile Include="SystemStorageManager.cs" />
     <Compile Include="StorageSettings.cs" />
     <Compile Include="SystemStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -59,6 +65,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="DataStoreClassDiagram.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

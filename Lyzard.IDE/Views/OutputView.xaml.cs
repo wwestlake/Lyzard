@@ -25,7 +25,7 @@ namespace Lyzard.IDE.Views
         public OutputView()
         {
             InitializeComponent();
-
+            Output.FontSize = StateManager.SystemState.OutputConsoleFontSize;
             Loaded += (s, e) => {
                 //Output.IsEnabled = false;
                 ConsoleIO.SetOutputConsole(this);
@@ -39,8 +39,9 @@ namespace Lyzard.IDE.Views
                 Output.FontSize += Math.Sign(e.Delta);
                 if (Output.FontSize > 34) Output.FontSize = 34;
                 if (Output.FontSize < 8) Output.FontSize = 8;
-                StateManager.SystemState.CommandConsoleFonSize = Output.FontSize;
+                StateManager.SystemState.OutputConsoleFontSize = Output.FontSize;
                 e.Handled = true;
+                
             }
         }
 

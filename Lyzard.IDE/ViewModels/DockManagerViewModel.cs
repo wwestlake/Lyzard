@@ -23,6 +23,7 @@ namespace Lyzard.IDE.ViewModels
         private ObservableCollection<PaneViewModel> _tools;
         private Theme _theme;
         internal CommandConsoleViewModel _console = new CommandConsoleViewModel() { Title = "Console" };
+        internal PowerShellConsoleViewModel _powerShell = new PowerShellConsoleViewModel() { Title = "Power Shell" };
         internal FileExplorerViewModel _fileexpl = new FileExplorerViewModel() { Title = "File Explorer" };
         internal OutputViewModel _output = new OutputViewModel() { Title = "Output" };
         internal ProjectExplorerViewModel _project = new ProjectExplorerViewModel() { Title = "Project Explorer" };
@@ -37,6 +38,7 @@ namespace Lyzard.IDE.ViewModels
             _tools = new ObservableCollection<PaneViewModel>();
 
             Anchorables.Add(_console);
+            Anchorables.Add(_powerShell);
             Anchorables.Add(_fileexpl);
             Anchorables.Add(_output);
             Anchorables.Add(_project);

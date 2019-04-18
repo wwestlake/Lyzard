@@ -4,15 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7AC24E59-0F41-496E-B9EA-BF6C2C51724D}</ProjectGuid>
+    <ProjectGuid>{55DDFA5F-2FAB-4DAC-B70F-E64E489B4812}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lyzard.FileSystem</RootNamespace>
-    <AssemblyName>Lyzard.FileSystem</AssemblyName>
+    <RootNamespace>Lyzard.Logger</RootNamespace>
+    <AssemblyName>Lyzard.Logger</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,7 +21,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Lyzard.FileSystem.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -33,9 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,19 +40,31 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommonFolders.cs" />
-    <Compile Include="FileSystemAccess.cs" />
-    <Compile Include="FileSystemItem.cs" />
-    <Compile Include="FileSystemSafeWatcher.cs" />
-    <Compile Include="ManagedFile.cs" />
-    <Compile Include="ManagedFolder.cs" />
-    <Compile Include="Paths.cs" />
+    <Compile Include="ConsoleLogger.cs" />
+    <Compile Include="FileLogger.cs" />
+    <Compile Include="SystemLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\Lyzard.Config\Lyzard.Config.csproj">
+      <Project>{1269A2D2-4FE0-461A-BB9F-9CAF7738A6C7}</Project>
+      <Name>Lyzard.Config</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lyzard.FileSystem\Lyzard.FileSystem.csproj">
+      <Project>{7AC24E59-0F41-496E-B9EA-BF6C2C51724D}</Project>
+      <Name>Lyzard.FileSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lyzard.Interfaces\Lyzard.Interfaces.csproj">
+      <Project>{242df884-d9f1-4b8d-891b-56d973cbb1d4}</Project>
+      <Name>Lyzard.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lyzard.SystemIO\Lyzard.SystemIO.csproj">
+      <Project>{F3F22409-4AE8-4A08-BF70-5BFC04716F19}</Project>
+      <Name>Lyzard.SystemIO</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

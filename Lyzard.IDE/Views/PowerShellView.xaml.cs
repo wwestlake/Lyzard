@@ -21,16 +21,14 @@ namespace Lyzard.IDE.Views
     /// <summary>
     /// Interaction logic for ConsoleView.xaml
     /// </summary>
-    public partial class ConsoleView : UserControl
+    public partial class PowerShellView : UserControl
     {
-        //private string fsi = @"C:\Program Files (x86)\Microsoft SDKs\F#\4.0\Framework\v4.0\fsi.exe";
-        public ConsoleView()
+        public PowerShellView()
         {
             InitializeComponent();
-            Console.FontSize = StateManager.SystemState.CommandConsoleFontSize;
+            Console.FontSize = StateManager.SystemState.PowerShellConsoleFontSize;
             var startFolder = CommonFolders.UserProjects;
-            //Console.StartProcess("powershell.exe", $"-noexit -command {{cd {startFolder}}}");
-            Console.StartProcess("cmd.exe", $"/K \"cd /d {startFolder}\"");
+            Console.StartProcess("powershell.exe", $" -noexit -command \"cd {startFolder}\"");
         }
 
         private void Console_MouseWheel(object sender, MouseWheelEventArgs e)
@@ -40,7 +38,7 @@ namespace Lyzard.IDE.Views
                 Console.FontSize += Math.Sign(e.Delta);
                 if (Console.FontSize > 34) Console.FontSize = 34;
                 if (Console.FontSize < 8) Console.FontSize = 8;
-                StateManager.SystemState.CommandConsoleFontSize = Console.FontSize;
+                StateManager.SystemState.PowerShellConsoleFontSize = Console.FontSize;
                 e.Handled = true;
             }
         }

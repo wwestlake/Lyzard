@@ -115,6 +115,7 @@
       <DependentUpon>PluginToolPaneViewWrapper.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\CodeEditorViewModel.cs" />
+    <Compile Include="ViewModels\PowerShellConsoleViewModel.cs" />
     <Compile Include="ViewModels\CommandConsoleViewModel.cs" />
     <Compile Include="ViewModels\ConsoleViewModelBase.cs" />
     <Compile Include="ViewModels\DelegateCommand.cs" />
@@ -136,6 +137,9 @@
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\CodeEditorView.xaml.cs">
       <DependentUpon>CodeEditorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PowerShellView.xaml.cs">
+      <DependentUpon>PowerShellView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ConsoleView.xaml.cs">
       <DependentUpon>ConsoleView.xaml</DependentUpon>
@@ -174,6 +178,10 @@
     <Page Include="UserControls\PluginToolPaneViewWrapper.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PowerShellView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Dialogs\LyzardMessage.xaml">
       <SubType>Designer</SubType>
@@ -288,6 +296,10 @@
     <ProjectReference Include="..\Lyzard.Interfaces\Lyzard.Interfaces.csproj">
       <Project>{242DF884-D9F1-4B8D-891B-56D973CBB1D4}</Project>
       <Name>Lyzard.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lyzard.Logger\Lyzard.Logger.csproj">
+      <Project>{55DDFA5F-2FAB-4DAC-B70F-E64E489B4812}</Project>
+      <Name>Lyzard.Logger</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lyzard.MessageBus\Lyzard.MessageBus.csproj">
       <Project>{8E731891-6390-42C7-9A5B-9D5AE408805F}</Project>

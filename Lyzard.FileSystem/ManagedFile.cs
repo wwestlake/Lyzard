@@ -17,6 +17,7 @@
  */
 using System;
 using System.IO;
+using System.Text;
 using Newtonsoft.Json;
 
 namespace Lyzard.FileSystem
@@ -83,6 +84,13 @@ namespace Lyzard.FileSystem
             _watcher.EnableRaisingEvents = true;
         }
         
+        public void Append(string text)
+        {
+            var sb = new StringBuilder(Load());
+            sb.Append(text);
+            Save(sb.ToString());
+        }
+
         public void Save<T>(T item)
         {
             Save(JsonConvert.SerializeObject(item, Formatting.Indented));
@@ -93,9 +101,7 @@ namespace Lyzard.FileSystem
             return JsonConvert.DeserializeObject<T>(Load());
         }
 
-        public void Save(object instance)
-        {
-            throw new NotImplementedException();
-        }
+
+
     }
 }

@@ -1,8 +1,12 @@
 ﻿using Lyzard.IDE.Views;
+using Lyzard.Interfaces;
+using Lyzard.Logger;
+using Lyzard.SystemIO;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace Lyzard.IDE
 {
@@ -18,6 +22,11 @@ namespace Lyzard.IDE
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            SystemLog.Instance.LogInfo($"Starting Lyzard");
+            SystemLog.Instance.LogWarning($"Warning log test");
+            SystemLog.Instance.LogError($"Error log test");
+            SystemLog.Instance.LogException($"Exception log test");
+            SystemLog.Instance.LogCritical($"Critical log test");
 
             var splash = new LyzardSplash();
             this.MainWindow = splash;
@@ -32,7 +41,6 @@ namespace Lyzard.IDE
                 for (int i = 1; i <= 100; i++)
                 {
                     if (i % 5 == 0) delay = rand.Next(50, 150);
-
 
                     // Load plugins and other resources here
                     //System.Threading.Thread.Sleep(delay);

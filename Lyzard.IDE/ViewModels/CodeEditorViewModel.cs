@@ -5,6 +5,7 @@ using Lyzard.IDE.Dialogs;
 using Lyzard.IDE.Messages;
 using Lyzard.IDE.ViewModels.DialogsViewModels;
 using Lyzard.Interfaces;
+using Lyzard.Logger;
 using Lyzard.MessageBus;
 using Lyzard.SystemIO;
 using System;
@@ -30,6 +31,8 @@ namespace Lyzard.IDE.ViewModels
 
         public CodeEditorViewModel()
         {
+            SystemLog.Instance.LogInfo($"Creating new file");
+
             Title = "New Editor";
             IconSource = new BitmapImage((new Uri($"pack://application:,,/Resources/Images/Document-1.png")));
             SyntaxHighlighting = HighlightingManager.Instance.GetDefinitionByExtension(".cs");
@@ -39,6 +42,7 @@ namespace Lyzard.IDE.ViewModels
         public CodeEditorViewModel(string path)
         {
             _file = ManagedFile.Create(path);
+            SystemLog.Instance.LogInfo($"Opening file...{_file.FileName}");
             if (_file != null)
             {
                 Document.Text = _file.Load();
@@ -53,6 +57,7 @@ namespace Lyzard.IDE.ViewModels
 
         public CodeEditorViewModel(ManagedFile file)
         {
+            SystemLog.Instance.LogInfo($"Opening file...{file.FileName}");
             _file = file;
             if (_file != null)
             {
@@ -122,6 +127,8 @@ namespace Lyzard.IDE.ViewModels
                 vm.CancelVisible = true;
                 vm.OkVisible = false;
                 vm.Completed = CloseDecision;
+                SystemLog.Instance.LogInfo($"Closed file...{_file.FileName}");
+
             }
         }
 
@@ -161,7 +168,9 @@ namespace Lyzard.IDE.ViewModels
         {
             if (_file != null)
             {
-                 _file.Save(_document.Text);
+                SystemLog.Instance.LogInfo($"Saving file...{_file.FileName}");
+
+                _file.Save(_document.Text);
             } else
             {
                 SaveAs(null);
@@ -171,7 +180,12 @@ namespace Lyzard.IDE.ViewModels
 
         public override void SaveAs(object param)
         {
+            var oldName = string.Empty;
+            if (_file != null)
+                oldName = _file.FileName;
+
             _file = DialogManager.SaveFileAs(_document.Text);
+            SystemLog.Instance.LogInfo($"Saving file as...From {oldName} to {_file.FileName}");
         }
     }
 }

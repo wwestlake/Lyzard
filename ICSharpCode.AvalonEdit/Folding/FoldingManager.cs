@@ -31,7 +31,7 @@ namespace ICSharpCode.AvalonEdit.Folding
 		/// </summary>
 		public FoldingManager(TextDocument document)
 		{
-			if (document == null)
+            if (document == null)
 				throw new ArgumentNullException("document");
 			this.document = document;
 			this.foldings = new TextSegmentCollection<FoldingSection>();

@@ -10,6 +10,10 @@ namespace Lyzard.DataStore
 
     public class StorageSettings : IStorageSettings
     {
+        public StorageSettings()
+        {
+        }
+
         public string BaseLocation { get; set; }
         public string IndexFile
         {
@@ -20,6 +24,7 @@ namespace Lyzard.DataStore
         }
 
         public string Container { get; set; }
+        public Format Format { get ; set; }
         string IStorageSettings.IndexFile { get; set; }
     }
 }

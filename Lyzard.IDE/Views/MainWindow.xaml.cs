@@ -48,6 +48,8 @@ namespace Lyzard.IDE.Views
             {
                 serializer.Serialize(stream);
                 StateManager.SystemState.Layout = stream.ToString();
+                StateManager.SaveState();
+
             }
         }
 
@@ -73,6 +75,9 @@ namespace Lyzard.IDE.Views
                     break;
                 case "CommandConsole":
                     e.Content = vm.DockManager._console;
+                    break;
+                case "PowerShell":
+                    e.Content = vm.DockManager._powerShell;
                     break;
                 case "Output":
                     e.Content = vm.DockManager._output;

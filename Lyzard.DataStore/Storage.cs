@@ -11,192 +11,81 @@ namespace Lyzard.DataStore
     /// <summary>
     /// Contract for all storage classes
     /// </summary>
-    public abstract class StorageContract : IStorageContract
+    public abstract class StorageContract<T> : IStorageContract<T>
+        where T: class
     {
-        private object lockObject = new object();
-        private ManagedFile _indexFile;
-        private Dictionary<Type, Guid> _index;
-        private Dictionary<Guid, List<object>> _cache = new Dictionary<Guid, List<object>>();
-        private Dictionary<Guid, ManagedFile> _files = new Dictionary<Guid, ManagedFile>();
+        private readonly IStorageContract<MetaData<T>> _manager;
 
-        public StorageContract()
+        public StorageContract(IStorageContract<MetaData<T>> storageManager)
         {
-            Settings = new StorageSettings();
+            _manager = storageManager;
         }
 
-        public IStorageSettings Settings { get; set; }
-
-
-        /// <summary>
-        /// Finds the fist item matching predicate
-        /// </summary>
-        /// <typeparam name="T">The type of item to find</typeparam>
-        /// <param name="predicate">The predicate</param>
-        /// <returns>The item</returns>
-        public T Find<T>(Predicate<T> predicate)
-             where T : class
+        public void Delete(T item)
         {
-            lock (lockObject)
-            {
-                return default(T);
-            }
+            var meta = RemoveFromCache(item);
+            _manager.Delete(meta);
         }
 
-        /// <summary>
-        /// Retrives all items of type T that where predicate returns true
-        /// </summary>
-        /// <typeparam name="T">The type of item to retreive</typeparam>
-        /// <param name="predicate">The predicate</param>
-        /// <returns>An enumeration of T</returns>
-        public IEnumerable<T> Query<T>(Predicate<T> predicate)
-             where T : class
+        public T Find(Predicate<T> predicate)
         {
-            lock (lockObject)
-            {
-                return null;
-            }
+            return _manager.Find((entity) => predicate(entity.Item));
         }
 
-        /// <summary>
-        /// Removes zero or more items from the data store
-        /// </summary>
-        /// <typeparam name="T">The type of item to remove</typeparam>
-        /// <param name="predicate">The predicate</param>
-        /// <returns>The number of items remove (may be zero)</returns>
-        public int Remove<T>(Predicate<T> predicate)
-             where T : class
+        public T Find(Predicate<T> predicate, int revision)
         {
-            lock (lockObject)
-            {
-                return 0;
-            }
+            return _manager.Find((entity) => predicate(entity.Item), revision);
         }
 
-        /// <summary>
-        /// Stores an item in the appropriate data store
-        /// </summary>
-        /// <typeparam name="T">The type of item to store</typeparam>
-        /// <param name="item">The item to store</param>
-        public void Store<T>(T item)
-             where T : class
+        public Guid? Identify(T item)
         {
-            lock (lockObject)
-            {
-                if (_index.ContainsKey(typeof(T)))
-                {
-                    UpdateIndexAndStore(item);
-                }
-                else
-                {
-                    CreatNewFileAndStore(item);
-                }
-            }
+            return _manager.Identify(item);
         }
 
-        private void UpdateIndexAndStore<T>(T item) where T : class
+        public void Prune(T item)
         {
-            var guid = _index[typeof(T)];
-            if (_cache.ContainsKey(guid))
-            {
-                UpdateCacheAndStore(item, guid);
-            }
-            else
-            {
-                LoadListAndStore(item, guid);
-            }
+            _manager.Prune(item);
         }
 
-        private void CreatNewFileAndStore<T>(T item) where T : class
+        public void Prune(T item, int revision)
         {
-            var guid = Guid.NewGuid();
-            _index.Add(typeof(T), guid);
-            SaveIndex();
-            var list = new List<T>();
-            AddItemToList(item, guid, list);
-            _cache[guid] = list.Select(x => x as object).ToList();
+            _manager.Prune(item, revision);
         }
 
-        private void LoadListAndStore<T>(T item, Guid guid) where T : class
+        public IEnumerable<T> Query(Predicate<T> predicate)
         {
-            var list = LoadList<T>(guid);
-            AddItemToList(item, guid, list);
-            _cache[guid] = list.Select(x => x as object).ToList();
-        }
-
-        private void UpdateCacheAndStore<T>(T item, Guid guid) where T : class
-        {
-            var list = _cache[guid];
-            AddItemToList(item, guid, list);
-            _cache[guid] = list.Select(x => x as object).ToList();
-        }
-
-        private List<T> LoadList<T>(Guid guid)
-        {
-            ManagedFile file;
-            if (_files.ContainsKey(guid))
-            {
-                file = _files[guid];
-            } else
-            {
-                var path = Settings.BaseLocation + CommonFolders.Sep + guid.ToString();
-                file = ManagedFile.Create(path);
-                _files.Add(guid, file);
-            }
-            return JsonConvert.DeserializeObject<List<T>>(file.Load());
-        }
-
-        private void AddItemToList<T>(T item, Guid guid, List<T> list) where T : class
-        {
-            var oldItem = list.FirstOrDefault(it => it.Equals(item));
-            if (oldItem != null)
-            {
-                list.Remove(oldItem);
-            }
-            list.Add(item);
-            Store(guid, list);
+            return (IEnumerable<T>)AddToCache( _manager.Query((entity) => predicate(entity.Item)) );
         }
 
 
-        #region Private Methods
-        private void Store<T>(Guid guid, List<T> list)
+        public T Store(T item)
         {
-            ManagedFile file;
-
-            if (_files.ContainsKey(guid))
-            {
-                file = _files[guid];
-            } else
-            {
-                var path = Settings.BaseLocation + CommonFolders.Sep + guid.ToString();
-                file = ManagedFile.Create(path);
-                _files.Add(guid, file);
-            }
-            file.Save(JsonConvert.SerializeObject(list));
+            return _manager.Store(CheckCache(item));
         }
 
-        private void SaveIndex()
+
+        /***********************************************************/
+
+        private MetaData<T> CheckCache(T item)
         {
-            _indexFile.Save(JsonConvert.SerializeObject(_index));
+            return CacheManager<T>.Instance.CheckCache(item);
         }
 
-        protected void LoadIndex()
+        private MetaData<T> RemoveFromCache(T item)
         {
-            _indexFile = ManagedFile.Create(Settings.IndexFile);
-            var text = _indexFile.Load();
-            if (string.IsNullOrEmpty(text))
-            {
-                _index = new Dictionary<Type, Guid>();
-                text = JsonConvert.SerializeObject(_index);
-            } else
-            {
-                _index = JsonConvert.DeserializeObject<Dictionary<Type, Guid>>(text);
-            }
+            return CacheManager<T>.Instance.RemoveFromCache(item);
         }
-       
-        
 
-        #endregion
-
+        public IEnumerable<MetaData<T>> AddToCache(IEnumerable<T> items)
+        {
+            return CacheManager<T>.Instance.AddToCache(items);
+        }
+        private IEnumerable<T> AddToCache(IEnumerable<MetaData<T>> items)
+        {
+            var _items = items.Select(item => (T)item).AsEnumerable<T>();
+            var result = AddToCache(_items).Select(item => (T)item).AsEnumerable<T>();
+            return result;
+        }
 
     }
 }

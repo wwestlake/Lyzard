@@ -24,8 +24,10 @@ namespace Lyzard.Config
 
         public string Layout { get; set; }
 
-        public double CommandConsoleFonSize { get; set; } = 16;
+        public double CommandConsoleFontSize { get; set; } = 16;
+        public double PowerShellConsoleFontSize { get; set; } = 16;
 
+        public double OutputConsoleFontSize { get; set; } = 16;
 
 
 

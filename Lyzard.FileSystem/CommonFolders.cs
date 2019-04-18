@@ -21,6 +21,7 @@ namespace Lyzard.FileSystem
         public static readonly string LyzardPlugins = LyzardAppData + Sep + "Plugins";
         public static readonly string LyzardTemplates = LyzardAppData + Sep + "Templates";
         public static readonly string LyzardDataStore = LyzardAppData + Sep + "DataStore";
+        public static readonly string LyzardLogs = LyzardAppData + Sep + "Logs";
         public static readonly string LyzardHelp = LyzardAppData + Sep + "Help";
 
         public static readonly string LyzardLayout = LyzardConfig + Sep + "Laout.xml";
@@ -43,6 +44,7 @@ namespace Lyzard.FileSystem
             LyzardPlugins,
             LyzardTemplates,
             LyzardDataStore,
+            LyzardLogs,
             LyzardHelp,
             UserProjects,
             UserTemplates,

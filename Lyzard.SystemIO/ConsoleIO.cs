@@ -10,6 +10,8 @@ namespace Lyzard.SystemIO
 {
     public static class ConsoleIO
     {
+        private static Queue<Tuple<string, Color>> _cache = new Queue<Tuple<string, Color>>();
+
         static ConsoleIO()
         {
         }
@@ -19,33 +21,49 @@ namespace Lyzard.SystemIO
         public static void SetOutputConsole(IOutputConsole output)
         {
             Output = output;
+            OuputCache();
         }
+
 
         public static void WriteOutput(string text, Color color)
         {
-            if (Output == null) return;
+            if (Output == null)
+            {
+                Cache(text, color);
+                return;
+            }
             Output.WriteOutput(text, color);
         }
 
+
         public static void WriteOutput(string text)
         {
-            if (Output == null) return;
-            Output.WriteOutput(text, Colors.White);
+            WriteOutput(text, Colors.White);
         }
 
         public static void WriteOutput(string format, params object[] args)
         {
-            if (Output == null) return;
             WriteOutput(string.Format(format, args));
         }
 
         public static void WriteOutput(string format, Color color, params object[] args)
         {
-            if (Output == null) return;
             WriteOutput(string.Format(format, args), color);
         }
 
+        private static void Cache(string text, Color color)
+        {
+            _cache.Enqueue(Tuple.Create(text, color));
+        }
 
+        private static void OuputCache()
+        {
+            while (_cache.Count > 0)
+            {
+                var info = _cache.Dequeue();
+                WriteOutput(info.Item1, info.Item2);
+            }
+        }
 
 
     }

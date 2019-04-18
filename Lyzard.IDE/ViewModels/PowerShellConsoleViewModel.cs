@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 namespace Lyzard.IDE.ViewModels
 {
 
-    public class CommandConsoleViewModel : ConsoleViewModelBase
+    public class PowerShellConsoleViewModel : ConsoleViewModelBase
     {
-        public CommandConsoleViewModel()
+        public PowerShellConsoleViewModel()
         {
-            ContentId = "CommandConsole";
+            ContentId = "PowerShell";
         }
     }
 }

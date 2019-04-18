@@ -112,6 +112,9 @@
                     <DataTemplate DataType="{x:Type vm:CommandConsoleViewModel}">
                         <views:ConsoleView />
                     </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:PowerShellConsoleViewModel}">
+                        <views:PowerShellView />
+                    </DataTemplate>
                     <DataTemplate DataType="{x:Type vm:FileExplorerViewModel}">
                         <views:FileExplorerView />
                     </DataTemplate>

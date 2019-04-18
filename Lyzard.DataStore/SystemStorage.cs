@@ -7,22 +7,13 @@ using System.Threading.Tasks;
 
 namespace Lyzard.DataStore
 {
-    public sealed class SystemStorage : StorageContract
+    public sealed class SystemStorage<T> : StorageContract<T>
+        where T : class
     {
-        private static SystemStorage _instance;
-
-
-        private SystemStorage(string container) : base()
+        public SystemStorage() : base(new SystemStorageManager<T>())
         {
-            Settings.BaseLocation = CommonFolders.LyzardDataStore + CommonFolders.Sep + container;
-            Settings.IndexFile = Settings.BaseLocation + CommonFolders.Sep + "Index.json";
-            LoadIndex();
         }
 
-        public static IStorageContract Create(string container)
-        {
-            return _instance ?? (_instance = new SystemStorage(container));
-        }
-
+        public SystemStorage(IStorageContract<MetaData<T>> manager) : base(manager) { }
     }
 }

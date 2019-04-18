@@ -32,31 +32,13 @@ using System.Linq;
 namespace Lyzard.TestConsole
 {
 
-    public class MyClass
-    {
-        public int MyProperty1 { get; set; }
 
-        public int MyProperty2 { get; set; }
-
-        public int MyProperty3 { get; set; }
-    }
 
     class Program
     {
         [STAThread]
         public static void Main(string[] args)
         {
-            var container = SystemStorage.Create("TestContainer");
-            container.Store(new MyClass());
-            container.Store(new MyClass());
-            container.Store(new MyClass());
-
-            //var list = new List<MyClass>();
-            //list.Add(new MyClass());
-            //list.Add(new MyClass());
-            //list.Add(new MyClass());
-            //
-            //var list2 = list.Select(x => x as object);
 
 
             pause("press a key");

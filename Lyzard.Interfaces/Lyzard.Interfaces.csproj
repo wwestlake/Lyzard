@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ILogger.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="MessageBoxButtons.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

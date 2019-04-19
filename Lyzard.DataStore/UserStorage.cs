@@ -14,7 +14,7 @@ namespace Lyzard.DataStore
         {
         }
 
-        public UserStorage(IStorageContract<MetaData<T>> manager) : base(manager)
+        public UserStorage(IStorageContract<MetaWrapper<T, MetaData>> manager) : base(manager)
         {
         }
     }

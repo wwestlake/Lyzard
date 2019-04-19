@@ -14,9 +14,9 @@ namespace Lyzard.DataStore
     public abstract class StorageContract<T> : IStorageContract<T>
         where T: class
     {
-        private readonly IStorageContract<MetaData<T>> _manager;
+        private readonly IStorageContract<MetaWrapper<T, MetaData>> _manager;
 
-        public StorageContract(IStorageContract<MetaData<T>> storageManager)
+        public StorageContract(IStorageContract<MetaWrapper<T, MetaData>> storageManager)
         {
             _manager = storageManager;
         }
@@ -29,12 +29,12 @@ namespace Lyzard.DataStore
 
         public T Find(Predicate<T> predicate)
         {
-            return _manager.Find((entity) => predicate(entity.Item));
+            return _manager.Find((entity) => predicate(entity.Data));
         }
 
         public T Find(Predicate<T> predicate, int revision)
         {
-            return _manager.Find((entity) => predicate(entity.Item), revision);
+            return _manager.Find((entity) => predicate(entity.Data), revision);
         }
 
         public Guid? Identify(T item)
@@ -54,7 +54,7 @@ namespace Lyzard.DataStore
 
         public IEnumerable<T> Query(Predicate<T> predicate)
         {
-            return (IEnumerable<T>)AddToCache( _manager.Query((entity) => predicate(entity.Item)) );
+            return (IEnumerable<T>)AddToCache( _manager.Query((entity) => predicate(entity.Data)) );
         }
 
 
@@ -66,21 +66,21 @@ namespace Lyzard.DataStore
 
         /***********************************************************/
 
-        private MetaData<T> CheckCache(T item)
+        private MetaWrapper<T, MetaData> CheckCache(T item)
         {
             return CacheManager<T>.Instance.CheckCache(item);
         }
 
-        private MetaData<T> RemoveFromCache(T item)
+        private MetaWrapper<T, MetaData> RemoveFromCache(T item)
         {
             return CacheManager<T>.Instance.RemoveFromCache(item);
         }
 
-        public IEnumerable<MetaData<T>> AddToCache(IEnumerable<T> items)
+        public IEnumerable<MetaWrapper<T, MetaData>> AddToCache(IEnumerable<T> items)
         {
             return CacheManager<T>.Instance.AddToCache(items);
         }
-        private IEnumerable<T> AddToCache(IEnumerable<MetaData<T>> items)
+        private IEnumerable<T> AddToCache(IEnumerable<MetaWrapper<T, MetaData>> items)
         {
             var _items = items.Select(item => (T)item).AsEnumerable<T>();
             var result = AddToCache(_items).Select(item => (T)item).AsEnumerable<T>();

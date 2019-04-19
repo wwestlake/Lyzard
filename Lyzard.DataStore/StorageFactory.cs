@@ -12,11 +12,11 @@ namespace Lyzard.DataStore
         private static StorageFactory<T> _instance;
         private SystemStorage<T> _systemStorage;
         private UserStorage<T> _userStorage;
-        private IStorageContract<MetaData<T>> _systemStorageManager;
-        private IStorageContract<MetaData<T>> _userStorageManager;
+        private IStorageContract<MetaWrapper<T, MetaData>> _systemStorageManager;
+        private IStorageContract<MetaWrapper<T, MetaData>> _userStorageManager;
 
 
-        public void SetSystemStorageManager(IStorageContract<MetaData<T>> manager)
+        public void SetSystemStorageManager(IStorageContract<MetaWrapper<T, MetaData>> manager)
         {
             _systemStorageManager = manager;
         }

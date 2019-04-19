@@ -23,17 +23,17 @@ namespace Lyzard.UnitTests
     public class StorageTests
     {
         private IStorageContract<SimpleEntity> storage;
-        private Mock<IStorageContract<MetaData<SimpleEntity>>> _manager;
+        private Mock<IStorageContract<MetaWrapper<SimpleEntity, MetaData>>> _manager;
 
-        MetaData<SimpleEntity> _entity = null;
+        MetaWrapper<SimpleEntity, MetaData> _entity = null;
 
 
         [SetUp]
         public void Setup()
         {
-            _manager = new Mock<IStorageContract<MetaData<SimpleEntity>>>();
+            _manager = new Mock<IStorageContract<MetaWrapper<SimpleEntity, MetaData>>>();
             StorageFactory<SimpleEntity>.Instance.SetSystemStorageManager(_manager.Object);
-            _manager.Setup(x => x.Store(It.IsAny<MetaData<SimpleEntity>>())).Callback<MetaData<SimpleEntity>>(x => {
+            _manager.Setup(x => x.Store(It.IsAny<MetaWrapper<SimpleEntity, MetaData>>())).Callback<MetaWrapper<SimpleEntity, MetaData>>(x => {
                 _entity = x;
             } ).Returns(() => _entity);
             storage = StorageFactory<SimpleEntity>.Instance.SystemStorage;

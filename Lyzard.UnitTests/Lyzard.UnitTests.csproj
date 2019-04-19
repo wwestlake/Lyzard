@@ -54,6 +54,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MetaDataTests.cs" />
     <Compile Include="StorageTests.cs" />
   </ItemGroup>
   <ItemGroup>

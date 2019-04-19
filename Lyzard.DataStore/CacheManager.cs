@@ -10,7 +10,7 @@ namespace Lyzard.DataStore
     {
         private static CacheManager<T> _instance;
 
-        private Dictionary<Guid, MetaData<T>> _cache = new Dictionary<Guid, MetaData<T>>();
+        private Dictionary<Guid, MetaWrapper<T, MetaData>> _cache = new Dictionary<Guid, MetaWrapper<T, MetaData>>();
 
 
 
@@ -20,9 +20,9 @@ namespace Lyzard.DataStore
         }
 
 
-        public IEnumerable<MetaData<T>> AddToCache(IEnumerable<T> items)
+        public IEnumerable<MetaWrapper<T, MetaData>> AddToCache(IEnumerable<T> items)
         {
-            var result = new List<MetaData<T>>();
+            var result = new List<MetaWrapper<T, MetaData>>();
             foreach (var item in items)
             {
                 result.Add(CheckCache(item));
@@ -31,20 +31,20 @@ namespace Lyzard.DataStore
         }
 
 
-        public MetaData<T> RemoveFromCache(T item)
+        public MetaWrapper<T, MetaData> RemoveFromCache(T item)
         {
-            var meta = (MetaData<T>)item;
+            var meta = (MetaWrapper<T, MetaData>)item;
             if (meta == null) return null;
-            if (_cache.ContainsKey(meta.Id))
+            if (_cache.ContainsKey(meta.Meta.Id))
             {
-                _cache.Remove(meta.Id);
+                _cache.Remove(meta.Meta.Id);
             }
             return meta;
         }
 
-        public MetaData<T> CheckCache(T item)
+        public MetaWrapper<T, MetaData> CheckCache(T item)
         {
-            var meta = (MetaData<T>)item;
+            var meta = (MetaWrapper<T, MetaData>)item;
             if (meta == null)
             {
                 return NewMetaData(item);
@@ -55,25 +55,24 @@ namespace Lyzard.DataStore
             }
         }
 
-        private MetaData<T> NewMetaData(T item)
+        private MetaWrapper<T, MetaData> NewMetaData(T item)
         {
-            var meta = MetaData<T>.Create(item);
-            _cache.Add(meta.Id, meta);
+            var meta = (MetaWrapper<T, MetaData>) MetaWrapper<T, MetaData>.Create(item);
+            _cache.Add(meta.Meta.Id, meta);
             return meta;
         }
 
-        private MetaData<T> UpdateCache(MetaData<T> meta)
+        private MetaWrapper<T, MetaData> UpdateCache(MetaWrapper<T, MetaData> meta)
         {
-            if (_cache.ContainsKey(meta.Id))
+            if (_cache.ContainsKey(meta.Meta.Id))
             {
-                var cacheMeta = _cache[meta.Id];
-                cacheMeta.Modified = DateTime.Now;
-                cacheMeta.Item = meta.Item;
+                var cacheMeta = _cache[meta.Meta.Id];
+                cacheMeta.Meta.Modified = DateTime.Now;
                 return cacheMeta;
             }
             else
             {
-                _cache.Add(meta.Id, meta);
+                _cache.Add(meta.Meta.Id, meta);
                 return meta;
             }
         }

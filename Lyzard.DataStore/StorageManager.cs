@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lyzard.DataStore
 {
-    public class StorageManager<T> : IStorageContract<MetaData<T>>
+    public class StorageManager<T> : IStorageContract<MetaWrapper<T, MetaData>>
         where T : class
     {
 
@@ -18,42 +18,42 @@ namespace Lyzard.DataStore
         public IStorageSettings Settings { get; set; }
 
 
-        public void Delete(MetaData<T> item)
+        public void Delete(MetaWrapper<T, MetaData> item)
         {
             throw new NotImplementedException();
         }
 
-        public MetaData<T> Find(Predicate<MetaData<T>> predicate)
+        public MetaWrapper<T, MetaData> Find(Predicate<MetaWrapper<T, MetaData>> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public MetaData<T> Find(Predicate<MetaData<T>> predicate, int revision)
+        public MetaWrapper<T, MetaData> Find(Predicate<MetaWrapper<T, MetaData>> predicate, int revision)
         {
             throw new NotImplementedException();
         }
 
-        public Guid? Identify(MetaData<T> item)
+        public Guid? Identify(MetaWrapper<T, MetaData> item)
         {
             throw new NotImplementedException();
         }
 
-        public void Prune(MetaData<T> item)
+        public void Prune(MetaWrapper<T, MetaData> item)
         {
             throw new NotImplementedException();
         }
 
-        public void Prune(MetaData<T> item, int revision)
+        public void Prune(MetaWrapper<T, MetaData> item, int revision)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<MetaData<T>> Query(Predicate<MetaData<T>> predicate)
+        public IEnumerable<MetaWrapper<T, MetaData>> Query(Predicate<MetaWrapper<T, MetaData>> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public MetaData<T> Store(MetaData<T> item)
+        public MetaWrapper<T, MetaData> Store(MetaWrapper<T, MetaData> item)
         {
             throw new NotImplementedException();
         }

@@ -47,6 +47,7 @@
     <Compile Include="CacheManager.cs" />
     <Compile Include="IStorageContract.cs" />
     <Compile Include="IStorageSettings.cs" />
+    <Compile Include="MetaWrapper.cs" />
     <Compile Include="MetaData.cs" />
     <Compile Include="Storage.cs" />
     <Compile Include="StorageFactory.cs" />

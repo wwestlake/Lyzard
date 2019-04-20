@@ -114,7 +114,9 @@
     <Compile Include="UserControls\PluginToolPaneViewWrapper.xaml.cs">
       <DependentUpon>PluginToolPaneViewWrapper.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ValueConverters\FolderItemToImageConverter.cs" />
     <Compile Include="ViewModels\CodeEditorViewModel.cs" />
+    <Compile Include="ViewModels\DirectoryItemViewModel.cs" />
     <Compile Include="ViewModels\PowerShellConsoleViewModel.cs" />
     <Compile Include="ViewModels\CommandConsoleViewModel.cs" />
     <Compile Include="ViewModels\ConsoleViewModelBase.cs" />
@@ -366,6 +368,56 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="lyzardicon_L9T_10.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Folder-Closed.png" />
+    <Resource Include="Resources\Images\Folder-Open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\FileTypes\after-effects.png" />
+    <Resource Include="Resources\Images\FileTypes\ai.png" />
+    <Resource Include="Resources\Images\FileTypes\audition.png" />
+    <Resource Include="Resources\Images\FileTypes\avi.png" />
+    <Resource Include="Resources\Images\FileTypes\bridge.png" />
+    <Resource Include="Resources\Images\FileTypes\cs.png" />
+    <Resource Include="Resources\Images\FileTypes\css.png" />
+    <Resource Include="Resources\Images\FileTypes\csv.png" />
+    <Resource Include="Resources\Images\FileTypes\dbf.png" />
+    <Resource Include="Resources\Images\FileTypes\doc.png" />
+    <Resource Include="Resources\Images\FileTypes\dreamweaver.png" />
+    <Resource Include="Resources\Images\FileTypes\dwg.png" />
+    <Resource Include="Resources\Images\FileTypes\exe.png" />
+    <Resource Include="Resources\Images\FileTypes\file.png" />
+    <Resource Include="Resources\Images\FileTypes\fireworks.png" />
+    <Resource Include="Resources\Images\FileTypes\fla.png" />
+    <Resource Include="Resources\Images\FileTypes\flash.png" />
+    <Resource Include="Resources\Images\FileTypes\html.png" />
+    <Resource Include="Resources\Images\FileTypes\illustrator.png" />
+    <Resource Include="Resources\Images\FileTypes\indesign.png" />
+    <Resource Include="Resources\Images\FileTypes\iso.png" />
+    <Resource Include="Resources\Images\FileTypes\javascript.png" />
+    <Resource Include="Resources\Images\FileTypes\jpg.png" />
+    <Resource Include="Resources\Images\FileTypes\json-file.png" />
+    <Resource Include="Resources\Images\FileTypes\mp3.png" />
+    <Resource Include="Resources\Images\FileTypes\mp4.png" />
+    <Resource Include="Resources\Images\FileTypes\pdf.png" />
+    <Resource Include="Resources\Images\FileTypes\photoshop.png" />
+    <Resource Include="Resources\Images\FileTypes\png.png" />
+    <Resource Include="Resources\Images\FileTypes\ppt.png" />
+    <Resource Include="Resources\Images\FileTypes\prelude.png" />
+    <Resource Include="Resources\Images\FileTypes\premiere.png" />
+    <Resource Include="Resources\Images\FileTypes\psd.png" />
+    <Resource Include="Resources\Images\FileTypes\rtf.png" />
+    <Resource Include="Resources\Images\FileTypes\search.png" />
+    <Resource Include="Resources\Images\FileTypes\svg.png" />
+    <Resource Include="Resources\Images\FileTypes\txt.png" />
+    <Resource Include="Resources\Images\FileTypes\xls.png" />
+    <Resource Include="Resources\Images\FileTypes\xml.png" />
+    <Resource Include="Resources\Images\FileTypes\zip-1.png" />
+    <Resource Include="Resources\Images\FileTypes\zip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\HardDrive.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

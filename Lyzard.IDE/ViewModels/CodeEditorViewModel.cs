@@ -50,7 +50,8 @@ namespace Lyzard.IDE.ViewModels
                 SyntaxHighlighting = HighlightingManager.Instance.GetDefinitionByExtension(
                     _file.Extension
                     );
-                Title = _file.FileName + $" - ({SyntaxHighlighting.Name})";
+
+                Title = _file.FileName + $" - ({SyntaxHighlighting?.Name})";
                 initialLoad = true;
             }
         }

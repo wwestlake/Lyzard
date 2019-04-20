@@ -28,6 +28,21 @@ namespace Lyzard.FileSystem
 {
     public static class FileSystemAccess
     {
+
+        public static IEnumerable<FileSystemItem> GetDrives()
+        {
+            return Directory.GetLogicalDrives().ToList().Select(drive => {
+                return new FileSystemItem
+                {
+                    FullPath = drive,
+                    IsHidden = false,
+                    IsSystem = false,
+                    Name = drive,
+                    ItemType = FileSystemItemType.Drive,
+                };
+            });
+        }
+
         public static IEnumerable<FileSystemItem> GetFolders(string path)
         {
             return Directory.GetDirectories(path).ToList().Select(folder => {
@@ -65,6 +80,13 @@ namespace Lyzard.FileSystem
                     Extension = GetExtension(file)
                 };
             });
+        }
+
+        public static IEnumerable<FileSystemItem> GetFolderContents(string fullPath)
+        {
+            var result = GetFolders(fullPath).ToList();
+            result.AddRange(GetFiles(fullPath));
+            return result;
         }
 
         public static string GetExtension(string path)

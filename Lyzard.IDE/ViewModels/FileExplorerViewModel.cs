@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Lyzard.FileSystem;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,11 +19,15 @@ namespace Lyzard.IDE.ViewModels
             ContentId = "FileExplorer";
             Title = "File Explorer";
             IconSource = new BitmapImage(new Uri($"pack://application:,,/Resources/Images/FileExplore.png"));
+            Items = new ObservableCollection<DirectoryItemViewModel>(FileSystemAccess.GetDrives().ToList().Select( drive => {
+                return new DirectoryItemViewModel(drive);
+            })); 
+
         }
 
-        public ICommand TestCommand => new DelegateCommand((x) => {
-            var a = 1;
-        });
+        public ObservableCollection<DirectoryItemViewModel> Items { get; set; }
+            
+
 
         public bool CanHide
         {

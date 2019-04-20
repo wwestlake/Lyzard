@@ -4,10 +4,40 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Lyzard.IDE.Views"
+             xmlns:conv="clr-namespace:Lyzard.IDE.ValueConverters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-   
-    <Grid>
-        <Button Content="Test" Command="{Binding TestCommand}" />
-    </Grid>
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="..\Themes\ExpressionDark.xaml" />
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <TreeView x:Name="FolderView" ItemsSource="{Binding Items}" MouseDoubleClick="FolderView_MouseDoubleClick" >
+
+        <TreeView.ItemContainerStyle>
+            <Style TargetType="{x:Type TreeViewItem}">
+                <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+                <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+            </Style>
+        </TreeView.ItemContainerStyle>
+
+        <TreeView.ItemTemplate>
+            <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="20" Margin="3" 
+                               Source="{Binding ImageName,
+                               Converter={x:Static conv:FolderItemToImageConverter.Instance}
+                            }" />
+                    <TextBlock Foreground="White" VerticalAlignment="Center" Text="{Binding Item.Name}" />
+                </StackPanel>
+            </HierarchicalDataTemplate>
+
+        </TreeView.ItemTemplate>
+
+    </TreeView>
 </UserControl>

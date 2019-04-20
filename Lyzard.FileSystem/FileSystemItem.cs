@@ -15,10 +15,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */using System;
+using System.Collections.ObjectModel;
+using System.Windows.Media;
 
 namespace Lyzard.FileSystem
 {
-    public enum FileSystemItemType { File, Folder }
+    public enum FileSystemItemType { Drive, File, Folder }
 
     public class FileSystemItem
     {
@@ -31,5 +33,11 @@ namespace Lyzard.FileSystem
         public bool IsSystem { get; set; }
         public bool IsHidden { get; set; }
         public bool Accessible { get; set; }
+
+        public ObservableCollection<FileSystemItem> Contents { get; set; }
+            = new ObservableCollection<FileSystemItem>();
+
+        public ImageSource Image { get; set; }
+        public bool IsExpanded { get; set; }
     }
 }

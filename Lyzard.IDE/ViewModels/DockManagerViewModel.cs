@@ -169,5 +169,10 @@ namespace Lyzard.IDE.ViewModels
             Dialog = null;
         }
 
+        public void OpenFile(string filepath)
+        {
+            _editors.Add(new CodeEditorViewModel(filepath));
+        }
+
     }
 }

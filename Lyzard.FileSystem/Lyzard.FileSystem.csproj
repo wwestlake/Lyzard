@@ -47,17 +47,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CacheManager.cs" />
     <Compile Include="CommonFolders.cs" />
     <Compile Include="FileSystemAccess.cs" />
     <Compile Include="FileSystemItem.cs" />
     <Compile Include="FileSystemSafeWatcher.cs" />
     <Compile Include="ManagedFile.cs" />
+    <Compile Include="ManagedFileIsNoLongerValidException.cs" />
     <Compile Include="ManagedFolder.cs" />
     <Compile Include="Paths.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lyzard.Collections\Lyzard.Collections.csproj">
+      <Project>{871BB41F-336D-4FA1-A90B-223457E5CDC0}</Project>
+      <Name>Lyzard.Collections</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lyzard.Interfaces\Lyzard.Interfaces.csproj">
+      <Project>{242DF884-D9F1-4B8D-891B-56D973CBB1D4}</Project>
+      <Name>Lyzard.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lyzard.Serialization\Lyzard.Serialization.csproj">
+      <Project>{1D58DD38-A80A-4462-BE67-13F9880790B6}</Project>
+      <Name>Lyzard.Serialization</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,5 @@
 ﻿using Lyzard.FileSystem;
+using Lyzard.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,13 +8,30 @@ using System.Threading.Tasks;
 
 namespace Lyzard.DataStore
 {
-    public sealed class SystemStorage<T> : StorageContract<T>
-        where T : class
+    public class SystemStorage<T> : Container<T>
+        where T: class
     {
-        public SystemStorage() : base(new SystemStorageManager<T>())
+        private Guid id;
+        private string container;
+
+        public SystemStorage(string container) : this(container, CacheManager.Instance)
         {
         }
 
-        public SystemStorage(IStorageContract<MetaWrapper<T, MetaData>> manager) : base(manager) { }
+        public SystemStorage(string container, ICacheManager cacheManager)
+            : base(container)
+        {
+            Settings.BaseLocation = CommonFolders.LyzardDataStore;
+            var sep = CommonFolders.Sep;
+            IndexFile = $"{BasePath}{sep}{container}.idx";
+            DataFile = $"{BasePath}{sep}{CheckIndex().ToString()}.dat";
+            CheckIndex();
+        }
+
+        protected override string DataFile { get; set; }
+
+
+        
+
     }
 }

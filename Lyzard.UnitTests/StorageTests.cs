@@ -1,11 +1,13 @@
 ﻿// NUnit 3 tests
 // See documentation : https://github.com/nunit/docs/wiki/NUnit-Documentation
-using System.Collections;
-using System.Collections.Generic;
+using Lyzard.Collections;
 using Lyzard.DataStore;
+using Lyzard.Interfaces;
+using Lyzard.Serialization;
 using NUnit.Framework;
-using Moq;
 using System;
+using System.Diagnostics;
+using System.Linq;
 
 namespace Lyzard.UnitTests
 {
@@ -22,51 +24,56 @@ namespace Lyzard.UnitTests
     [TestFixture]
     public class StorageTests
     {
-        private IStorageContract<SimpleEntity> storage;
-        private Mock<IStorageContract<MetaWrapper<SimpleEntity, MetaData>>> _manager;
-
-        MetaWrapper<SimpleEntity, MetaData> _entity = null;
+        ICacheManager _cache = new MockCacheManager();
 
 
         [SetUp]
         public void Setup()
         {
-            _manager = new Mock<IStorageContract<MetaWrapper<SimpleEntity, MetaData>>>();
-            StorageFactory<SimpleEntity>.Instance.SetSystemStorageManager(_manager.Object);
-            _manager.Setup(x => x.Store(It.IsAny<MetaWrapper<SimpleEntity, MetaData>>())).Callback<MetaWrapper<SimpleEntity, MetaData>>(x => {
-                _entity = x;
-            } ).Returns(() => _entity);
-            storage = StorageFactory<SimpleEntity>.Instance.SystemStorage;
-
+            StorageFactory<SimpleEntity>.SystemStorage("Test",_cache).Settings.Serializer = new JsonSerializer();
+            StorageFactory<SimpleEntity>.UserStorage("Test",_cache).Settings.Serializer = new JsonSerializer();
         }
 
         [Test]
         public void StorageFactory_returns_system_storage_instance()
         {
-            var store = StorageFactory<SimpleEntity>.Instance.SystemStorage;
+            var store = StorageFactory<SimpleEntity>.SystemStorage("test", _cache);
             Assert.That(store, Is.Not.Null, "Store is null?");
         }
 
         [Test]
         public void StorageFactory_returns_user_storage_instance()
         {
-            var store = StorageFactory<SimpleEntity>.Instance.UserStorage;
+            var store = StorageFactory<SimpleEntity>.UserStorage("test", _cache);
             Assert.That(store, Is.Not.Null, "Store is null?");
         }
 
         [Test]
-        public void Storage_unit_passes_entity_in_as_meta_data_object()
+        public void Storage_system_serialzes_an_object()
         {
-            var entity = storage.Store(new SimpleEntity() { Name = "Test" });
-            _manager.Verify();
-            Assert.IsNotNull(entity);
+            var entity = new SimpleEntity() { Name = "Bill" };
+            var storage = StorageFactory<SimpleEntity>.UserStorage("Test", _cache);
+            MetaWrapper<SimpleEntity, MetaData> storedEntity = storage.Store(entity);
+            SimpleEntity updateEntity = storedEntity;
+            updateEntity.Name = "Updated Bill";
+            storedEntity = storage.Store(updateEntity);
+            Assert.That(storedEntity is MetaWrapper<SimpleEntity, MetaData>);
+            storage.Purge();
         }
 
-        public void Storage_unit_finds_meta_data_object_in_cache()
+        [Test]
+        public void Storage_system_queries_data()
         {
-            var entity = storage.Store(new SimpleEntity() { Name = "Test" });
-            _manager.Verify();
-            Assert.IsNotNull(entity);
+            var entity = new SimpleEntity() { Name = "Bill" };
+            var storage = StorageFactory<SimpleEntity>.UserStorage("Test", _cache);
+            var newEnt = storage.Store(entity);
+            newEnt.Name = "Updated Bill";
+            newEnt = storage.Store(entity);
+            var list = storage.Query(x => true);
+            Assert.That(list.Count() == 1);
+            MetaWrapper<SimpleEntity, MetaData> test = list.FirstOrDefault();
+            Assert.That(test.Meta.Revision == 1);
+            storage.Purge();
         }
 
     }

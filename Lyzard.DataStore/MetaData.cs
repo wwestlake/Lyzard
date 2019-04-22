@@ -8,9 +8,22 @@ namespace Lyzard.DataStore
 {
     public sealed class MetaData
     {
-        public Guid Id { get; internal set; }
-        public DateTime Created { get; internal set; }
-        public DateTime Modified { get; internal set; }
-        public int Revision { get; internal set; }
+
+        public Guid Id { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime Modified { get; set; }
+        public int Revision { get; set; }
+
+        public static MetaData New()
+        {
+            return new MetaData
+            {
+                Id = Guid.NewGuid(),
+                Created = DateTime.Now,
+                Modified = DateTime.Now,
+                Revision = 0
+            };
+        }
+
     }
 }

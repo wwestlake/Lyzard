@@ -1,91 +1,193 @@
-﻿using Lyzard.FileSystem;
-using Newtonsoft.Json;
+﻿using Lyzard.Collections;
+using Lyzard.Interfaces;
+using Lyzard.Serialization;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Lyzard.DataStore
 {
-    /// <summary>
-    /// Contract for all storage classes
-    /// </summary>
-    public abstract class StorageContract<T> : IStorageContract<T>
-        where T: class
+    public abstract class Storage<T> : IStorageContract<T>
+        where T : class
     {
-        private readonly IStorageContract<MetaWrapper<T, MetaData>> _manager;
+        private ICacheManager _cache = CacheManager.Instance;
+        protected Dictionary<Type, Guid> _index;
+        protected List<MetaWrapper<T, MetaData>> _data;
+        protected bool _isValid = true;
 
-        public StorageContract(IStorageContract<MetaWrapper<T, MetaData>> storageManager)
+        public IStorageSettings Settings { get; set; } = new StorageSettings();
+
+        public Storage() : this(CacheManager.Instance)
         {
-            _manager = storageManager;
+        }
+
+        protected Storage(ICacheManager cacheManager)
+        {
+            this._cache = cacheManager;
+            Settings.Serializer = new JsonSerializer();
+            Settings.Format = Format.Indented;
+        }
+
+        public void Purge()
+        {
+            CheckIndex();
+            _data = _cache.Read<List<MetaWrapper<T, MetaData>>>(DataFile);
+            _cache.Delete(DataFile);
+            _index.Remove(typeof(T));
+            WriteIndex();
         }
 
         public void Delete(T item)
         {
-            var meta = RemoveFromCache(item);
-            _manager.Delete(meta);
+            ReadData();
+            throw new NotImplementedException();
         }
 
         public T Find(Predicate<T> predicate)
         {
-            return _manager.Find((entity) => predicate(entity.Data));
+            ReadData();
+            return Query(predicate).FirstOrDefault();
         }
 
         public T Find(Predicate<T> predicate, int revision)
         {
-            return _manager.Find((entity) => predicate(entity.Data), revision);
+            ReadData();
+            return Query(predicate, revision).FirstOrDefault();
         }
 
         public Guid? Identify(T item)
         {
-            return _manager.Identify(item);
+            MetaWrapper<T, MetaData> meta = item;
+            if (item != null)
+            {
+                return meta.Meta.Id;
+            }
+            return null;
         }
 
         public void Prune(T item)
         {
-            _manager.Prune(item);
+            ReadData();
         }
 
         public void Prune(T item, int revision)
         {
-            _manager.Prune(item, revision);
+            ReadData();
+            throw new NotImplementedException();
         }
 
-        public IEnumerable<T> Query(Predicate<T> predicate)
+        public IQueryable<T> Query(Predicate<T> predicate)
         {
-            return (IEnumerable<T>)AddToCache( _manager.Query((entity) => predicate(entity.Data)) );
+            ReadData();
+            return Query(predicate, -1).Where(x => predicate.Invoke(x.Data)).Select(x => (T)x).AsQueryable<T>();
         }
 
+        private IQueryable<MetaWrapper<T, MetaData>> Query(Predicate<T> predicate, int revision)
+        {
+            if (revision < 0)
+            {
+                return (from item in _data
+                            group item by item.Meta.Id into g
+                            select g.OrderByDescending(t => t.Meta.Revision).FirstOrDefault()).AsQueryable<MetaWrapper<T, MetaData>>();
+            }
+            else
+            {
+                return (from item in _data
+                        group item by item.Meta.Id into g
+                        select g.Where(t => t.Meta.Revision == revision).FirstOrDefault()).AsQueryable<MetaWrapper<T, MetaData>>();
+            }
+        }
 
         public T Store(T item)
         {
-            return _manager.Store(CheckCache(item));
+            ReadData();
+            var wrapped = WrapItem(item);
+            var latest = FindLatestRevision(wrapped);
+            if (latest != null)
+            {
+                latest = latest.Clone();
+                latest.Meta.Revision++;
+                latest.Data = DeapClone<T>.Clone(wrapped.Data);
+                latest.Meta.Modified = DateTime.Now;
+            } else
+            {
+                latest = wrapped;
+            }
+            _data.Add(latest);
+            WriteData();
+            return latest.Clone();
         }
 
+        protected abstract string BasePath { get; set; }
+        protected abstract string DataFile { get; set; }
+        protected abstract string IndexFile { get; set; }
 
-        /***********************************************************/
-
-        private MetaWrapper<T, MetaData> CheckCache(T item)
+        protected void ReadIndex()
         {
-            return CacheManager<T>.Instance.CheckCache(item);
+            var reader = new StringReader(_cache.ReadFile(IndexFile));
+            _index = Settings.Serializer.Deserialize<Dictionary<Type, Guid>>(reader);
+            if (_index == null) _index = new Dictionary<Type, Guid>();
         }
 
-        private MetaWrapper<T, MetaData> RemoveFromCache(T item)
+        protected void WriteIndex()
         {
-            return CacheManager<T>.Instance.RemoveFromCache(item);
+            var writer = new StringWriter();
+            Settings.Serializer.Serialize(writer, Settings.Format, _index);
+            _cache.WriteFile(IndexFile, writer.ToString());
         }
 
-        public IEnumerable<MetaWrapper<T, MetaData>> AddToCache(IEnumerable<T> items)
+
+        private void ReadData(bool force = false)
         {
-            return CacheManager<T>.Instance.AddToCache(items);
+            if (_data == null || force)
+            {
+                _data = _cache.Read<List<MetaWrapper<T, MetaData>>>(DataFile)
+                    ?? new List<MetaWrapper<T, MetaData>>();
+                _data = _data.Select(x => MetaWrapper<T, MetaData>.Register(x)).ToList();
+            }
         }
-        private IEnumerable<T> AddToCache(IEnumerable<MetaWrapper<T, MetaData>> items)
+
+        private void WriteData()
         {
-            var _items = items.Select(item => (T)item).AsEnumerable<T>();
-            var result = AddToCache(_items).Select(item => (T)item).AsEnumerable<T>();
-            return result;
+            _cache.Write(DataFile, Settings.Format, _data);
         }
+
+        private MetaWrapper<T, MetaData> FindLatestRevision(MetaWrapper<T, MetaData> item)
+        {
+            return _data
+                .Where(x => x.Meta.Id == item.Meta.Id)
+                .OrderByDescending(x => x.Meta.Revision)
+                .FirstOrDefault();
+        }
+
+        protected Guid CheckIndex()
+        {
+            var type = typeof(T);
+            if (_index == null) ReadIndex();
+            if (_index.ContainsKey(type))
+            {
+                return _index[type];
+            }
+            _index.Add(type, Guid.NewGuid());
+            WriteIndex();
+            return _index[type];
+        }
+
+        private MetaWrapper<T, MetaData> WrapItem(T item)
+        {
+            MetaWrapper<T, MetaData> meta = item;
+            if (meta == null)
+            {
+                meta = MetaWrapper<T, MetaData>.Create(item);
+                meta.Meta = MetaData.New();
+            }
+            return meta;
+        }
+
+
 
     }
 }

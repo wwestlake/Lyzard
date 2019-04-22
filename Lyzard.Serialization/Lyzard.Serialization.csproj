@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{54C66679-4560-4E63-A40A-44C17666B043}</ProjectGuid>
+    <ProjectGuid>{1D58DD38-A80A-4462-BE67-13F9880790B6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lyzard.DataStore</RootNamespace>
-    <AssemblyName>Lyzard.DataStore</AssemblyName>
+    <RootNamespace>Lyzard.Serialization</RootNamespace>
+    <AssemblyName>Lyzard.Serialization</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -21,7 +21,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Lyzard.DataStore.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -45,35 +44,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Container.cs" />
-    <Compile Include="MetaData.cs" />
-    <Compile Include="Storage.cs" />
-    <Compile Include="StorageFactory.cs" />
-    <Compile Include="StorageSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SystemStorage.cs" />
-    <Compile Include="UserStorage.cs" />
+    <Compile Include="FormatConverter.cs" />
+    <Compile Include="JsonSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lyzard.Collections\Lyzard.Collections.csproj">
-      <Project>{871bb41f-336d-4fa1-a90b-223457e5cdc0}</Project>
-      <Name>Lyzard.Collections</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lyzard.FileSystem\Lyzard.FileSystem.csproj">
-      <Project>{7AC24E59-0F41-496E-B9EA-BF6C2C51724D}</Project>
-      <Name>Lyzard.FileSystem</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Lyzard.Interfaces\Lyzard.Interfaces.csproj">
       <Project>{242DF884-D9F1-4B8D-891B-56D973CBB1D4}</Project>
       <Name>Lyzard.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lyzard.Serialization\Lyzard.Serialization.csproj">
-      <Project>{1D58DD38-A80A-4462-BE67-13F9880790B6}</Project>
-      <Name>Lyzard.Serialization</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="DataStoreClassDiagram.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

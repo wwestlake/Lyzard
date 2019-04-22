@@ -18,12 +18,16 @@
 using System;
 using System.IO;
 using System.Text;
-using Newtonsoft.Json;
+using Lyzard.Intercaces;
+using Lyzard.Interfaces;
+using Lyzard.Serialization;
 
 namespace Lyzard.FileSystem
 {
-    public sealed class ManagedFile
+    public sealed class ManagedFile : IManagedFile
     {
+        private bool _isValid = true;
+
         public event FileSystemEventHandler Changed;
 
 
@@ -44,18 +48,31 @@ namespace Lyzard.FileSystem
             _watcher.NotifyFilter = NotifyFilters.LastWrite;
         }
 
+        private void CheckValid()
+        {
+            if (!_isValid) throw new ManagedFileIsNoLongerValidException();
+        }
+
+        public ISerializer Serializer { get; set; }
+
         public static ManagedFile Create(string filepath)
         {
             try
             {
                 return new ManagedFile(filepath);
-            } catch (Exception)
+            }
+            catch (Exception)
             {
                 return null;
             }
-
         }
 
+        public void Delete()
+        {
+            _isValid = false;
+            File.Delete(FullPath);
+            _watcher.EnableRaisingEvents = false;
+        }
 
         private void OnChanged(object sender, FileSystemEventArgs e)
         {
@@ -69,6 +86,7 @@ namespace Lyzard.FileSystem
 
         public string Load()
         {
+            CheckValid();
             var reader = new StreamReader(File.OpenRead(FullPath));
             var result = reader.ReadToEnd();
             reader.Close();
@@ -77,15 +95,17 @@ namespace Lyzard.FileSystem
 
         public void Save(string text)
         {
+            CheckValid();
             _watcher.EnableRaisingEvents = false;
             var writer = new StreamWriter(File.Open(FullPath, FileMode.Truncate, FileAccess.Write));
             writer.Write(text);
             writer.Close();
             _watcher.EnableRaisingEvents = true;
         }
-        
+
         public void Append(string text)
         {
+            CheckValid();
             var sb = new StringBuilder(Load());
             sb.Append(text);
             Save(sb.ToString());
@@ -93,15 +113,26 @@ namespace Lyzard.FileSystem
 
         public void Save<T>(T item)
         {
-            Save(JsonConvert.SerializeObject(item, Formatting.Indented));
+            CheckValid();
+            if (Serializer == null)
+            {
+                Serializer = new JsonSerializer();
+            }
+            StringWriter writer = new StringWriter();
+            Serializer.Serialize(writer, Format.Indented, item);
+            Save(writer.ToString());
         }
 
         public T Load<T>()
         {
-            return JsonConvert.DeserializeObject<T>(Load());
+            CheckValid();
+            if (Serializer == null)
+            {
+                Serializer = new JsonSerializer();
+            }
+            var text = Load();
+            var reader = new StringReader(text);
+            return Serializer.Deserialize<T>(reader);
         }
-
-
-
     }
 }

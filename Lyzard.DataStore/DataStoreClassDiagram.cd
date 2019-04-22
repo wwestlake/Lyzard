@@ -1,41 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Lyzard.DataStore.CacheManager&lt;T&gt;" Collapsed="true">
-    <Position X="7" Y="2.25" Width="1.5" />
+  <Class Name="Lyzard.DataStore.StorageSettings" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>CacheManager.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Lyzard.DataStore.MetaData&lt;T&gt;" Collapsed="true">
-    <Position X="7" Y="3.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AgACAAAAAAAAEAAAABAAAAAEAEAAAEQAAAAAIAAAAAA=</HashCode>
-      <FileName>MetaData.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Lyzard.DataStore.StorageContract&lt;T&gt;" Collapsed="true">
-    <Position X="2.75" Y="1.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAIAAAAAAAAAAAAAQAAAEEIAAgAAAAAAQEAAAA=</HashCode>
-      <FileName>Storage.cs</FileName>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAEAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StorageSettings.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Lyzard.DataStore.StorageFactory&lt;T&gt;" Collapsed="true">
-    <Position X="0.5" Y="1.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>EAAEAAAEAAAAAAAAAAAgAAAAAAAAgAAAUAABAAQAAAA=</HashCode>
-      <FileName>StorageFactory.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Lyzard.DataStore.StorageSettings" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="13" Y="1.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAACAQAAAAAAAAAAAAAAEAAAAgAAAAAIAAAAAAAAAA=</HashCode>
-      <FileName>StorageSettings.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
+  <Class Name="Lyzard.DataStore.CacheManager&lt;T&gt;" Collapsed="true">
+    <Position X="7" Y="2.25" Width="1.5" />
+    <TypeIdentifier />
   </Class>
   <Class Name="Lyzard.DataStore.SystemStorage&lt;T&gt;" Collapsed="true">
     <Position X="1.5" Y="2.5" Width="1.5" />
@@ -44,49 +19,19 @@
       <FileName>SystemStorage.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Lyzard.DataStore.SystemStorageManager&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="1.5" Y="3.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAEEIAAgAgAAAAQEAAAA=</HashCode>
-      <FileName>SystemStorageManager.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
-  </Class>
-  <Class Name="Lyzard.DataStore.UserStorage&lt;T&gt;" Collapsed="true">
-    <Position X="3.75" Y="2.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>UserStorage.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Lyzard.DataStore.UserStorageManager&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="3.75" Y="3.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAEEIAAgAgAAAAQEAAAA=</HashCode>
-      <FileName>UserStorageManager.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
-  </Class>
   <Interface Name="Lyzard.DataStore.IStorageContract&lt;T&gt;" Collapsed="true">
-    <Position X="10.5" Y="0.5" Width="1.5" />
+    <Position X="2.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAEEIAAgAAAAAAQEAAAA=</HashCode>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAAEIAAgAgAAAAQEAAAA=</HashCode>
       <FileName>IStorageContract.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Lyzard.DataStore.IStorageSettings" Collapsed="true">
-    <Position X="13" Y="0.5" Width="1.5" />
+    <Position X="4.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAQAAAAAAAAAAAAAAEAAAAgAAAAAIAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAEAAAAgAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IStorageSettings.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Enum Name="Lyzard.DataStore.Format" Collapsed="true">
-    <Position X="7" Y="1.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
-      <FileName>IStorageSettings.cs</FileName>
-    </TypeIdentifier>
-  </Enum>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

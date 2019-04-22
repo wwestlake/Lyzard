@@ -38,6 +38,10 @@
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Core.4.3.1\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
+    <Reference Include="FSharp.Core, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\FSharp.Core.4.6.2\lib\net45\FSharp.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Moq, Version=4.10.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.4.10.1\lib\net45\Moq.dll</HintPath>
     </Reference>
@@ -54,7 +58,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FsMathTests.cs" />
     <Compile Include="MetaDataTests.cs" />
+    <Compile Include="MockCacheManager.cs" />
     <Compile Include="StorageTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +99,10 @@
       <Project>{7ac24e59-0f41-496e-b9ea-bf6c2c51724d}</Project>
       <Name>Lyzard.FileSystem</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lyzard.FsMath\Lyzard.FsMath.fsproj">
+      <Project>{c4086266-9fa6-414f-9070-0762c933b85f}</Project>
+      <Name>Lyzard.FsMath</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lyzard.IDE\Lyzard.IDE.csproj">
       <Project>{f10700b9-3243-4e28-9360-b3d3b777ba20}</Project>
       <Name>Lyzard.IDE</Name>
@@ -108,6 +118,10 @@
     <ProjectReference Include="..\Lyzard.PluginFramework\Lyzard.PluginFramework.csproj">
       <Project>{0b6a580a-fc50-4f97-a652-e89bea5cc68a}</Project>
       <Name>Lyzard.PluginFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lyzard.Serialization\Lyzard.Serialization.csproj">
+      <Project>{1D58DD38-A80A-4462-BE67-13F9880790B6}</Project>
+      <Name>Lyzard.Serialization</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lyzard.Simulation\Lyzard.Simulation.csproj">
       <Project>{e4c5502b-c0ae-4357-86e1-e5e48fca38aa}</Project>

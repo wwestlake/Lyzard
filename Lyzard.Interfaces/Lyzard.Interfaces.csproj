@@ -44,7 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICacheManager.cs" />
     <Compile Include="ILogger.cs" />
+    <Compile Include="IManagedFile.cs" />
+    <Compile Include="ISerializer.cs" />
+    <Compile Include="IStorageContract.cs" />
+    <Compile Include="IStorageSettings.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="MessageBoxButtons.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

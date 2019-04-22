@@ -1,2 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Lyzard.Simulation.CompletionCriteria&lt;T&gt;" Collapsed="true">
+    <Position X="2" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CompletionCriteria.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lyzard.Simulation.InitialConditions&lt;T&gt;" Collapsed="true">
+    <Position X="2" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InitialConditions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lyzard.Simulation.SimulationContract&lt;T&gt;">
+    <Position X="9.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAIAAACABABQIAAAAAgAAAIIAABAAAQAAAAAAAAA=</HashCode>
+      <FileName>SimulationContract.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lyzard.Simulation.SimulationEventArgs&lt;T&gt;" Collapsed="true">
+    <Position X="2" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>SimulationEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lyzard.Simulation.SummulationRunner">
+    <Position X="5.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SummulationRunner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Delegate Name="Lyzard.Simulation.SimulationEventHandler&lt;T&gt;" Collapsed="true">
+    <Position X="2" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAACAAAAAAAAAA=</HashCode>
+      <FileName>SimulationEventHandler.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

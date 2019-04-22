@@ -1,4 +1,5 @@
-﻿using Lyzard.DataStore;
+﻿using Lyzard.Collections;
+using Lyzard.DataStore;
 using NUnit.Framework;
 using System;
 using System.Collections;

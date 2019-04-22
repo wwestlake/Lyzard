@@ -1,16 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace Lyzard.DataStore
+namespace Lyzard.Interfaces
 {
-    public interface IStorageContract<T> where T: class 
+    public interface IStorageContract<T> where T : class
     {
+
+        /// <summary>
+        /// Purges a container of all existing data
+        /// </summary>
+        void Purge();
+
+        /// <summary>
+        /// The settings for the DataStore
+        /// </summary>
+        IStorageSettings Settings { get; set;  }
+
         /// <summary>
         /// Returns an enumeration of items that match the predicate
         /// </summary>
         /// <param name="predicate">The predicate to match items</param>
         /// <returns>And enumeration of items</returns>
-        IEnumerable<T> Query(Predicate<T> predicate);
+        IQueryable<T> Query(Predicate<T> predicate);
 
         /// <summary>
         /// Finds the first occurance, latest revision of item that matches T

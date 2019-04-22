@@ -1,4 +1,5 @@
 ﻿using Lyzard.FileSystem;
+using Lyzard.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,16 +16,8 @@ namespace Lyzard.DataStore
         }
 
         public string BaseLocation { get; set; }
-        public string IndexFile
-        {
-            get
-            {
-                return BaseLocation + CommonFolders.Sep + "Index.json";
-            }
-        }
-
-        public string Container { get; set; }
+ 
         public Format Format { get ; set; }
-        string IStorageSettings.IndexFile { get; set; }
+        public ISerializer Serializer { get; set; }
     }
 }

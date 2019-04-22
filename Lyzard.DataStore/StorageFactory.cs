@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lyzard.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,54 +7,47 @@ using System.Threading.Tasks;
 
 namespace Lyzard.DataStore
 {
-    public class StorageFactory<T>
+    public static class StorageFactory<T>
         where T: class
     {
-        private static StorageFactory<T> _instance;
-        private SystemStorage<T> _systemStorage;
-        private UserStorage<T> _userStorage;
-        private IStorageContract<MetaWrapper<T, MetaData>> _systemStorageManager;
-        private IStorageContract<MetaWrapper<T, MetaData>> _userStorageManager;
 
+        private static Dictionary<string, UserStorage<T>> _userInstances = new Dictionary<string, UserStorage<T>>();
+        private static Dictionary<string, SystemStorage<T>> _systemInstances = new Dictionary<string, SystemStorage<T>>();
 
-        public void SetSystemStorageManager(IStorageContract<MetaWrapper<T, MetaData>> manager)
+        public static IStorageContract<T> UserStorage(string container)
         {
-            _systemStorageManager = manager;
-        }
-
-        public void SetUserStorageManager(UserStorageManager<T> manager)
-        {
-            _userStorageManager = manager;
-        }
-
-        public static StorageFactory<T> Instance
-        {
-            get
-            {
-                return _instance ?? (_instance = new StorageFactory<T>());
+            if (! _userInstances.ContainsKey(container)) {
+                _userInstances.Add(container, new UserStorage<T>(container));
             }
+            return _userInstances[container];
         }
 
-        public StorageContract<T> SystemStorage
+        public static IStorageContract<T> UserStorage(string container, ICacheManager cacheManager)
         {
-            get
+            if (!_userInstances.ContainsKey(container))
             {
-                if (_systemStorageManager == null)
-                    return _systemStorage ?? (_systemStorage = new SystemStorage<T>());
-                else
-                    return _systemStorage ?? (_systemStorage = new SystemStorage<T>(_systemStorageManager));
+                _userInstances.Add(container, new UserStorage<T>(container, cacheManager));
             }
+            return _userInstances[container];
         }
 
-        public StorageContract<T> UserStorage
+
+        public static IStorageContract<T> SystemStorage(string container)
         {
-            get
+            if (!_systemInstances.ContainsKey(container))
             {
-                if (_userStorageManager == null)
-                    return _userStorage ?? (_userStorage = new UserStorage<T>());
-                else
-                    return _userStorage ?? (_userStorage = new UserStorage<T>(_userStorageManager));
+                _systemInstances.Add(container, new SystemStorage<T>(container));
             }
+            return _systemInstances[container];
+        }
+
+        public static IStorageContract<T> SystemStorage(string container, ICacheManager cacheManager)
+        {
+            if (!_systemInstances.ContainsKey(container))
+            {
+                _systemInstances.Add(container, new SystemStorage<T>(container, cacheManager));
+            }
+            return _systemInstances[container];
         }
 
     }

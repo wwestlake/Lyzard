@@ -52,8 +52,18 @@
     <Reference Include="MahApps.Metro, Version=1.6.5.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.6.5\lib\net47\MahApps.Metro.dll</HintPath>
     </Reference>
+    <Reference Include="NAudio, Version=1.8.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.1.8.5\lib\net35\NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot, Version=1.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.Core.1.0.0\lib\net45\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Wpf, Version=1.0.0.0, Culture=neutral, PublicKeyToken=75e952ba404cdbb0, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.Wpf.1.0.0\lib\net45\OxyPlot.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Controls.Ribbon" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -115,6 +125,7 @@
       <DependentUpon>PluginToolPaneViewWrapper.xaml</DependentUpon>
     </Compile>
     <Compile Include="ValueConverters\FolderItemToImageConverter.cs" />
+    <Compile Include="ViewModels\AudioFileViewModel.cs" />
     <Compile Include="ViewModels\CodeEditorViewModel.cs" />
     <Compile Include="ViewModels\DirectoryItemViewModel.cs" />
     <Compile Include="ViewModels\PowerShellConsoleViewModel.cs" />
@@ -137,6 +148,9 @@
     <Compile Include="ViewModels\PropertiesViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\AudioFileView.xaml.cs">
+      <DependentUpon>AudioFileView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CodeEditorView.xaml.cs">
       <DependentUpon>CodeEditorView.xaml</DependentUpon>
     </Compile>
@@ -178,6 +192,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\PluginToolPaneViewWrapper.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AudioFileView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -275,6 +293,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\NAudio.WaveFormRenderer\WaveFormRendererLib\WaveFormRendererLib.csproj">
+      <Project>{3EFEF2D1-5D08-46FD-AF6D-098DBE7FB3B4}</Project>
+      <Name>WaveFormRendererLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj">
       <Project>{6c55b776-26d4-4db3-a6ab-87e783b2f3d1}</Project>
       <Name>ICSharpCode.AvalonEdit</Name>
@@ -310,6 +332,10 @@
     <ProjectReference Include="..\Lyzard.PluginFramework\Lyzard.PluginFramework.csproj">
       <Project>{0b6a580a-fc50-4f97-a652-e89bea5cc68a}</Project>
       <Name>Lyzard.PluginFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lyzard.SignalProcessing\Lyzard.SignalProcessing.csproj">
+      <Project>{757A545F-96C7-4D30-8D66-2D22B3EC176C}</Project>
+      <Name>Lyzard.SignalProcessing</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lyzard.SystemIO\Lyzard.SystemIO.csproj">
       <Project>{F3F22409-4AE8-4A08-BF70-5BFC04716F19}</Project>

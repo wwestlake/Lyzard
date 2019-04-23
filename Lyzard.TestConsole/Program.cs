@@ -23,11 +23,14 @@ using Lyzard.DataStore;
 using Lyzard.FileSystem;
 using Lyzard.IDE.Dialogs;
 using Lyzard.MessageBus;
+using Lyzard.SignalProcessing;
+using NAudio.Wave;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 
 namespace Lyzard.TestConsole
 {
@@ -39,6 +42,11 @@ namespace Lyzard.TestConsole
         [STAThread]
         public static void Main(string[] args)
         {
+            var mp3 = @"E:\Software Development\Visual Studio 2017\Projects\Lyzard\Audio\Alchemists Tower.mp3";
+            var wave = @"E:\Software Development\Visual Studio 2017\Projects\Lyzard\Audio\Alchemists Tower.wav";
+
+            var file = new AudioFile(mp3);
+            Console.WriteLine($"Chan: {file.Channels}, Rate={file.SampleRate}, Size={file.Channel1.Length},{file.Channel2.Length}");
 
 
             pause("press a key");

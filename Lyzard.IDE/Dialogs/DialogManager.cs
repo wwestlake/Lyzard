@@ -39,6 +39,24 @@ namespace Lyzard.IDE.Dialogs
             return file;
         }
 
+        public static string OpenFilePath()
+        {
+            var lastPath = StateManager.SystemState.LastFileOpenLocation;
+            if (string.IsNullOrEmpty(lastPath))
+                lastPath = CommonFolders.UserProjects;
+            var dlg = new OpenFileDialog();
+            dlg.InitialDirectory = lastPath;
+            dlg.DefaultExt = ".lyzard";
+            dlg.Filter = "C Sharp (*.cs)|*.cs|Visual Basic (*.vb)|*.vb|Lyzard Project (*.lyzard)|*.lyzard|All File (*.*)|*.*";
+            var result = dlg.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                StateManager.SystemState.LastFileOpenLocation = dlg.FileName ;
+            }
+            return dlg.FileName;
+        }
+
+
         public static ManagedFile SaveFileAs(string text)
         {
             ManagedFile file = null;

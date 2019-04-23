@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NAudio, Version=1.8.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.1.8.5\lib\net35\NAudio.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -58,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lyzard.AppDominaControl\Lyzard.AppDominaControl.csproj">
@@ -103,6 +107,10 @@
     <ProjectReference Include="..\Lyzard.MessageBus\Lyzard.MessageBus.csproj">
       <Project>{8e731891-6390-42c7-9a5b-9d5ae408805f}</Project>
       <Name>Lyzard.MessageBus</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lyzard.SignalProcessing\Lyzard.SignalProcessing.csproj">
+      <Project>{757a545f-96c7-4d30-8d66-2d22b3ec176c}</Project>
+      <Name>Lyzard.SignalProcessing</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lyzard.Utilities\Lyzard.Utilities.csproj">
       <Project>{5f586ddb-cdf7-47b0-a6cf-b1105ffc177f}</Project>

@@ -132,13 +132,22 @@ namespace Lyzard.IDE.ViewModels
             _dockManager.Documents.Add(new CodeEditorViewModel());
         });
 
-        public ICommand OpenFile => new DelegateCommand((x) => {
+        public ICommand OpenCodeFile => new DelegateCommand((x) => {
             var file = DialogManager.OpenFile();
             if (file != null)
             {
                 DockManager.Documents.Add(new CodeEditorViewModel(file));
             }
         });
+
+        public ICommand OpenAudioFile => new DelegateCommand((x) => {
+            var file = DialogManager.OpenFilePath();
+            if (file != null)
+            {
+                DockManager.Documents.Add(new AudioFileViewModel(file));
+            }
+        });
+
 
         public bool FileExplorerVisibility
         {

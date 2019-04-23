@@ -74,8 +74,9 @@
                         <RibbonMenuItem Header="Save As" Command="{Binding SaveAsCommand}" />
                         <RibbonMenuItem Header="Save All" Command="{Binding SaveAllCommand}" />
                     </RibbonGroup>
-                    <RibbonGroup Header="New">
-                        <RibbonMenuItem Header="Open File" Command="{Binding OpenFile}" />
+                    <RibbonGroup Header="Open">
+                        <RibbonMenuItem Header="Open Code File" Command="{Binding OpenCodeFile}" />
+                        <RibbonMenuItem Header="Open Audio File" Command="{Binding OpenAudioFile}" />
                     </RibbonGroup>
                 </RibbonTab>
                 <RibbonTab Header="View">
@@ -129,6 +130,9 @@
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type plgvm:UserPluginToolPaneViewModel}">
                         <plgviews:PluginToolPaneViewWrapper />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:AudioFileViewModel}">
+                        <views:AudioFileView />
                     </DataTemplate>
 
                 </dock:DockingManager.Resources>

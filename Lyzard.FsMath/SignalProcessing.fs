@@ -31,6 +31,18 @@ module Mixxers =
         a |> Seq.map (fun x -> if x < 0.0f then 0.0f else x)
 
 
+    let lowPassfilter (dt:float32) (rc:float32) (a:float32 seq) =
+        let alpha = dt / (rc + dt)
+        let y0 = alpha * ((Seq.take (1) a) |> Seq.last) 
+        let rec inner prev list = 
+            seq {
+                let current = (Seq.take (1) list |> Seq.last)
+                yield alpha * current + (1.0f - alpha) * prev
+                yield! inner current a
+            }
+        inner y0 a
+
+
     type DSP() =
         member x.Mix(a,b) =
             mixxer a b

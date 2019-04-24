@@ -23,10 +23,6 @@ module Mixxers =
         let rms = Math.Sqrt(float(meanSqr))
         float32(rms)
 
-    let rand = new Random(int(DateTime.Now.Ticks))
-
-    let randomFloat () =
-        float32(rand.NextDouble()) * 2.0f - 1.0f
         
     let fullRectify a =
         a |> Seq.map (fun x -> if x < 0.0f then -x else x)

@@ -17,6 +17,24 @@ module Mixxers =
     let amplifier factorDb a =
         amp (decibelsToAttenuation factorDb) a
 
+    let rootMeanSquare n (a: float32 seq) : float32 =
+        let sumSqr = a |> Seq.take(n) |> Seq.reduce (fun x y -> x + (y * y))
+        let meanSqr = sumSqr / float32(n)
+        let rms = Math.Sqrt(float(meanSqr))
+        float32(rms)
+
+    let rand = new Random(int(DateTime.Now.Ticks))
+
+    let randomFloat () =
+        float32(rand.NextDouble()) * 2.0f - 1.0f
+        
+    let fullRectify a =
+        a |> Seq.map (fun x -> if x < 0.0f then -x else x)
+       
+    let halfRectify a =
+        a |> Seq.map (fun x -> if x < 0.0f then 0.0f else x)
+
+
     type DSP() =
         member x.Mix(a,b) =
             mixxer a b

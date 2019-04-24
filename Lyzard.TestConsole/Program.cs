@@ -31,6 +31,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using Lyzard.FsMath;
 
 namespace Lyzard.TestConsole
 {
@@ -42,13 +43,28 @@ namespace Lyzard.TestConsole
         [STAThread]
         public static void Main(string[] args)
         {
-            var mp3 = @"E:\Software Development\Visual Studio 2017\Projects\Lyzard\Audio\Alchemists Tower.mp3";
-            var wave = @"E:\Software Development\Visual Studio 2017\Projects\Lyzard\Audio\Alchemists Tower.wav";
+            var gen1 = new Generators.SquareWaveGenerator(0.0f, 1.0f, 1000.0f, 44100.0f, 0.0f);
+            var gen2 = new Generators.SineWaveGenerator(0.0f, 1.0f, 2000.0f, 44100.0f, 0.0f);
+            var dsp = new SignalProcessing.Mixxers.DSP();
+            var gen3 = dsp.Clamp(0.0f, 1.0f, (new Generators.SquareWaveGenerator(0.0f, 1.0f, 1.0f, 44100.0f, 0.0f)).Generate());
+            var gen = dsp.Mix(dsp.Mix(gen1.Generate(), gen2.Generate()), gen3);
+            var samples = gen.Select(x => (float)x).Take(200000).ToArray();
+            var sampleBytes = new byte[sizeof(float) * samples.Length];
+            Buffer.BlockCopy(samples, 0, sampleBytes, 0, sampleBytes.Length);
+            var provider = new RawSourceWaveStream(sampleBytes, 0, sampleBytes.Length, new WaveFormat(44100, 32,1));
+            var waveOut = new WaveOut();
+            waveOut.DeviceNumber = -1;
+            waveOut.Init(provider);
+            waveOut.Play();
+            //
+            //let _waveOut = new WaveOut()
+            //
+            //_waveOut.Init(provider)
+            //_waveOut.Play()
 
-            var file = new AudioFile(mp3);
-            Console.WriteLine($"Chan: {file.Channels}, Rate={file.SampleRate}, Size={file.Channel1.Length},{file.Channel2.Length}");
+            Console.WriteLine(sizeof(float) * 8);
 
-
+            //Thread.Sleep(2000);
             pause("press a key");
         }
 

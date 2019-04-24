@@ -96,6 +96,10 @@
       <Project>{7ac24e59-0f41-496e-b9ea-bf6c2c51724d}</Project>
       <Name>Lyzard.FileSystem</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lyzard.FsMath\Lyzard.FsMath.fsproj">
+      <Project>{c4086266-9fa6-414f-9070-0762c933b85f}</Project>
+      <Name>Lyzard.FsMath</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lyzard.IDE\Lyzard.IDE.csproj">
       <Project>{F10700B9-3243-4E28-9360-B3D3B777BA20}</Project>
       <Name>Lyzard.IDE</Name>

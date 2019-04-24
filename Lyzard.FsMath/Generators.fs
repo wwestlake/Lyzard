@@ -19,6 +19,10 @@ module Generators =
         generatorWithTime f start amplitude frequency sampleRate phase
         |> Seq.map (fun x -> snd x)
     
+    let rand = new Random(int(DateTime.Now.Ticks))
+    
+    let randomFunc (_:float32) (amplitude:float32) (_:float32) (_:float32) : float32 =
+        (float32(rand.NextDouble()) * 2.0f - 1.0f) * amplitude
 
     let sineFunc (time:float32) (amplitude:float32) (frequency:float32) (phase:float32) : float32 =
         let omega = (2.f * PI * frequency)
@@ -43,6 +47,9 @@ module Generators =
         | 2 -> -tao * m
         | _ -> -amplitude + tao * m
 
+
+    let randomWave = generator randomFunc
+    let randomWaveWithTime = generatorWithTime randomFunc
     let sineWave = generator sineFunc
     let sineWaveWithTime = generatorWithTime sineFunc
     let squareWave = generator squareFunc
@@ -70,4 +77,5 @@ module Generators =
     type TriangleWaveGenerator(startTime, amplitude, frequency, sampleRate, phase) =
         inherit FunctionGenerator(triangleWave, startTime, amplitude, frequency, sampleRate, phase)
 
-
+    type RandomWaveGenerator(startTime, amplitude, frequency, sampleRate, phase) =
+        inherit FunctionGenerator(randomWave, startTime, amplitude, frequency, sampleRate, phase)

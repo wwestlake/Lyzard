@@ -1,9 +1,10 @@
 ﻿namespace Lyzard.SignalProcessing
+open System
 
 module Mixxers =
 
-    let decibelsToAttenuation db =
-        Math.Pow(10., db/20.)
+    let decibelsToAttenuation (db:float32) : float32 =
+        float32(Math.Pow(10.0, float(db/20.0f)))
 
     let mixxer a b =
         Seq.zip a b |> Seq.map (fun (a,b) -> (a + b) / 2.0f)
@@ -14,7 +15,7 @@ module Mixxers =
     let amp (factor:float32) a =
         a |> Seq.map (fun x -> x * factor)
 
-    let amplifier factorDb a =
+    let amplify factorDb a =
         amp (decibelsToAttenuation factorDb) a
 
     let rootMeanSquare n (a: float32 seq) : float32 =
@@ -30,23 +31,8 @@ module Mixxers =
     let halfRectify a =
         a |> Seq.map (fun x -> if x < 0.0f then 0.0f else x)
 
-
-    let lowPassfilter (dt:float32) (rc:float32) (a:float32 seq) =
-        let alpha = dt / (rc + dt)
-        let y0 = alpha * ((Seq.take (1) a) |> Seq.last) 
-        let rec inner prev list = 
-            seq {
-                let current = (Seq.take (1) list |> Seq.last)
-                yield alpha * current + (1.0f - alpha) * prev
-                yield! inner current a
-            }
-        inner y0 a
-
-    //let lowPassfilter (dt:float32) (rc:float32) (a:float32 seq) =
-    //    let alpha = dt / (rc + dt)
-    //    let y0 = alpha * ((Seq.take (1) a) |> Seq.last) 
-    //    a |> Seq.pairwise |> Seq.scan (fun elem prevOut -> ( alpha * (snd elem) + (1.0f - alpha) * (fst elem) ))
-
+    let offset dc a =
+        a |> Seq.map (fun x -> x + dc)
 
 
     type DSP() =
@@ -57,5 +43,5 @@ module Mixxers =
             clamp min max a
 
         member x.Amplify(factorDb, a) =
-            amplify factor a
+            amplify factorDb a
 

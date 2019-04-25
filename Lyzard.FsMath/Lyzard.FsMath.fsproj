@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Generators.fs" />
+    <Compile Include="Filters.fs" />
     <Compile Include="SignalProcessing.fs" />
     <Compile Include="Solvers.fs" />
     <Compile Include="Converters.fs" />

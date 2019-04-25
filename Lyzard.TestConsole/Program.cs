@@ -46,8 +46,8 @@ namespace Lyzard.TestConsole
             var gen1 = new Generators.SquareWaveGenerator(0.0f, 1.0f, 1000.0f, 44100.0f, 0.0f);
             var gen2 = new Generators.SineWaveGenerator(0.0f, 1.0f, 2000.0f, 44100.0f, 0.0f);
             var dsp = new SignalProcessing.Mixxers.DSP();
-            var gen3 = dsp.Clamp(0.0f, 1.0f, (new Generators.SquareWaveGenerator(0.0f, 1.0f, 1.0f, 44100.0f, 0.0f)).Generate());
-            var gen = dsp.Mix(dsp.Mix(gen1.Generate(), gen2.Generate()), gen3);
+            var gen3 = dsp.Clamp(0.0f, 1.0f, (new Generators.SquareWaveGenerator(0.0f, 1.0f, 1.0f, 44100.0f, 0.0f)).GenerateFloat());
+            var gen = dsp.Mix(dsp.Mix(gen1.GenerateFloat(), gen2.GenerateFloat()), gen3);
             var samples = gen.Select(x => (float)x).Take(200000).ToArray();
             var sampleBytes = new byte[sizeof(float) * samples.Length];
             Buffer.BlockCopy(samples, 0, sampleBytes, 0, sampleBytes.Length);

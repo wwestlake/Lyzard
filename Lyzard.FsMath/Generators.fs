@@ -4,59 +4,73 @@ open System
 
 module Generators =
 
-    let PI = float32(Math.PI)
+    let PI = Math.PI
 
-    let generatorWithTime f (start:float32) (amplitude:float32) (frequency:float32) (sampleRate:float32) (phase:float32)  : (float32 * float32) seq =
-        let deltaTime = 1.0f / sampleRate
-        let rec inner time : (float32 * float32) seq = seq {
-            yield (time, f time amplitude frequency phase)
-            yield! inner (time + deltaTime)
+    let generatorWithTime f start amplitude frequency sampleRate phase =
+        let w = 2.0 * Math.PI * frequency
+        let sampTime = 1.0 / sampleRate
+        let sampRad = w * sampTime
+        let tstep = 1.0 / sampleRate
+        let rec inner time = seq {
+            yield (time, f time amplitude frequency phase sampTime sampRad tstep (time * w))
+            yield! inner (time + sampTime)
         }
         inner start
 
 
-    let generator f (start:float32) (amplitude:float32) (frequency:float32) (sampleRate:float32) (phase:float32) : float32 seq =
+    let generator f start amplitude frequency sampleRate phase =
         generatorWithTime f start amplitude frequency sampleRate phase
         |> Seq.map (fun x -> snd x)
     
     let rand = new Random(int(DateTime.Now.Ticks))
     
-    let randomFunc (_:float32) (amplitude:float32) (_:float32) (_:float32) : float32 =
-        (float32(rand.NextDouble()) * 2.0f - 1.0f) * amplitude
+    let randomFunc _ amplitude _ _ _ _ _ _ =
+        rand.NextDouble() * 2.0 - 1.0 * amplitude
 
-    let sineFunc (time:float32) (amplitude:float32) (frequency:float32) (phase:float32) : float32 =
-        let omega = (2.f * PI * frequency)
-        float32(Math.Sin(float(omega * time + phase)) * float(amplitude))
+    let sineFunc time amplitude frequency phase _ _ _ _ =
+        let omega = (2.0 * PI * frequency)
+        Math.Sin(omega * time + phase) * amplitude
 
-    let squareFunc (time:float32) (amplitude:float32) (frequency:float32) (phase:float32) =
-        let value = sineFunc time amplitude frequency phase
-        if value >= 0.0f then amplitude else -amplitude
+    let squareFunc time amplitude frequency phase sampTime sampRad tstep theta =
+        let value = sineFunc time amplitude frequency phase sampTime sampRad tstep theta
+        if value >= 0.0 then amplitude else -amplitude
 
-    let triangleFunc (time:float32) (amplitude:float32) (frequency:float32) (phase:float32) =
-        let p = phase * 1.0f
-        let omega = 2.0f * PI * frequency
-        let deltaTime = 1.0f / frequency + (phase / omega)
+    let triangleFunc time amplitude frequency phase _ _ _ _ =
+        let omega = 2.0 * PI * frequency
+        let deltaTime = 1.0 / frequency + (phase / omega)
         let adjustedTime = time + deltaTime
-        let cycle = int (frequency * adjustedTime * 4.0f)
-        let tao = adjustedTime - float32(cycle) / 4.0f / frequency
-        let cyclePosition = int (frequency * adjustedTime * 4.0f) % 4
-        let m = 4.0f * amplitude * frequency
+        let cycle = int (frequency * adjustedTime * 4.0)
+        let tao = adjustedTime - float(cycle) / 4.0 / frequency
+        let cyclePosition = int (frequency * adjustedTime * 4.0) % 4
+        let m = 4.0 * amplitude * frequency
         match cyclePosition with
         | 0 -> tao * m
         | 1 -> amplitude - tao * m
         | 2 -> -tao * m
         | _ -> -amplitude + tao * m
 
+    let impulseFunc delaySamples _ _ _ _ sampTime sampRad tstep theta =
+        if (theta >= (delaySamples * sampRad)) && (theta < ((delaySamples + 1.0) * sampRad)) then 1.0 else 0.0
+
+    let stepFunc delaySamples _ _ _ _ sampTime sampRad tstep theta =
+        if theta > (delaySamples * sampRad) then 1.0 else 0.0
+
 
     let randomWave = generator randomFunc
-    let randomWaveWithTime = generatorWithTime randomFunc
+    let randomWaveWithTime _ amplitude _ _ _ = generatorWithTime randomFunc
     let sineWave = generator sineFunc
     let sineWaveWithTime = generatorWithTime sineFunc
     let squareWave = generator squareFunc
     let squareWaveWithTime = generatorWithTime squareFunc
     let triangleWave = generator triangleFunc
     let triangleWaveWithTime = generatorWithTime triangleFunc
-    
+    let impulseGenerator delaySamples = generator (impulseFunc delaySamples)
+    let impulseGeneratorWithTime delaySamples = generatorWithTime (impulseFunc delaySamples)
+    let stepGenerator delaySamples = generator (stepFunc delaySamples)
+    let stepGeneratorWithTime delaySamples = generatorWithTime (stepFunc delaySamples)
+
+    let toFloatSeq s =
+        s |> Seq.map (fun x -> float32(x))
 
     type FunctionGenerator(func, startTime, amplitude, frequency, sampleRate, phase) =
         member private x.func = func
@@ -67,6 +81,8 @@ module Generators =
         member private x.phase = phase
         member x.Generate() =
             x.func x.startTime x.amplitude x.frequency x.sampleRate x.phase
+        member x.GenerateFloat() =
+            x.func x.startTime x.amplitude x.frequency x.sampleRate x.phase |> toFloatSeq
 
     type SineWaveGenerator(startTime, amplitude, frequency, sampleRate, phase) =
         inherit FunctionGenerator(sineWave, startTime, amplitude, frequency, sampleRate, phase)

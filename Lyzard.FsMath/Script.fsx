@@ -27,3 +27,35 @@ let x = mix.Take(1000) |> Seq.toList
 //let vals = sineWave 0.0 1.0 1000.0 44100.0 0.0 |> Seq.take(1000) |> Seq.toList
 
 x |> Chart.Line
+
+
+open System
+let pi = Math.PI
+
+let generator f startTime freq sampleRate =
+    let w = 2.0 * Math.PI * freq
+    let sampTime = 1.0 / 44100.0
+    let sampRad = w * sampTime
+    let tstep = 1.0 / sampleRate
+    let rec gen t = seq { 
+        yield (t, f w sampTime sampRad tstep (t * w))
+        yield! gen (t + tstep)
+    }
+    gen startTime
+
+let sineFunc w sampTime sampRad tstep theta = Math.Sin(theta)
+let sineWave = generator sineFunc
+
+let stepFunc delaySamples w sampTime sampRad tstep theta =
+    if theta > (delaySamples * sampRad) then 1.0 else 0.0
+
+let impulseFunc delaySamples w sampTime sampRad tstep theta =
+    if (theta >= (delaySamples * sampRad)) && (theta < ((delaySamples + 1.0) * sampRad)) then 1.0 else 0.0
+
+let stepGenerator delay = generator (stepFunc delay)
+let impulseGenerator delay = generator (impulseFunc delay)
+
+
+impulseGenerator 3.0  0.0 1000.0 44100.0 |> Seq.take 1000  |>  Seq.iter (fun (t,x) -> printfn "%f - %f" t x)
+
+

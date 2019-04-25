@@ -64,11 +64,11 @@ let toFloat32List count gen =
 let toFloat32Array count gen =
     gen |> toFloat32Seq |> toArray count
     
-let filter f init coef data =
-    data |> Seq.scan (fun (tprev,prevX) (t,x) -> (t,f prevX coef t x)) init
+let filter f init coef1 coef2 data =
+    data |> Seq.scan (fun (tprev,prevX) (t,x) -> (t,f prevX coef1 coef2 t x)) init
 
-let IIR prev coef t (x:float) =
-    coef * prev + x
+let IIR prev coef1 coef2 t (x:float) =
+    coef1 * prev + coef2 * x
 
 let IIRFilter = filter IIR
 
@@ -85,8 +85,7 @@ let stepGenerator delay = generator (stepFunc delay)
 let impulseGenerator delay = generator (impulseFunc delay)
 
 
-impulseGenerator 3.0  0.0 1000.0 44100.0 |>  IIRFilter (0.0,0.0) 0.5 |> Seq.take 1000 |> Seq.iter (fun (t,x) -> printfn "%f" x)
-
+impulseGenerator 3.0  0.0 1000.0 44100.0 |>  IIRFilter (0.0,0.0) 0.5 0.5 |> Seq.take 1000 |> Seq.iter (fun (t,x) -> printfn "%f" x)
 
   
 

@@ -43,6 +43,35 @@ let generator f startTime freq sampleRate =
     }
     gen startTime
 
+let toList count gen =
+   gen |> Seq.take count |> Seq.toList
+
+let toArray count gen =
+   gen |> Seq.take count |> Seq.toArray
+    
+let toFloat32Seq gen =
+    gen |> Seq.map (fun (t,v) -> (float32(t),float32(v)) )
+
+let valueSeq gen =
+    gen |> Seq.map (fun (t,v) -> v)
+
+let timeSeq gen =
+    gen |> Seq.map (fun (t,v) -> t)
+
+let toFloat32List count gen =
+    gen |> toFloat32Seq |> toList count
+    
+let toFloat32Array count gen =
+    gen |> toFloat32Seq |> toArray count
+    
+let filter f init coef data =
+    data |> Seq.scan (fun (tprev,prevX) (t,x) -> (t,f prevX coef t x)) init
+
+let IIR prev coef t (x:float) =
+    coef * prev + x
+
+let IIRFilter = filter IIR
+
 let sineFunc w sampTime sampRad tstep theta = Math.Sin(theta)
 let sineWave = generator sineFunc
 
@@ -56,6 +85,8 @@ let stepGenerator delay = generator (stepFunc delay)
 let impulseGenerator delay = generator (impulseFunc delay)
 
 
-impulseGenerator 3.0  0.0 1000.0 44100.0 |> Seq.take 1000  |>  Seq.iter (fun (t,x) -> printfn "%f - %f" t x)
+impulseGenerator 3.0  0.0 1000.0 44100.0 |>  IIRFilter (0.0,0.0) 0.5 |> Seq.take 1000 |> Seq.iter (fun (t,x) -> printfn "%f" x)
 
+
+  
 

@@ -81,5 +81,37 @@ let filter (coefs:float list) (data: float seq) =
 filter coefs data |> Seq.iter (fun x -> printfn "%A" x)
 
 
+// more improvement
+let data = seq { for x in 1.0 .. 1000.0 -> 
+                        if x = 5.0 then 1.0 else 0.0 
+                        //x
+                    }
+let coefsIn =  [ 0.5]
+let coefsOut =  [ 0.8 ]
+
+let filter (coefsIn:float list) (coefsOut:float list) (data: float seq) =
+    let n = List.length coefsIn
+    let rec inner cIn cOut pin pout x =
+        match cIn,cOut, pin, pout with
+        | [], [], [], []  
+        | [], _, _, _
+        | _, [], _, _  
+        | _, _, [], _
+        | _, _, _, [] -> x
+        | cinh::cint, couth::coutt, pinh::pint, pouth::poutt ->
+            //printfn "%f * %f + %f = %f" ch ph x (ch * ph + x)
+            inner cint coutt pint poutt ((couth * pouth + cinh * pinh ) * float(n))
+
+    data |> Seq.scan (fun (prevIn, prevOut, y) x -> 
+                        match prevIn, prevOut with
+                        | [],[] 
+                        | _, []
+                        | [], _ -> ([x],[y], x)
+                        | pin, pout when (List.length pin) < n -> 
+                                prevIn @ [x],  prevOut @ [y], inner coefsIn coefsOut (prevIn @ [x]) (prevOut @ [y]) x 
+                        | pinh::pint, pouth::poutt -> pint @ [x], poutt @ [y], inner coefsIn coefsOut (pint @ [x]) (poutt @ [y]) x
+                     ) ([],[],0.0) |> Seq.map (fun (l1,l2,x) -> x)
+
+filter coefsIn coefsOut data |> Seq.iter (fun x -> printfn "%A" x)
 
 

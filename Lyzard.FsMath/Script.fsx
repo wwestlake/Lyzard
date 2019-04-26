@@ -51,3 +51,35 @@ let testiir coefA coefB data = filter 3 iir coefA coefB data
 
 testiir 2.0 3.0 t |> Seq.iter (fun x -> printfn "%f" x)
 
+
+/// improved filter multiple coefs and multiple feed back 
+
+let data = seq { for x in 1.0 .. 1000.0 -> 
+                        if x >= 5.0 then 1.0 else 0.0 
+                        
+                    }
+let coefs =  [ 0.5; 0.4; 0.3 ]
+
+let filter (coefs:float list) (data: float seq) =
+    let n = List.length coefs
+    let rec inner c p x =
+        match c,p with
+        | [], []  
+        | _, [] 
+        | [], _ -> x
+        | ch::ct, ph::pt ->
+            //printfn "%f * %f + %f = %f" ch ph x (ch * ph + x)
+            inner ct pt (ch * (ph + x))
+
+    data |> Seq.scan (fun (prev, y) x -> 
+                        match prev with
+                        | [] -> ([y], x)
+                        | list when (List.length list) < n -> (prev @ [y], inner coefs (prev @ [y]) x)
+                        | h::t -> (t @ [y], inner coefs (t @ [y]) x)
+                     ) ([],0.0) |> Seq.map (fun (l,x) -> x)
+
+filter coefs data |> Seq.iter (fun x -> printfn "%A" x)
+
+
+
+

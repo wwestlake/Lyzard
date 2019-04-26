@@ -6,7 +6,7 @@ module Generators =
 
     let PI = Math.PI
 
-    let generatorWithTime f start amplitude frequency sampleRate phase =
+    let generator f (start:float) (amplitude:float) (frequency:float) (sampleRate:float) (phase: float) : (float * float) seq =
         let w = 2.0 * Math.PI * frequency
         let sampTime = 1.0 / sampleRate
         let sampRad = w * sampTime
@@ -16,11 +16,6 @@ module Generators =
             yield! inner (time + sampTime)
         }
         inner start
-
-
-    let generator f start amplitude frequency sampleRate phase =
-        generatorWithTime f start amplitude frequency sampleRate phase
-        |> Seq.map (fun x -> snd x)
     
     let rand = new Random(int(DateTime.Now.Ticks))
     
@@ -57,20 +52,12 @@ module Generators =
 
 
     let randomWave = generator randomFunc
-    let randomWaveWithTime _ amplitude _ _ _ = generatorWithTime randomFunc
     let sineWave = generator sineFunc
-    let sineWaveWithTime = generatorWithTime sineFunc
     let squareWave = generator squareFunc
-    let squareWaveWithTime = generatorWithTime squareFunc
     let triangleWave = generator triangleFunc
-    let triangleWaveWithTime = generatorWithTime triangleFunc
     let impulseGenerator delaySamples = generator (impulseFunc delaySamples)
-    let impulseGeneratorWithTime delaySamples = generatorWithTime (impulseFunc delaySamples)
     let stepGenerator delaySamples = generator (stepFunc delaySamples)
-    let stepGeneratorWithTime delaySamples = generatorWithTime (stepFunc delaySamples)
 
-    let toFloatSeq s =
-        s |> Seq.map (fun x -> float32(x))
 
     type FunctionGenerator(func, startTime, amplitude, frequency, sampleRate, phase) =
         member private x.func = func
@@ -81,14 +68,13 @@ module Generators =
         member private x.phase = phase
         member x.Generate() =
             x.func x.startTime x.amplitude x.frequency x.sampleRate x.phase
-        member x.GenerateFloat() =
-            x.func x.startTime x.amplitude x.frequency x.sampleRate x.phase |> toFloatSeq
 
-    type SineWaveGenerator(startTime, amplitude, frequency, sampleRate, phase) =
-        inherit FunctionGenerator(sineWave, startTime, amplitude, frequency, sampleRate, phase)
 
     type SquareWaveGenerator(startTime, amplitude, frequency, sampleRate, phase) =
         inherit FunctionGenerator(squareWave, startTime, amplitude, frequency, sampleRate, phase)
+
+    type SineWaveGenerator(startTime, amplitude, frequency, sampleRate, phase) =
+        inherit FunctionGenerator(sineWave, startTime, amplitude, frequency, sampleRate, phase)
 
     type TriangleWaveGenerator(startTime, amplitude, frequency, sampleRate, phase) =
         inherit FunctionGenerator(triangleWave, startTime, amplitude, frequency, sampleRate, phase)

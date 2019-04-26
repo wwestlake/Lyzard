@@ -29,63 +29,25 @@ open System.Linq
 //x |> Chart.Line
 
 
-open System
-let pi = Math.PI
-
-let generator f startTime freq sampleRate =
-    let w = 2.0 * Math.PI * freq
-    let sampTime = 1.0 / 44100.0
-    let sampRad = w * sampTime
-    let tstep = 1.0 / sampleRate
-    let rec gen t = seq { 
-        yield (t, f w sampTime sampRad tstep (t * w))
-        yield! gen (t + tstep)
-    }
-    gen startTime
-
-let toList count gen =
-   gen |> Seq.take count |> Seq.toList
-
-let toArray count gen =
-   gen |> Seq.take count |> Seq.toArray
-    
-let toFloat32Seq gen =
-    gen |> Seq.map (fun (t,v) -> (float32(t),float32(v)) )
-
-let valueSeq gen =
-    gen |> Seq.map (fun (t,v) -> v)
-
-let timeSeq gen =
-    gen |> Seq.map (fun (t,v) -> t)
-
-let toFloat32List count gen =
-    gen |> toFloat32Seq |> toList count
-    
-let toFloat32Array count gen =
-    gen |> toFloat32Seq |> toArray count
-    
-let filter f init coef1 coef2 data =
-    data |> Seq.scan (fun (tprev,prevX) (t,x) -> (t,f prevX coef1 coef2 t x)) init
-
-let IIR prev coef1 coef2 t (x:float) =
-    coef1 * prev + coef2 * x
-
-let IIRFilter = filter IIR
-
-let sineFunc w sampTime sampRad tstep theta = Math.Sin(theta)
-let sineWave = generator sineFunc
-
-let stepFunc delaySamples w sampTime sampRad tstep theta =
-    if theta > (delaySamples * sampRad) then 1.0 else 0.0
-
-let impulseFunc delaySamples w sampTime sampRad tstep theta =
-    if (theta >= (delaySamples * sampRad)) && (theta < ((delaySamples + 1.0) * sampRad)) then 1.0 else 0.0
-
-let stepGenerator delay = generator (stepFunc delay)
-let impulseGenerator delay = generator (impulseFunc delay)
-
-
-impulseGenerator 3.0  0.0 1000.0 44100.0 |>  IIRFilter (0.0,0.0) 0.5 0.5 |> Seq.take 1000 |> Seq.iter (fun (t,x) -> printfn "%f" x)
+let t = seq { for i in 1.0 .. 100.0 do if i = 3.0 then yield 1.0 else yield 0.0 }
 
   
+let filter n f coefA coefB data =
+    let inner list x =
+        match list with
+        | [] -> (0.0::list, 0.0)
+        | l::tail ->
+               printfn "%d" (List.length (l::tail))
+               let sublist = if List.length (l::tail) >= n then tail else l::tail
+               let result = f sublist coefA coefB x
+               (result::sublist, result)
+    data |> Seq.scan (fun (list, xprev) x -> (inner list x) ) ([],0.0)
+         |> Seq.map (fun (l,x) -> x)
+
+let iir list coefA coefB x = 
+    (List.sum list) / float(List.length list) * coefA + coefB * x
+
+let testiir coefA coefB data = filter 3 iir coefA coefB data
+
+testiir 2.0 3.0 t |> Seq.iter (fun x -> printfn "%f" x)
 

@@ -82,14 +82,14 @@ filter coefs data |> Seq.iter (fun x -> printfn "%A" x)
 
 
 // more improvement
-let data = seq { for x in 1.0 .. 1000.0 -> 
+let data2 = seq { for x in 1.0 .. 30.0 -> 
                         if x = 5.0 then 1.0 else 0.0 
                         //x
                     }
 let coefsIn =  [ 0.5]
 let coefsOut =  [ 0.8 ]
 
-let filter (coefsIn:float list) (coefsOut:float list) (data: float seq) =
+let filter2 (coefsIn:float list) (coefsOut:float list) (data: float seq) =
     let n = List.length coefsIn
     let rec inner cIn cOut pin pout x =
         match cIn,cOut, pin, pout with
@@ -112,6 +112,8 @@ let filter (coefsIn:float list) (coefsOut:float list) (data: float seq) =
                         | pinh::pint, pouth::poutt -> pint @ [x], poutt @ [y], inner coefsIn coefsOut (pint @ [x]) (poutt @ [y]) x
                      ) ([],[],0.0) |> Seq.map (fun (l1,l2,x) -> x)
 
-filter coefsIn coefsOut data |> Seq.iter (fun x -> printfn "%A" x)
+filter2 coefsIn coefsOut data2 
+    //|> Seq.iter (fun x -> printfn "%A" x) 
+    |> Chart.Line
 
 

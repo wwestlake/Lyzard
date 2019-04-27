@@ -7,10 +7,12 @@
 #load "FSharp.Charting.fsx"
 #load "Generators.fs"
 #load "SignalProcessing.fs"
+#load "Filters.fs"
 
 open System
 open Lyzard.FsMath.Generators
 open Lyzard.SignalProcessing.Mixxers
+open Lyzard.FsMath.Filters
 open FSharp.Charting
 open NAudio
 open NAudio.Wave
@@ -80,17 +82,30 @@ let filter (coefs:float list) (data: float seq) =
 
 filter coefs data |> Seq.iter (fun x -> printfn "%A" x)
 
+(*
+a0 0.0004218886 0.0004218886
+a1 -0.001687554 -0.00161024
+a2 0.0025313316 0.00229933
+a3 -0.001687554 -0.0014555
+a4 0.0004218886 0.000344561
+b1 1 1
+b2 3.177811 3.15992
+b3 3.8546544 3.80985
+b4 2.10730622 2.069939
+b5 0.43700264 0.426703
+*)
+
 
 // more improvement
-let data2 = seq { for x in 1.0 .. 30.0 -> 
-                        if x = 5.0 then 1.0 else 0.0 
+let data2 = seq { for x in 1.0 .. 20.0 -> 
+                        if x >= 2.0 then 1.0 else 0.0 
                         //x
                     }
-let coefsIn =  [ 0.5]
-let coefsOut =  [ 0.8 ]
+let coefsA =  [ 0.0004218886; -0.001687554; 0.0025313316; -0.001687554; 0.0004218886]
+let coefsB =  [ 1.0; 3.177811; 3.8546544; 2.10730622; 0.43700264]
 
-let filter2 (coefsIn:float list) (coefsOut:float list) (data: float seq) =
-    let n = List.length coefsIn
+let filter2 (coefsA:float list) (coefsB:float list) (data: float seq) =
+    let n = List.length coefsA
     let rec inner cIn cOut pin pout x =
         match cIn,cOut, pin, pout with
         | [], [], [], []  
@@ -98,9 +113,9 @@ let filter2 (coefsIn:float list) (coefsOut:float list) (data: float seq) =
         | _, [], _, _  
         | _, _, [], _
         | _, _, _, [] -> x
-        | cinh::cint, couth::coutt, pinh::pint, pouth::poutt ->
+        | A::cint, B::coutt, pinh::pint, pouth::poutt ->
             //printfn "%f * %f + %f = %f" ch ph x (ch * ph + x)
-            inner cint coutt pint poutt ((couth * pouth + cinh * pinh ) * float(n))
+            inner cint coutt pint poutt ((A * pouth + B * pinh ) * float(n))
 
     data |> Seq.scan (fun (prevIn, prevOut, y) x -> 
                         match prevIn, prevOut with
@@ -108,12 +123,12 @@ let filter2 (coefsIn:float list) (coefsOut:float list) (data: float seq) =
                         | _, []
                         | [], _ -> ([x],[y], x)
                         | pin, pout when (List.length pin) < n -> 
-                                prevIn @ [x],  prevOut @ [y], inner coefsIn coefsOut (prevIn @ [x]) (prevOut @ [y]) x 
-                        | pinh::pint, pouth::poutt -> pint @ [x], poutt @ [y], inner coefsIn coefsOut (pint @ [x]) (poutt @ [y]) x
+                                prevIn @ [x],  prevOut @ [y], inner coefsA coefsB (prevIn @ [x]) (prevOut @ [y]) x 
+                        | pinh::pint, pouth::poutt -> pint @ [x], poutt @ [y], inner coefsA coefsB (pint @ [x]) (poutt @ [y]) x
                      ) ([],[],0.0) |> Seq.map (fun (l1,l2,x) -> x)
 
-filter2 coefsIn coefsOut data2 
+NpoleIIRFilter coefsA coefsB data2 
     //|> Seq.iter (fun x -> printfn "%A" x) 
-    |> Chart.Line
+    |> Chart.Spline
 
 

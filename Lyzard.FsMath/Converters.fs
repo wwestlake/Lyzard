@@ -32,3 +32,17 @@ module Converters =
             f.Invoke(a,b,c,d)
         inner
 
+    let toTimeSeq (s : (float * float) seq) =
+        s |> Seq.map (fun (t,x) -> t)
+
+    let toValueSeq (s : (float * float) seq) =
+        s |> Seq.map (fun (t,x) -> x)
+
+    let toFloat32Seq s =
+        s |> Seq.map (fun x -> float32(x))
+
+    let toTimeSeqFloat32 s = s |> (toTimeSeq >> toFloat32Seq)
+
+    let toValueSeqFloat32 s = s |> (toValueSeq >> toFloat32Seq)
+
+

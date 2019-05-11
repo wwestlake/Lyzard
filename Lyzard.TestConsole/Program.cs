@@ -16,21 +16,17 @@
  * limitations under the License.
  */
 using Lyzard.AppDominaControl;
-using Lyzard.Collections;
 using Lyzard.Compiler;
 using Lyzard.Config;
-using Lyzard.DataStore;
 using Lyzard.FileSystem;
 using Lyzard.IDE.Dialogs;
 using Lyzard.MessageBus;
-using Lyzard.SignalProcessing;
 using NAudio.Wave;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using Lyzard.FsMath;
 
 namespace Lyzard.TestConsole
@@ -43,19 +39,19 @@ namespace Lyzard.TestConsole
         [STAThread]
         public static void Main(string[] args)
         {
-            var gen1 = new Generators.SquareWaveGenerator(0.0f, 1.0f, 1000.0f, 44100.0f, 0.0f);
-            var gen2 = new Generators.SineWaveGenerator(0.0f, 1.0f, 2000.0f, 44100.0f, 0.0f);
-            var dsp = new SignalProcessing.Mixxers.DSP();
-            var gen3 = dsp.Clamp(0.0f, 1.0f, (new Generators.SquareWaveGenerator(0.0f, 1.0f, 1.0f, 44100.0f, 0.0f)).GenerateFloat());
-            var gen = dsp.Mix(dsp.Mix(gen1.GenerateFloat(), gen2.GenerateFloat()), gen3);
-            var samples = gen.Select(x => (float)x).Take(200000).ToArray();
-            var sampleBytes = new byte[sizeof(float) * samples.Length];
-            Buffer.BlockCopy(samples, 0, sampleBytes, 0, sampleBytes.Length);
-            var provider = new RawSourceWaveStream(sampleBytes, 0, sampleBytes.Length, new WaveFormat(44100, 32,1));
-            var waveOut = new WaveOut();
-            waveOut.DeviceNumber = -1;
-            waveOut.Init(provider);
-            waveOut.Play();
+            //var gen1 = new Generators.SquareWaveGenerator(0.0f, 1.0f, 1000.0f, 44100.0f, 0.0f);
+            //var gen2 = new Generators.SineWaveGenerator(0.0f, 1.0f, 2000.0f, 44100.0f, 0.0f);
+            //var dsp = new SignalProcessing.Mixxers.DSP();
+            //var gen3 = dsp.Clamp(0.0f, 1.0f, (new Generators.SquareWaveGenerator(0.0f, 1.0f, 1.0f, 44100.0f, 0.0f)).GenerateFloat());
+            //var gen = dsp.Mix(dsp.Mix(gen1.GenerateFloat(), gen2.GenerateFloat()), gen3);
+            //var samples = gen.Select(x => (float)x).Take(200000).ToArray();
+            //var sampleBytes = new byte[sizeof(float) * samples.Length];
+            //Buffer.BlockCopy(samples, 0, sampleBytes, 0, sampleBytes.Length);
+            //var provider = new RawSourceWaveStream(sampleBytes, 0, sampleBytes.Length, new WaveFormat(44100, 32,1));
+            //var waveOut = new WaveOut();
+            //waveOut.DeviceNumber = -1;
+            //waveOut.Init(provider);
+            //waveOut.Play();
             //
             //let _waveOut = new WaveOut()
             //

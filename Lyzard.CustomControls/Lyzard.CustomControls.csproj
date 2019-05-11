@@ -50,13 +50,21 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Themes\Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="LyzardCanvas.cs">
+    <Compile Include="Connection.cs" />
+    <Compile Include="ConnectionAdorner.cs" />
+    <Compile Include="Connector.cs" />
+    <Compile Include="ConnectorAdorner.cs" />
+    <Compile Include="DesignerCanvas.cs" />
+    <Compile Include="DesignerItem.cs" />
+    <Compile Include="DragThumb.cs" />
+    <Compile Include="PathFinder.cs" />
+    <Compile Include="RelativePositionPanel.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ResizeThumb.cs" />
+    <Compile Include="RubberbandAdorner.cs" />
+    <Compile Include="SelectionService.cs" />
+    <Compile Include="ToolboxItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -80,6 +88,12 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lyzard.Interfaces\Lyzard.Interfaces.csproj">
+      <Project>{242df884-d9f1-4b8d-891b-56d973cbb1d4}</Project>
+      <Name>Lyzard.Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

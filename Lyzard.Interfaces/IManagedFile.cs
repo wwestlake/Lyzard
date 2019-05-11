@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Lyzard.Interfaces;
 
-namespace Lyzard.Intercaces
+namespace Lyzard.Interfaces
 {
     public interface IManagedFile
     {

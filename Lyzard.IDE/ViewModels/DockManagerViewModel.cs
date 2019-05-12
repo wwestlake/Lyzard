@@ -28,6 +28,7 @@ namespace Lyzard.IDE.ViewModels
         internal OutputViewModel _output = new OutputViewModel() { Title = "Output" };
         internal ProjectExplorerViewModel _project = new ProjectExplorerViewModel() { Title = "Project Explorer" };
         internal PropertiesViewModel _properties = new PropertiesViewModel() { Title = "Properties" };
+        internal DiagramToolboxViewModel _diagramToolbox = new DiagramToolboxViewModel() { Title = "Diagram Items" };
 
         internal static DockManagerViewModel DocumentManager;
 
@@ -43,7 +44,7 @@ namespace Lyzard.IDE.ViewModels
             Anchorables.Add(_output);
             Anchorables.Add(_project);
             Anchorables.Add(_properties);
-
+            Anchorables.Add(_diagramToolbox);
 
         }
 

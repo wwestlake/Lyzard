@@ -132,6 +132,11 @@ namespace Lyzard.IDE.ViewModels
             _dockManager.Documents.Add(new CodeEditorViewModel());
         });
 
+        public ICommand NewDiagram => new DelegateCommand((x) => {
+            _dockManager.Documents.Add(new DiagramViewModel());
+
+        });
+
         public ICommand OpenCodeFile => new DelegateCommand((x) => {
             var file = DialogManager.OpenFile();
             if (file != null)

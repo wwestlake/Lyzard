@@ -70,6 +70,7 @@
                     <RibbonGroup Header="New">
                         <RibbonMenuItem Header="New File" Command="{Binding FileNew}" />
                         <RibbonMenuItem Header="New Project" Command="{Binding NewProject}" />
+                        <RibbonMenuItem Header="New Diagram" Command="{Binding NewDiagram}" />
                         <RibbonMenuItem Header="Save" Command="{Binding SaveCommand}" />
                         <RibbonMenuItem Header="Save As" Command="{Binding SaveAsCommand}" />
                         <RibbonMenuItem Header="Save All" Command="{Binding SaveAllCommand}" />
@@ -133,6 +134,12 @@
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type vm:AudioFileViewModel}">
                         <views:AudioFileView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:DiagramToolboxViewModel}">
+                        <views:DiagramToolboxView />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type vm:DiagramViewModel}">
+                        <views:DiagramView />
                     </DataTemplate>
 
                 </dock:DockingManager.Resources>

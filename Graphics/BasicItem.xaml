@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--This file is NOT compatible with Silverlight-->
+<Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+  <Canvas Name="svg8" Width="210" Height="297">
+    <Canvas.RenderTransform>
+      <TranslateTransform X="0" Y="0"/>
+    </Canvas.RenderTransform>
+    <Canvas.Resources/>
+    <!--Unknown tag: sodipodi:namedview-->
+    <!--Unknown tag: metadata-->
+    <Canvas Name="layer1">
+      <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="rect3713" Fill="#FFE6E6E6" StrokeThickness="0.26458332">
+        <Path.Data>
+          <PathGeometry Figures="m 47.247025 30.90476 h 50.648811 v 63.5 H 47.247025 Z" FillRule="NonZero"/>
+        </Path.Data>
+      </Path>
+      <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path3716" Fill="#FFE6E6E6" StrokeThickness="1.42857146">
+        <Path.Data>
+          <PathGeometry Figures="m 178.85611 236.61405 v -120 h 95.71429 95.71428 v 120 120 H 274.5704 178.85611 Z" FillRule="NonZero"/>
+        </Path.Data>
+        <Path.RenderTransform>
+          <ScaleTransform ScaleX="0.26458333" ScaleY="0.26458333"/>
+        </Path.RenderTransform>
+      </Path>
+      <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path3718" Fill="#FFE6E6E6" StrokeThickness="1.42857146">
+        <Path.Data>
+          <PathGeometry Figures="m 178.85611 236.61405 v -120 h 95.71429 95.71428 v 120 120 H 274.5704 178.85611 Z" FillRule="NonZero"/>
+        </Path.Data>
+        <Path.RenderTransform>
+          <ScaleTransform ScaleX="0.26458333" ScaleY="0.26458333"/>
+        </Path.RenderTransform>
+      </Path>
+    </Canvas>
+  </Canvas>
+</Viewbox>

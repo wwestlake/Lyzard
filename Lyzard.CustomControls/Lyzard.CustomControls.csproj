@@ -54,6 +54,7 @@
     <Compile Include="ConnectionAdorner.cs" />
     <Compile Include="Connector.cs" />
     <Compile Include="ConnectorAdorner.cs" />
+    <Compile Include="DesignerCanvas.Commands.cs" />
     <Compile Include="DesignerCanvas.cs" />
     <Compile Include="DesignerItem.cs" />
     <Compile Include="DragThumb.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="ResizeThumb.cs" />
     <Compile Include="RubberbandAdorner.cs" />
     <Compile Include="SelectionService.cs" />
+    <Compile Include="Toolbox.cs" />
     <Compile Include="ToolboxItem.cs" />
   </ItemGroup>
   <ItemGroup>

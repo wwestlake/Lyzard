@@ -148,6 +148,9 @@
     <Compile Include="ViewModels\Plugins\UserPluginToolPaneViewModel.cs" />
     <Compile Include="ViewModels\ProjectExplorerViewModel.cs" />
     <Compile Include="ViewModels\PropertiesViewModel.cs" />
+    <Compile Include="ViewModels\SimulationItemViewModels\DiagramIOViewModel.cs" />
+    <Compile Include="ViewModels\SimulationItemViewModels\SimFunctionViewModel.cs" />
+    <Compile Include="ViewModels\SimulationItemViewModels\SimulationViewModelSelector.cs" />
     <Compile Include="ViewModels\ToolViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\AudioFileView.xaml.cs">
@@ -243,6 +246,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Resource>
+    <Page Include="Resources\Stencils\SimulationStencils.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\PluginDocumentViewWrapper.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

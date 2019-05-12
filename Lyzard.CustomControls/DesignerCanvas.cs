@@ -12,8 +12,12 @@ using System.Windows.Media;
 
 namespace Lyzard.CustomControls
 {
+    public delegate void DesignerItemDropEventHandler(object sender, EventArgs args);
+
     public partial class DesignerCanvas : Canvas
     {
+        public event DesignerItemDropEventHandler DropEvent;
+
         private Point? rubberbandSelectionStartPoint = null;
 
         private SelectionService selectionService;
@@ -78,7 +82,7 @@ namespace Lyzard.CustomControls
             if (dragObject != null && !String.IsNullOrEmpty(dragObject.Xaml))
             {
                 DesignerItem newItem = null;
-                Object content = XamlReader.Load(XmlReader.Create(new StringReader(dragObject.Xaml)));
+                object content = XamlReader.Load(XmlReader.Create(new StringReader(dragObject.Xaml)));
 
                 if (content != null)
                 {
@@ -109,6 +113,7 @@ namespace Lyzard.CustomControls
                     //update selection
                     this.SelectionService.SelectItem(newItem);
                     newItem.Focus();
+                    DropEvent?.Invoke(content, new EventArgs());
                 }
 
                 e.Handled = true;

@@ -16,21 +16,13 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
         public SimFunctionViewModel()
         {
             Title = "Function";
-            _inputs.Add(new DiagramIOViewModel { Name = "Exec In" });
-            _outputs.Add(new DiagramIOViewModel { Name = "Exec Out" });
-            _inputs.Add(new DiagramIOViewModel { Name = "Exec In" });
-            _outputs.Add(new DiagramIOViewModel { Name = "Exec Out" });
-            _inputs.Add(new DiagramIOViewModel { Name = "Exec In" });
-            _outputs.Add(new DiagramIOViewModel { Name = "Exec Out" });
-            _inputs.Add(new DiagramIOViewModel { Name = "Exec In" });
-            _outputs.Add(new DiagramIOViewModel { Name = "Exec Out" });
-            _inputs.Add(new DiagramIOViewModel { Name = "Exec In" });
-            _outputs.Add(new DiagramIOViewModel { Name = "Exec Out" });
+            _inputs.Add(new DiagramIOViewModel { Name = "Input Value", Value = "0.0" });
+            _outputs.Add(new DiagramIOViewModel { Name = "Output Value" });
         }
         public string Title { get { return _title; } set { _title = value; FirePropertyChanged(); } }
 
-        public ObservableCollection<DiagramIOViewModel> Inputs { get => _inputs; set { _inputs = value; FirePropertyChanged(); } }
-        public ObservableCollection<DiagramIOViewModel> Outputs { get => _outputs; set { _outputs = value; FirePropertyChanged(); } }
+        public ObservableCollection<DiagramIOViewModel> InputItems { get => _inputs; set { _inputs = value; FirePropertyChanged(); } }
+        public ObservableCollection<DiagramIOViewModel> OutputItems { get => _outputs; set { _outputs = value; FirePropertyChanged(); } }
 
     }
 }

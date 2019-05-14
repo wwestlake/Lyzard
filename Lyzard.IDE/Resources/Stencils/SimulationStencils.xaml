@@ -34,6 +34,10 @@
         <Setter Property="Fill" Value="{StaticResource SimItemBrush}" />
     </Style>
 
+    <Style x:Key="SimulationControlStyle" TargetType="Grid">
+        <Setter Property="IsHitTestVisible" Value="False"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+    </Style>
 
     <Style x:Key="Function_DragThumb" TargetType="Path" BasedOn="{StaticResource SimulationItemStyle}">
         <Setter Property="IsHitTestVisible" Value="true"/>
@@ -41,6 +45,7 @@
 
     <Style x:Key="Function" TargetType="Path" BasedOn="{StaticResource SimulationItemStyle}">
         <Setter Property="Tag" Value="Function" />
+        <Setter Property="Data" Value="M 0,0 H 60 V40 H 0 Z"/>
     </Style>
 
     <Style x:Key="DiagramListViewStyle" TargetType="ListView">
@@ -48,8 +53,8 @@
             <Setter.Value>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="{Binding Name}" />
-                        <TextBox Text="{Binding Value}" />
+                        <TextBlock Text="{Binding Path=Name}" />
+                        <TextBlock Text="{Binding Path=Value}" />
                     </StackPanel>
                 </DataTemplate>
             </Setter.Value>
@@ -67,17 +72,6 @@
                         </ControlTemplate>
                     </s:DesignerItem.DragThumbTemplate>
                 </Path>
-                <StackPanel Orientation="Vertical"  >
-                    <TextBlock Text="{Binding ElementName=Path, Path=Tag}" x:Name="Title" Style="{StaticResource ItemHeader}" Margin="0" Padding="0"  Grid.Column="0" Grid.ColumnSpan="2"    />
-                    <Grid VerticalAlignment="Stretch"   Margin="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <ListView Style="{StaticResource DiagramListViewStyle}" Grid.Column="0" x:Name="Input" ItemsSource="{Binding Inputs}" Margin="0" Padding="0"   />
-                        <ListView Style="{StaticResource DiagramListViewStyle}" Grid.Column="1" x:Name="Output" ItemsSource="{Binding Outputs}"  Margin="0" Padding="0"  />
-                    </Grid>
-                </StackPanel>
             </Grid>
         </ItemsControl.Items> 
         

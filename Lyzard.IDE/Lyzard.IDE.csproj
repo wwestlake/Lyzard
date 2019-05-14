@@ -118,6 +118,9 @@
     <Compile Include="Messages\DocumentActivatedMessage.cs" />
     <Compile Include="Messages\FileCreatedMessage.cs" />
     <Compile Include="Messages\FileSavedMessage.cs" />
+    <Compile Include="UserControls\DiagramControls\FunctionControl.xaml.cs">
+      <DependentUpon>FunctionControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\PluginDocumentViewWrapper.xaml.cs">
       <DependentUpon>PluginDocumentViewWrapper.xaml</DependentUpon>
     </Compile>
@@ -247,6 +250,10 @@
       <SubType>Designer</SubType>
     </Resource>
     <Page Include="Resources\Stencils\SimulationStencils.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\DiagramControls\FunctionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

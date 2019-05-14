@@ -113,12 +113,20 @@ namespace Lyzard.CustomControls
                     //update selection
                     this.SelectionService.SelectItem(newItem);
                     newItem.Focus();
-                    DropEvent?.Invoke(content, new EventArgs());
+                    DropEvent?.Invoke(newItem, new EventArgs());
                 }
 
                 e.Handled = true;
             }
         }
+
+        public void ReplaceContent(UIElement stencil, UserControl control)
+        {
+            Children.Remove(stencil);
+            Children.Add(control);
+            UpdateLayout();
+        }
+
 
         protected override Size MeasureOverride(Size constraint)
         {

@@ -1,4 +1,5 @@
-﻿using Lyzard.IDE.ViewModels.SimulationItemViewModels;
+﻿using Lyzard.CustomControls;
+using Lyzard.IDE.ViewModels.SimulationItemViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,18 +27,15 @@ namespace Lyzard.IDE.Views
             InitializeComponent();
             Designer.DropEvent += (s, e) =>
             {
-                var grid = s as Grid;
-                var path = grid.FindName("Path") as Path;
-                var vm = SimulationViewModelSelector.SelectViewModel(path);
-                if (vm != null)
+                var item = s as DesignerItem;
+                if (! (item.Content is Grid)) return;
+                var path = (item.Content as Grid).FindName("Path") as Path;
+                var result = SimulationViewModelSelector.SelectViewAndViewModel(path);
+                if (result != null)
                 {
-                    (grid.FindName("Title") as TextBlock).SetBinding(TextBlock.TextProperty, new Binding("Title"));
-                    var inputs = (grid.FindName("Input") as ListView);
-                    inputs.SetBinding(ListView.ItemsSourceProperty, new Binding("Inputs"));
-                    var outputs = (grid.FindName("Output") as ListView);
-                    outputs.SetBinding(ListView.ItemsSourceProperty, new Binding("Outputs"));
-                    grid.DataContext = vm;
-                    grid.UpdateLayout();
+                    result.Item2.DataContext = result.Item1;
+                    item.Content = result.Item2;
+                    item.UpdateLayout();
                 }
             };
         }

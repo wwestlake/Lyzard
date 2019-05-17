@@ -72,6 +72,11 @@ namespace Lyzard.IDE.ViewModels
             DocumentManager.Documents.Add(vm);
         }
 
+        internal void SelectDiagramItem(object vm)
+        {
+            _properties.SelectedItem = vm;
+        }
+
         public void CreateToolPane(IPluginToolPaneView view, IPluginToolPaneViewModel model)
         {
             view.ViewModel = model;

@@ -4,6 +4,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
+using System.Xaml;
+using XamlWriter = System.Windows.Markup.XamlWriter;
 
 namespace Lyzard.CustomControls
 {

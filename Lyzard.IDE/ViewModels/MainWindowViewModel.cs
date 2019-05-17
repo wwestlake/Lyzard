@@ -133,7 +133,7 @@ namespace Lyzard.IDE.ViewModels
         });
 
         public ICommand NewDiagram => new DelegateCommand((x) => {
-            _dockManager.Documents.Add(new DiagramViewModel());
+            _dockManager.Documents.Add(new DiagramViewModel() { Title = "New Diagram" } );
 
         });
 

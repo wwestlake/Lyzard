@@ -59,25 +59,25 @@ module Generators =
     let stepGenerator delaySamples = generator (stepFunc delaySamples)
 
 
-    type FunctionGenerator(func, startTime, amplitude, frequency, sampleRate, phase) =
-        member private x.func = func
-        member private x.startTime = startTime
-        member private x.amplitude = amplitude
-        member private x.frequency = frequency
-        member private x.sampleRate = sampleRate
-        member private x.phase = phase
+    type FunctionGenerator(func) =
+        member val Func = func with get, set
+        member val StartTime = 0.0 with get, set 
+        member val Amplitude = 1.0 with get, set
+        member val Frequency = 100.0 with get, set
+        member val SampleRate = 44100.0 with get, set
+        member val Phase = 0.0 with get, set
         member x.Generate() =
-            x.func x.startTime x.amplitude x.frequency x.sampleRate x.phase
+            x.Func x.StartTime x.Amplitude x.Frequency x.SampleRate x.Phase
 
 
-    type SquareWaveGenerator(startTime, amplitude, frequency, sampleRate, phase) =
-        inherit FunctionGenerator(squareWave, startTime, amplitude, frequency, sampleRate, phase)
+    type SquareWaveGenerator() =
+        inherit FunctionGenerator(squareWave)
 
-    type SineWaveGenerator(startTime, amplitude, frequency, sampleRate, phase) =
-        inherit FunctionGenerator(sineWave, startTime, amplitude, frequency, sampleRate, phase)
+    type SineWaveGenerator() =
+        inherit FunctionGenerator(sineWave) 
 
-    type TriangleWaveGenerator(startTime, amplitude, frequency, sampleRate, phase) =
-        inherit FunctionGenerator(triangleWave, startTime, amplitude, frequency, sampleRate, phase)
+    type TriangleWaveGenerator() =
+        inherit FunctionGenerator(triangleWave)
 
-    type RandomWaveGenerator(startTime, amplitude, frequency, sampleRate, phase) =
-        inherit FunctionGenerator(randomWave, startTime, amplitude, frequency, sampleRate, phase)
+    type RandomWaveGenerator() =
+        inherit FunctionGenerator(randomWave)

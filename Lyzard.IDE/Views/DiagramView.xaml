@@ -21,7 +21,7 @@
     <GroupBox Header="Diagram" Grid.Column="1" Margin="3,0,0,0">
         <ScrollViewer HorizontalScrollBarVisibility="Auto"
                       VerticalScrollBarVisibility="Auto">
-            <s:DesignerCanvas Focusable="true" x:Name="MyDesigner"
+            <s:DesignerCanvas Focusable="true" x:Name="Designer"
                             Background="{StaticResource WindowBackgroundBrush}"
                             Margin="10" FocusVisualStyle="{x:Null}"
                             ContextMenu="{StaticResource DesignerCanvasContextMenu}"/>

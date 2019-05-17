@@ -15,5 +15,6 @@
     <StackPanel Margin="0,0,5,0">
         <Expander Header="Flow Chart" Content="{StaticResource FlowChartStencils}" IsExpanded="True"/>
         <Expander Header="Shapes" Content="{StaticResource ShapeStencils}" IsExpanded="True"/>
+        <Expander Header="Simulation" Content="{StaticResource SimulationStencils}" IsExpanded="True"/>
     </StackPanel>
 </UserControl>

@@ -91,6 +91,9 @@
         </Grid>
     </ControlTemplate>
 
+    
+    
+    
     <!-- ResizeDecorator Default Template -->
     <ControlTemplate x:Key="ResizeDecoratorTemplate" TargetType="{x:Type Control}">
         <Grid Opacity="0.7" SnapsToDevicePixels="true">

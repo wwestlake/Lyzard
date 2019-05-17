@@ -49,6 +49,9 @@
     <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net462\ControlzEx.dll</HintPath>
     </Reference>
+    <Reference Include="FSharp.Core, Version=4.6.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FSharp.Core.4.6.2\lib\net45\FSharp.Core.dll</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro, Version=1.6.5.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.6.5\lib\net47\MahApps.Metro.dll</HintPath>
     </Reference>
@@ -118,6 +121,9 @@
     <Compile Include="Messages\DocumentActivatedMessage.cs" />
     <Compile Include="Messages\FileCreatedMessage.cs" />
     <Compile Include="Messages\FileSavedMessage.cs" />
+    <Compile Include="UserControls\DiagramControls\FlowChartProcessControl.xaml.cs">
+      <DependentUpon>FlowChartProcessControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\DiagramControls\FunctionControl.xaml.cs">
       <DependentUpon>FunctionControl.xaml</DependentUpon>
     </Compile>
@@ -127,12 +133,15 @@
     <Compile Include="UserControls\PluginToolPaneViewWrapper.xaml.cs">
       <DependentUpon>PluginToolPaneViewWrapper.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ValueConverters\StringToDoubleConverter.cs" />
     <Compile Include="ValueConverters\FolderItemToImageConverter.cs" />
     <Compile Include="ViewModels\AudioFileViewModel.cs" />
     <Compile Include="ViewModels\CodeEditorViewModel.cs" />
     <Compile Include="ViewModels\DiagramToolboxViewModel.cs" />
     <Compile Include="ViewModels\DiagramViewModel.cs" />
     <Compile Include="ViewModels\DirectoryItemViewModel.cs" />
+    <Compile Include="ViewModels\FlowChartViewModels\FlowChartProcessViewModel.cs" />
+    <Compile Include="ViewModels\FlowChartViewModels\FlowChartViewModelSelector.cs" />
     <Compile Include="ViewModels\PowerShellConsoleViewModel.cs" />
     <Compile Include="ViewModels\CommandConsoleViewModel.cs" />
     <Compile Include="ViewModels\ConsoleViewModelBase.cs" />
@@ -151,7 +160,9 @@
     <Compile Include="ViewModels\Plugins\UserPluginToolPaneViewModel.cs" />
     <Compile Include="ViewModels\ProjectExplorerViewModel.cs" />
     <Compile Include="ViewModels\PropertiesViewModel.cs" />
+    <Compile Include="ViewModels\PropertyBase.cs" />
     <Compile Include="ViewModels\SimulationItemViewModels\DiagramIOViewModel.cs" />
+    <Compile Include="ViewModels\SimulationItemViewModels\FunctionGenerator.cs" />
     <Compile Include="ViewModels\SimulationItemViewModels\SimFunctionViewModel.cs" />
     <Compile Include="ViewModels\SimulationItemViewModels\SimulationViewModelSelector.cs" />
     <Compile Include="ViewModels\ToolViewModelBase.cs" />
@@ -250,6 +261,10 @@
       <SubType>Designer</SubType>
     </Resource>
     <Page Include="Resources\Stencils\SimulationStencils.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\DiagramControls\FlowChartProcessControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -395,6 +410,10 @@
       <Project>{7AC24E59-0F41-496E-B9EA-BF6C2C51724D}</Project>
       <Name>Lyzard.FileSystem</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lyzard.FsMath\Lyzard.FsMath.fsproj">
+      <Project>{c4086266-9fa6-414f-9070-0762c933b85f}</Project>
+      <Name>Lyzard.FsMath</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lyzard.Interfaces\Lyzard.Interfaces.csproj">
       <Project>{242DF884-D9F1-4B8D-891B-56D973CBB1D4}</Project>
       <Name>Lyzard.Interfaces</Name>
@@ -418,6 +437,10 @@
     <ProjectReference Include="..\Lyzard.SystemIO\Lyzard.SystemIO.csproj">
       <Project>{F3F22409-4AE8-4A08-BF70-5BFC04716F19}</Project>
       <Name>Lyzard.SystemIO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lyzard.Utilities\Lyzard.Utilities.csproj">
+      <Project>{5F586DDB-CDF7-47B0-A6CF-B1105FFC177F}</Project>
+      <Name>Lyzard.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -547,5 +570,6 @@
     <Resource Include="Resources\Images\SendToBack.png" />
     <Resource Include="Resources\Images\Ungroup.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

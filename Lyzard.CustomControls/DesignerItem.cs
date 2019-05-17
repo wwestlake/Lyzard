@@ -7,6 +7,8 @@ using System.Windows.Media;
 
 namespace Lyzard.CustomControls
 {
+    public delegate void SelectedEventHandler(object sender, EventArgs args);
+
     //These attributes identify the types of the named parts that are used for templating
     [TemplatePart(Name = "PART_DragThumb", Type = typeof(DragThumb))]
     [TemplatePart(Name = "PART_ResizeDecorator", Type = typeof(Control))]
@@ -43,10 +45,15 @@ namespace Lyzard.CustomControls
 
         #region IsSelected Property
 
+        public event SelectedEventHandler Selected;
+
         public bool IsSelected
         {
             get { return (bool)GetValue(IsSelectedProperty); }
-            set { SetValue(IsSelectedProperty, value); }
+            set {
+                SetValue(IsSelectedProperty, value);
+                Selected?.Invoke(this, new EventArgs());
+            }
         }
         public static readonly DependencyProperty IsSelectedProperty =
           DependencyProperty.Register("IsSelected",
@@ -150,7 +157,6 @@ namespace Lyzard.CustomControls
                 {
                     designer.SelectionService.SelectItem(this);
                 }
-                Focus();
             }
 
             e.Handled = false;

@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace Lyzard.IDE.UserControls.DiagramControls
 {
     /// <summary>
-    /// Interaction logic for FunctionControl.xaml
+    /// Interaction logic for FlowChartProcessControl.xaml
     /// </summary>
-    public partial class FunctionControl : UserControl
+    public partial class FlowChartProcessControl : UserControl
     {
-        public FunctionControl()
+        public FlowChartProcessControl()
         {
             InitializeComponent();
         }
-
     }
 }

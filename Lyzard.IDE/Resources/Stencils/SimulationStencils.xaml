@@ -4,6 +4,8 @@
                     xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
                     xmlns:local="clr-namespace:Lyzard.IDE.Resources.Stencils">
 
+
+    <BitmapImage x:Key="SineWave" UriSource="/Resources/Images/Icons/SineWave.png" />
     <Brush x:Key="SimItemStroke">#111111</Brush>
     <LinearGradientBrush x:Key="SimItemBrush" StartPoint="0,0" EndPoint="0,1">
         <LinearGradientBrush.GradientStops>
@@ -46,7 +48,7 @@
 
     <Style x:Key="Function" TargetType="Path" BasedOn="{StaticResource SimulationItemStyle}">
         <Setter Property="Tag" Value="Function" />
-        <Setter Property="Data" Value="M 0,0 H 60 V40 H 0 M 5,10 L 5,15 M 5,15 L 10,15   Z"/>
+        <Setter Property="Data" Value="M 0,0 H 60 V40 H 0 Z"/>
     </Style>
 
     <Style x:Key="DiagramListViewStyle" TargetType="ListView">
@@ -66,13 +68,21 @@
              ScrollViewer.HorizontalScrollBarVisibility="Disabled">
         <ItemsControl.Items>
             <Grid IsHitTestVisible="False" Margin="0">
-                <Path Name="Path" Style="{StaticResource Function}" ToolTip="Function" >
-                    <s:DesignerItem.DragThumbTemplate>
-                        <ControlTemplate>
-                            <Path Style="{StaticResource Function_DragThumb}" />
-                        </ControlTemplate>
-                    </s:DesignerItem.DragThumbTemplate>
-                </Path>
+                <Path Name="Path" Style="{StaticResource Function}" ToolTip="Function" />
+                <Image Source="{StaticResource SineWave}" />
+                <s:DesignerItem.DragThumbTemplate>
+                    <ControlTemplate>
+                        <Path Style="{StaticResource Function_DragThumb}" />
+                    </ControlTemplate>
+                </s:DesignerItem.DragThumbTemplate>
+                <s:DesignerItem.ConnectorDecoratorTemplate>
+                    <ControlTemplate>
+                        <s:RelativePositionPanel Margin="-4">
+                            <s:Connector Orientation="Right" Background="Blue"
+                                    s:RelativePositionPanel.RelativePosition="1,0.5"/>
+                        </s:RelativePositionPanel>
+                    </ControlTemplate>
+                </s:DesignerItem.ConnectorDecoratorTemplate>
             </Grid>
         </ItemsControl.Items> 
         

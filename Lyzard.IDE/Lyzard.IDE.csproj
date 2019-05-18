@@ -570,6 +570,8 @@
     <Resource Include="Resources\Images\SendToBack.png" />
     <Resource Include="Resources\Images\Ungroup.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Images\Icons\SineWave.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

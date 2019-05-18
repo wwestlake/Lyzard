@@ -73,8 +73,8 @@
                 <ControlTemplate TargetType="{x:Type s:Connector}">
                     <Grid>
                         <!-- transparent extra space makes connector easier to hit -->
-                        <Rectangle Fill="Transparent" Margin="-2"/>
-                        <Rectangle Fill="Lavender" StrokeThickness="1" Stroke="#AA000080"/>
+                        <Ellipse Fill="Transparent" Margin="-2"/>
+                        <Ellipse Fill="{TemplateBinding Background}" StrokeThickness="1" Stroke="#AA000080"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

@@ -145,6 +145,7 @@
                                  Visibility="Collapsed"
                                  Template="{StaticResource ResizeDecoratorTemplate}"/>
                         <!-- PART_ContentPresenter -->
+
                         <ContentPresenter x:Name="PART_ContentPresenter"
                                           HorizontalAlignment="Stretch"
                                           VerticalAlignment="Stretch"

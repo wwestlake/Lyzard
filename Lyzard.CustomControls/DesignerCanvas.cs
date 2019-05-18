@@ -49,6 +49,22 @@ namespace Lyzard.CustomControls
             }
         }
 
+        private double scale = 1.0;
+
+        protected override void OnPreviewMouseWheel(MouseWheelEventArgs e)
+        {
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
+            {
+                scale += (0.1 * Math.Sign(e.Delta));
+                if (scale < 0.1) scale = 0.1;
+                if (scale > 10.0) scale = 10.0;
+                var st = new ScaleTransform(scale, scale);
+                LayoutTransform = st;
+            }
+
+            base.OnPreviewMouseWheel(e);
+        }
+
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);

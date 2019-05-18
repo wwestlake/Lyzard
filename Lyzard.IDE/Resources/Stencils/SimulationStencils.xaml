@@ -43,7 +43,7 @@
 
     <Style x:Key="Function_DragThumb" TargetType="Path" BasedOn="{StaticResource SimulationItemStyle}">
         <Setter Property="IsHitTestVisible" Value="true"/>
-        <Setter Property="Data" Value="M 0,0 H 60 V40 H 0 M 5,10 L 5,15 M 5,15 L 10,15   Z"/>
+        <Setter Property="Data" Value="M 0,0 H 60 V40 H 0 Z"/>
     </Style>
 
     <Style x:Key="Function" TargetType="Path" BasedOn="{StaticResource SimulationItemStyle}">
@@ -78,7 +78,7 @@
                 <s:DesignerItem.ConnectorDecoratorTemplate>
                     <ControlTemplate>
                         <s:RelativePositionPanel Margin="-4">
-                            <s:Connector Orientation="Right" Background="Blue"
+                            <s:Connector Orientation="Right" Background="Blue" ToolTip="Signal Output"
                                     s:RelativePositionPanel.RelativePosition="1,0.5"/>
                         </s:RelativePositionPanel>
                     </ControlTemplate>

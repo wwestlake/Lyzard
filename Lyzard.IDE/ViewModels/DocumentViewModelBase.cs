@@ -45,7 +45,7 @@ namespace Lyzard.IDE.ViewModels
             set
             {
                 _filePath = value;
-                FirePropertyChanged();
+                OnPropertyChanged();
             }
         }
 

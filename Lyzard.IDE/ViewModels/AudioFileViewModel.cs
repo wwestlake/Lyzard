@@ -66,7 +66,7 @@ namespace Lyzard.IDE.ViewModels
 
         public ICommand Play => new DelegateCommand((x) => {
             playing = true;
-            FirePropertyChanged();
+            OnPropertyChanged();
             Task.Factory.StartNew(() => {
                 using (var audioFile = new AudioFileReader(FilePath))
                 using (var outputDevice = new WaveOutEvent())
@@ -85,10 +85,10 @@ namespace Lyzard.IDE.ViewModels
         private void OutputDevice_PlaybackStopped(object sender, StoppedEventArgs e)
         {
             playing = false;
-            FirePropertyChanged("Play");
+            OnPropertyChanged("Play");
         }
 
-        public string FilePath { get { return _filepath; } set { _filepath = value; FirePropertyChanged(); } }
+        public string FilePath { get { return _filepath; } set { _filepath = value; OnPropertyChanged(); } }
         public override bool CanSave(object param)
         {
             return false;

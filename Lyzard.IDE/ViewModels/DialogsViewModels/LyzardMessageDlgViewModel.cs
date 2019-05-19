@@ -47,54 +47,54 @@ namespace Lyzard.IDE.ViewModels.DialogsViewModels
         public string Title
         {
             get { return _title; }
-            set { _title = value; FirePropertyChanged(); }
+            set { _title = value; OnPropertyChanged(); }
         }
 
         private string _message;
         public string Message
         {
             get { return _message; }
-            set { _message = value; FirePropertyChanged(); }
+            set { _message = value; OnPropertyChanged(); }
         }
 
         private bool _okVisaible;
         public bool OkVisible
         {
             get { return _okVisaible; }
-            set { _okVisaible = value; FirePropertyChanged(); }
+            set { _okVisaible = value; OnPropertyChanged(); }
         }
 
         private bool _yesVisible;
         public bool YesVisible
         {
             get { return _yesVisible; }
-            set { _yesVisible = value; FirePropertyChanged(); }
+            set { _yesVisible = value; OnPropertyChanged(); }
         }
         private bool _noVisible;
         public bool NoVisible
         {
             get { return _noVisible; }
-            set { _noVisible = value; FirePropertyChanged(); }
+            set { _noVisible = value; OnPropertyChanged(); }
         }
 
         private bool _cancelVisible;
         public bool CancelVisible
         {
-            get { return _cancelVisible; FirePropertyChanged(); }
+            get { return _cancelVisible; OnPropertyChanged(); }
             set { _cancelVisible = value; }
         }
 
         private bool _textVisible;
         public bool TextVisible
         {
-            get { return _textVisible; FirePropertyChanged(); }
+            get { return _textVisible; OnPropertyChanged(); }
             set { _textVisible = value; }
         }
 
         private bool _listVisible;
         public bool ListVisible
         {
-            get { return _listVisible; FirePropertyChanged(); }
+            get { return _listVisible; OnPropertyChanged(); }
             set { _listVisible = value; }
         }
 

@@ -33,7 +33,7 @@ namespace Lyzard.IDE.ViewModels
                 if (_title != value)
                 {
                     _title = value;
-                    this.FirePropertyChanged();
+                    this.OnPropertyChanged();
                 }
             }
         }
@@ -57,7 +57,7 @@ namespace Lyzard.IDE.ViewModels
                 if (_contentId != value)
                 {
                     _contentId = value;
-                    FirePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -75,7 +75,7 @@ namespace Lyzard.IDE.ViewModels
                 if (_isSelected != value)
                 {
                     _isSelected = value;
-                    FirePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -93,7 +93,7 @@ namespace Lyzard.IDE.ViewModels
                 if (_isActive != value)
                 {
                     _isActive = value;
-                    FirePropertyChanged();
+                    OnPropertyChanged();
                     if (_isActive) MessageBroker.Instance.Publish(this, new DocumentActivatedMessage());
                 }
             }
@@ -110,7 +110,7 @@ namespace Lyzard.IDE.ViewModels
                 if (_isVisible != value)
                 {
                     _isVisible = value;
-                    FirePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }

@@ -57,7 +57,7 @@ namespace Lyzard.IDE.ViewModels
             set
             {
                 _dialog = value;
-                FirePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -93,13 +93,13 @@ namespace Lyzard.IDE.ViewModels
         public ObservableCollection<DocumentViewModelBase> Documents
         {
             get { return _editors; }
-            set { _editors = value; FirePropertyChanged(); }
+            set { _editors = value; OnPropertyChanged(); }
         }
 
         public ObservableCollection<PaneViewModel> Anchorables
         {
             get { return _tools; }
-            set { _tools = value; FirePropertyChanged(); }
+            set { _tools = value; OnPropertyChanged(); }
         }
 
         public Theme CurrentTheme
@@ -112,7 +112,7 @@ namespace Lyzard.IDE.ViewModels
             {
                 if (_theme != value)
                     _theme = value;
-                FirePropertyChanged();
+                OnPropertyChanged();
 
             }
         }
@@ -131,7 +131,7 @@ namespace Lyzard.IDE.ViewModels
                 if (_activeDocument != value)
                 {
                     _activeDocument = value;
-                    FirePropertyChanged();
+                    OnPropertyChanged();
                     ActiveDocumentChanged?.Invoke(this, EventArgs.Empty);
                 }
             }

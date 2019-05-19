@@ -1,5 +1,6 @@
 ﻿using Lyzard.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -98,6 +99,32 @@ namespace Lyzard.CustomControls
         }
 
         #endregion
+
+
+        public List<Connector> GetConnectors()
+        {
+            Control cd = this.Template.FindName("PART_ConnectorDecorator", this) as Control;
+
+            List<Connector> connectors = new List<Connector>();
+            GetConnectors(cd, connectors);
+            return connectors;
+        }
+
+        private void GetConnectors(DependencyObject parent, List<Connector> connectors)
+        {
+            int childrenCount = VisualTreeHelper.GetChildrenCount(parent);
+            for (int i = 0; i < childrenCount; i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(parent, i);
+                if (child is Connector)
+                {
+                    connectors.Add(child as Connector);
+                }
+                else
+                    GetConnectors(child, connectors);
+            }
+        }
+
 
         #region IsDragConnectionOver
 

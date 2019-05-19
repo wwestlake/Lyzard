@@ -82,7 +82,7 @@ namespace Lyzard.IDE.ViewModels
             set
             {
                 _highlighting = value;
-                FirePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -99,7 +99,7 @@ namespace Lyzard.IDE.ViewModels
             set
             {
                 _document = value;
-                FirePropertyChanged();
+                OnPropertyChanged();
             }
         }
 

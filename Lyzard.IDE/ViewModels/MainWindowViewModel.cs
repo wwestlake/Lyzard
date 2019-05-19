@@ -62,12 +62,12 @@ namespace Lyzard.IDE.ViewModels
 
         private void _dockManager_ActiveDocumentChanged(object sender, EventArgs e)
         {
-            FirePropertyChanged("SaveCommand");
-            FirePropertyChanged("SaveAsCommand");
-            FirePropertyChanged("SaveAllCommand");
+            OnPropertyChanged("SaveCommand");
+            OnPropertyChanged("SaveAsCommand");
+            OnPropertyChanged("SaveAllCommand");
         }
 
-        public string Title { get { return _title; } set { _title = value; FirePropertyChanged(); } }
+        public string Title { get { return _title; } set { _title = value; OnPropertyChanged(); } }
 
         public ICommand NewProject  => new DelegateCommand((x) => {
             DockManager.CreateProject();
@@ -93,7 +93,7 @@ namespace Lyzard.IDE.ViewModels
                 if (value == null) return;
                 if (value == _selectedStyle) return;
                 _selectedStyle = value;
-                FirePropertyChanged();
+                OnPropertyChanged();
                 _dockManager.CurrentTheme = _themes[_selectedStyle];
             }
 
@@ -108,7 +108,7 @@ namespace Lyzard.IDE.ViewModels
             set
             {
                 _dockManager = value;
-                FirePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -123,7 +123,7 @@ namespace Lyzard.IDE.ViewModels
             set
             {
                 _toggleFileManagerHeader = value;
-                FirePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -163,7 +163,7 @@ namespace Lyzard.IDE.ViewModels
                     DockManager._fileexpl.IsVisible = true;
                 else
                     DockManager._fileexpl.IsVisible = false;
-                FirePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -176,7 +176,7 @@ namespace Lyzard.IDE.ViewModels
                     DockManager._project.IsVisible = true;
                 else
                     DockManager._project.IsVisible = false;
-                FirePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -189,7 +189,7 @@ namespace Lyzard.IDE.ViewModels
                     DockManager._properties.IsVisible = true;
                 else
                     DockManager._properties.IsVisible = false;
-                FirePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -197,7 +197,7 @@ namespace Lyzard.IDE.ViewModels
         {
             if (_dockManager.ActiveDocument != null)
                 _dockManager.ActiveDocument.Save(x);
-            FirePropertyChanged();
+            OnPropertyChanged();
         }, (x) => {
             return _dockManager.ActiveDocument != null ? _dockManager.ActiveDocument.CanSave(x) : false;
         });
@@ -206,13 +206,13 @@ namespace Lyzard.IDE.ViewModels
         {
             if (_dockManager.ActiveDocument != null)
                 _dockManager.ActiveDocument.SaveAs(x);
-            FirePropertyChanged();
+            OnPropertyChanged();
         }, (x) => _dockManager.ActiveDocument != null);
 
         public ICommand SaveAllCommand => new DelegateCommand((x) =>
         {
             _dockManager.SaveAll(x);
-            FirePropertyChanged();
+            OnPropertyChanged();
         }, (x) =>  _dockManager.CanSaveAll(x) );
 
 

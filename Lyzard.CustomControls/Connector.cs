@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -47,21 +48,29 @@ namespace Lyzard.CustomControls
         }
 
         // keep track of connections that link to this connector
-        private List<Connection> connections;
-        public List<Connection> Connections
+        private ObservableCollection<Connection> connections;
+        public ObservableCollection<Connection> Connections
         {
             get
             {
                 if (connections == null)
-                    connections = new List<Connection>();
+                    connections = new ObservableCollection<Connection>();
                 return connections;
             }
         }
 
+        public delegate void ConnectionsChangedHandler(object sender, ConnectionChangedEventArgs args);
+        public event ConnectionsChangedHandler ConnectionChanged;
         public Connector()
         {
             // fired when layout changes
-            base.LayoutUpdated += new EventHandler(Connector_LayoutUpdated);            
+            base.LayoutUpdated += new EventHandler(Connector_LayoutUpdated);
+            Connections.CollectionChanged += Connections_CollectionChanged;
+        }
+
+        private void Connections_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            ConnectionChanged?.Invoke(this, new ConnectionChangedEventArgs());
         }
 
         // when the layout changes we update the position property

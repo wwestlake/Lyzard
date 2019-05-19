@@ -17,14 +17,21 @@
             <MenuItem Header="Select All" Command="{x:Static s:DesignerCanvas.SelectAll}"/>
         </ContextMenu>
     </UserControl.Resources>
-    
-    <GroupBox Header="Diagram" Grid.Column="1" Margin="3,0,0,0">
-        <ScrollViewer HorizontalScrollBarVisibility="Auto"
+
+    <DockPanel>
+        <Grid DockPanel.Dock="Top">
+            <CheckBox Grid.Row="0" Name="ShowGridlines" Content="Show Grid Lines" Checked="ShowGridlines_Checked"  Unchecked="ShowGridlines_Unchecked" ></CheckBox>
+            <Slider Grid.Row="0" ValueChanged="SliderValue_ValueChanged"  Margin="0 20 0 0" Minimum="5" Maximum="100" TickPlacement="BottomRight" TickFrequency="5" IsSnapToTickEnabled="True" Name="SliderValue"  IsEnabled="False"></Slider>
+        </Grid>
+        <GroupBox Header="Diagram" Grid.Column="1" Margin="3,0,0,0">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto"
                       VerticalScrollBarVisibility="Auto">
-            <s:DesignerCanvas Focusable="true" x:Name="Designer"
+                <s:DesignerCanvas Focusable="true" x:Name="Designer"
                             Background="{StaticResource WindowBackgroundBrush}"
                             Margin="10" FocusVisualStyle="{x:Null}"
                             ContextMenu="{StaticResource DesignerCanvasContextMenu}"/>
-        </ScrollViewer>
-    </GroupBox>
+            </ScrollViewer>
+        </GroupBox>
+    </DockPanel>
+
 </UserControl>

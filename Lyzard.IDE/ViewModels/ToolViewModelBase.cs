@@ -30,7 +30,7 @@ namespace Lyzard.IDE.ViewModels
             set
             {
                 _isVisible = value;
-                FirePropertyChanged();
+                OnPropertyChanged();
             }
         }
 

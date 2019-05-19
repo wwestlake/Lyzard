@@ -17,6 +17,6 @@ namespace Lyzard.IDE.ViewModels.FlowChartViewModels
             if (tag != null) Name = this.tag.ToString();
         }
 
-        public string Name { get => _name; set { _name = value; FirePropertyChanged(); } }
+        public string Name { get => _name; set { _name = value; OnPropertyChanged(); } }
     }
 }

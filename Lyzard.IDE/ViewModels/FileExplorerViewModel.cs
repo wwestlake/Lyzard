@@ -38,7 +38,7 @@ namespace Lyzard.IDE.ViewModels
             set
             {
                 _canHide = value;
-                FirePropertyChanged();
+                OnPropertyChanged();
             }
         }
 

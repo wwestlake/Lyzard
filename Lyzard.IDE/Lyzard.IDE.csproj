@@ -127,6 +127,12 @@
     <Compile Include="UserControls\DiagramControls\FunctionControl.xaml.cs">
       <DependentUpon>FunctionControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\DiagramControls\ScopeControl.xaml.cs">
+      <DependentUpon>ScopeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DiagramControls\VariableControl.xaml.cs">
+      <DependentUpon>VariableControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\PluginDocumentViewWrapper.xaml.cs">
       <DependentUpon>PluginDocumentViewWrapper.xaml</DependentUpon>
     </Compile>
@@ -161,10 +167,14 @@
     <Compile Include="ViewModels\ProjectExplorerViewModel.cs" />
     <Compile Include="ViewModels\PropertiesViewModel.cs" />
     <Compile Include="ViewModels\PropertyBase.cs" />
+    <Compile Include="ViewModels\SimulationItemViewModels\Delegates.cs" />
     <Compile Include="ViewModels\SimulationItemViewModels\DiagramIOViewModel.cs" />
     <Compile Include="ViewModels\SimulationItemViewModels\FunctionGenerator.cs" />
+    <Compile Include="ViewModels\SimulationItemViewModels\ScopeViewModel.cs" />
     <Compile Include="ViewModels\SimulationItemViewModels\SimFunctionViewModel.cs" />
     <Compile Include="ViewModels\SimulationItemViewModels\SimulationViewModelSelector.cs" />
+    <Compile Include="ViewModels\SimulationItemViewModels\SimViewModelBase.cs" />
+    <Compile Include="ViewModels\SimulationItemViewModels\DoubleVariableViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\AudioFileView.xaml.cs">
@@ -269,6 +279,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\DiagramControls\FunctionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\DiagramControls\ScopeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\DiagramControls\VariableControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -572,6 +590,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Icons\SineWave.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Icons\Scope.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Icons\Variable.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

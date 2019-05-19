@@ -102,9 +102,11 @@ namespace Lyzard.CustomControls
 
                 if (content != null)
                 {
-                    newItem = new DesignerItem();
+                    newItem = new DesignerItem(); 
                     newItem.Content = content;
-
+                    var ctrl = (newItem.Content as Grid);
+                    var tag = ctrl?.Tag;
+                    newItem.Name = tag?.ToString();
                     Point position = e.GetPosition(this);
 
                     if (dragObject.DesiredSize.HasValue)

@@ -40,11 +40,11 @@ namespace Lyzard.IDE.ViewModels
             internal set
             {
                 _selectedItem = value;
-                FirePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
-        public ObservableCollection<PropertyBase> Properties { get => _properties; set { _properties = value; FirePropertyChanged(); } }
+        public ObservableCollection<PropertyBase> Properties { get => _properties; set { _properties = value; OnPropertyChanged(); } }
 
     }
 }

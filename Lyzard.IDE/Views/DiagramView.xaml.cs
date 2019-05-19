@@ -2,18 +2,10 @@
 using Lyzard.IDE.ViewModels;
 using Lyzard.IDE.ViewModels.SimulationItemViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Lyzard.IDE.Views
@@ -23,15 +15,20 @@ namespace Lyzard.IDE.Views
     /// </summary>
     public partial class DiagramView : UserControl
     {
+        private Brush _color1 = Brushes.Black;
+        private Brush _color2 = Brushes.DarkGray;
+
         public DiagramView()
         {
             InitializeComponent();
+
+
             Designer.DropEvent += (s, e) =>
             {
                 var item = s as DesignerItem;
                 if (item.Content is Grid)
                 {
-                    var path = (item.Content as Grid).FindName("Path") as Path;
+                    var path = (item.Content as Grid).FindName(item.Name) as Path;
                     var result = SimulationViewModelSelector.SelectViewAndViewModel(path);
                     if (result != null) AssignSimulationViewModeAndView(item, result);
                     return;
@@ -52,12 +49,30 @@ namespace Lyzard.IDE.Views
                 result.Item2.DataContext = result.Item1;
                 item.Content = result.Item2;
                 item.UpdateLayout();
+                var connectors = item.GetConnectors();
+                foreach (var connector in connectors)
+                {
+                    connector.ConnectionChanged += Connector_ConnectionChanged;
+                }
             }
         }
+
+
+
+        private static void Connector_ConnectionChanged(object sender, ConnectionChangedEventArgs args)
+        {
+            var connector = sender as Connector;
+            var item = connector.ParentDesignerItem;
+            var internalItem = (item.Content as Control);
+            var vm = internalItem.DataContext as SimViewModelBase;
+            vm.HandleConnectionAdded(connector);
+        }
+
         private static void AssignFlowChartViewModeAndView(DesignerItem item, Tuple<ViewModels.ViewModelBase, UserControl> result)
         {
             if (result != null)
             {
+
                 result.Item2.DataContext = result.Item1;
                 var path = item.Content;
                 item.Content = result.Item2;
@@ -76,5 +91,92 @@ namespace Lyzard.IDE.Views
                 DockManagerViewModel.DocumentManager.SelectDiagramItem(vm);
             }
         }
+
+        private void ShowGridlines_Checked(object sender, System.Windows.RoutedEventArgs e)
+        {
+            DrawGraph((int)SliderValue.Value, (int)SliderValue.Value, Designer);
+            SliderValue.IsEnabled = true;
+        }
+
+        private void ShowGridlines_Unchecked(object sender, System.Windows.RoutedEventArgs e)
+        {
+            RemoveGraph(Designer);
+            SliderValue.IsEnabled = false;
+        }
+
+        private void SliderValue_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (ShowGridlines.IsChecked ?? false)
+            {
+                DrawGraph((int)SliderValue.Value, (int)SliderValue.Value, Designer);
+            }
+        }
+
+        
+
+        private void DrawGraph(int yoffSet, int xoffSet, Canvas mainCanvas)
+        {
+            RemoveGraph(mainCanvas);
+            Image lines = new Image();
+            lines.SetValue(Panel.ZIndexProperty, -100);
+            //Draw the grid
+            DrawingVisual gridLinesVisual = new DrawingVisual();
+            DrawingContext dct = gridLinesVisual.RenderOpen();
+            Pen lightPen = new Pen(_color1, 0.5), darkPen = new Pen(_color2, 1);
+            lightPen.Freeze();
+            darkPen.Freeze();
+
+            int yOffset = yoffSet,
+                xOffset = xoffSet,
+                rows = (int)(SystemParameters.PrimaryScreenHeight),
+                columns = (int)(SystemParameters.PrimaryScreenWidth),
+                alternate = yOffset == 5 ? yOffset : 1,
+                j = 0;
+
+            //Draw the horizontal lines
+            Point x = new Point(0, 0.5);
+            Point y = new Point(SystemParameters.PrimaryScreenWidth, 0.5);
+
+            for (int i = 0; i <= rows; i++, j++)
+            {
+                dct.DrawLine(j % alternate == 0 ? lightPen : darkPen, x, y);
+                x.Offset(0, yOffset);
+                y.Offset(0, yOffset);
+            }
+            j = 0;
+            //Draw the vertical lines
+            x = new Point(0.5, 0);
+            y = new Point(0.5, SystemParameters.PrimaryScreenHeight);
+
+            for (int i = 0; i <= columns; i++, j++)
+            {
+                dct.DrawLine(j % alternate == 0 ? lightPen : darkPen, x, y);
+                x.Offset(xOffset, 0);
+                y.Offset(xOffset, 0);
+            }
+
+            dct.Close();
+
+            RenderTargetBitmap bmp = new RenderTargetBitmap((int)SystemParameters.PrimaryScreenWidth,
+                (int)SystemParameters.PrimaryScreenHeight, 96, 96, PixelFormats.Pbgra32);
+            bmp.Render(gridLinesVisual);
+            bmp.Freeze();
+            lines.Source = bmp;
+
+            mainCanvas.Children.Add(lines);
+        }
+
+        private void RemoveGraph(Canvas mainCanvas)
+        {
+            foreach (UIElement obj in mainCanvas.Children)
+            {
+                if (obj is Image)
+                {
+                    mainCanvas.Children.Remove(obj);
+                    break;
+                }
+            }
+        }
+
     }
 }

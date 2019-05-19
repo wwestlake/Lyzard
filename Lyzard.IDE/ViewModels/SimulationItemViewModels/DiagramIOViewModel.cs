@@ -16,8 +16,8 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
 
         }
 
-        public string Name { get { return _name; } set { _name = value; FirePropertyChanged(); } }
-        public string Value { get { return _value; } set { _value = value; FirePropertyChanged(); } }
+        public string Name { get { return _name; } set { _name = value; OnPropertyChanged(); } }
+        public string Value { get { return _value; } set { _value = value; OnPropertyChanged(); } }
 
     }
 }

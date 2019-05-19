@@ -8,7 +8,7 @@ namespace Lyzard.IDE.ViewModels
     {
         private string _name;
 
-        public string Name { get => _name; set { _name = value; FirePropertyChanged(); } }
+        public string Name { get => _name; set { _name = value; OnPropertyChanged(); } }
 
         public Type Type { get; set; }
     }
@@ -17,42 +17,42 @@ namespace Lyzard.IDE.ViewModels
     {
         private string _value;
 
-        public string Value { get => _value; set { _value = value; FirePropertyChanged(); } }
+        public string Value { get => _value; set { _value = value; OnPropertyChanged(); } }
     }
 
     public class IntProperty : PropertyBase
     {
         private int _value;
 
-        public int Value { get => _value; set { _value = value; FirePropertyChanged(); } }
+        public int Value { get => _value; set { _value = value; OnPropertyChanged(); } }
     }
 
     public class FloatProperty : PropertyBase
     {
         private float _value;
 
-        public float Value { get => _value; set { _value = value; FirePropertyChanged(); } }
+        public float Value { get => _value; set { _value = value; OnPropertyChanged(); } }
     }
 
     public class DoubleProperty : PropertyBase
     {
         private double _value;
 
-        public double Value { get => _value; set { _value = value; FirePropertyChanged(); } }
+        public double Value { get => _value; set { _value = value; OnPropertyChanged(); } }
     }
 
     public class BooleanProperty : PropertyBase
     {
         private bool _value;
 
-        public bool Value { get => _value; set { _value = value; FirePropertyChanged(); } }
+        public bool Value { get => _value; set { _value = value; OnPropertyChanged(); } }
     }
 
     public class EnumProperty : PropertyBase
     {
         private Enum _value;
 
-        public Enum Value { get => _value; set { _value = value; FirePropertyChanged(); } }
+        public Enum Value { get => _value; set { _value = value; OnPropertyChanged(); } }
 
         public List<string> Values
         {

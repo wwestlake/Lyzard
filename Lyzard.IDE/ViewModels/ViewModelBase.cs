@@ -14,7 +14,7 @@ namespace Lyzard.IDE.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void FirePropertyChanged([CallerMemberName] string name = "")
+        public void OnPropertyChanged([CallerMemberName] string name = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }

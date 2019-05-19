@@ -5,7 +5,10 @@
                     xmlns:local="clr-namespace:Lyzard.IDE.Resources.Stencils">
 
 
-    <BitmapImage x:Key="SineWave" UriSource="/Resources/Images/Icons/SineWave.png" />
+    <BitmapImage x:Key="SineWaveIcon" UriSource="/Resources/Images/Icons/SineWave.png" />
+    <BitmapImage x:Key="ScopeIcon" UriSource="/Resources/Images/Icons/Scope.png" />
+    <BitmapImage x:Key="VariableIcon" UriSource="/Resources/Images/Icons/Variable.png" />
+
     <Brush x:Key="SimItemStroke">#111111</Brush>
     <LinearGradientBrush x:Key="SimItemBrush" StartPoint="0,0" EndPoint="0,1">
         <LinearGradientBrush.GradientStops>
@@ -51,6 +54,26 @@
         <Setter Property="Data" Value="M 0,0 H 60 V40 H 0 Z"/>
     </Style>
 
+    <Style x:Key="Scope_DragThumb" TargetType="Path" BasedOn="{StaticResource SimulationItemStyle}">
+        <Setter Property="IsHitTestVisible" Value="true"/>
+        <Setter Property="Data" Value="M 0,0 H 60 V40 H 0 Z"/>
+    </Style>
+
+    <Style x:Key="Scope" TargetType="Path" BasedOn="{StaticResource SimulationItemStyle}">
+        <Setter Property="Tag" Value="Scope" />
+        <Setter Property="Data" Value="M 0,0 H 60 V40 H 0 Z"/>
+    </Style>
+
+    <Style x:Key="Variable_DragThumb" TargetType="Path" BasedOn="{StaticResource SimulationItemStyle}">
+        <Setter Property="IsHitTestVisible" Value="true"/>
+        <Setter Property="Data" Value="M 0,0 H 60 V40 H 0 Z"/>
+    </Style>
+
+    <Style x:Key="Variable" TargetType="Path" BasedOn="{StaticResource SimulationItemStyle}">
+        <Setter Property="Tag" Value="Variable" />
+        <Setter Property="Data" Value="M 0,0 H 60 V40 H 0 Z"/>
+    </Style>
+
     <Style x:Key="DiagramListViewStyle" TargetType="ListView">
         <Setter Property="ItemTemplate">
             <Setter.Value>
@@ -67,9 +90,9 @@
     <s:Toolbox x:Key="SimulationStencils"  SnapsToDevicePixels="True"
              ScrollViewer.HorizontalScrollBarVisibility="Disabled">
         <ItemsControl.Items>
-            <Grid IsHitTestVisible="False" Margin="0">
-                <Path Name="Path" Style="{StaticResource Function}" ToolTip="Function" />
-                <Image Source="{StaticResource SineWave}" />
+            <Grid IsHitTestVisible="False" Margin="0" Tag="Function">
+                <Path Name="Function" Style="{StaticResource Function}" ToolTip="Function" />
+                <Image Source="{StaticResource SineWaveIcon}" />
                 <s:DesignerItem.DragThumbTemplate>
                     <ControlTemplate>
                         <Path Style="{StaticResource Function_DragThumb}" />
@@ -78,12 +101,72 @@
                 <s:DesignerItem.ConnectorDecoratorTemplate>
                     <ControlTemplate>
                         <s:RelativePositionPanel Margin="-4">
-                            <s:Connector Orientation="Right" Background="Blue" ToolTip="Signal Output"
-                                    s:RelativePositionPanel.RelativePosition="1,0.5"/>
+                            <s:Connector Name="SignalOut" Tag="TimeSignal,Output" Orientation="Right" Background="Red" ToolTip="Signal Output"
+                                    s:RelativePositionPanel.RelativePosition="1,0.5" />
+
+                            <s:Connector Name="StartTime" Tag="Double,Input" Orientation="Left" Background="Blue" ToolTip="Start Time"
+                                    s:RelativePositionPanel.RelativePosition="0,0.1" />
+
+                            <s:Connector Name="Amplitude" Tag="Double,Input" Orientation="Left" Background="Blue" ToolTip="Amplitude"
+                                    s:RelativePositionPanel.RelativePosition="0,0.3" />
+
+                            <s:Connector Name="Frequency" Tag="Double,Input" Orientation="Left" Background="Blue" ToolTip="Frequency"
+                                    s:RelativePositionPanel.RelativePosition="0,0.5" />
+
+                            <s:Connector Name="SampleRate" Tag="Double,Input" Orientation="Left" Background="Blue" ToolTip="Sample Rate"
+                                    s:RelativePositionPanel.RelativePosition="0,0.7" />
+
+                            <s:Connector Name="Phase" Tag="Double,Input" Orientation="Left" Background="Blue" ToolTip="Phase"
+                                    s:RelativePositionPanel.RelativePosition="0,0.9" />
+
+
                         </s:RelativePositionPanel>
                     </ControlTemplate>
                 </s:DesignerItem.ConnectorDecoratorTemplate>
             </Grid>
+
+
+            <Grid IsHitTestVisible="False" Margin="0" Tag="Scope">
+                <Path Name="Scope" Style="{StaticResource Scope}" ToolTip="Scope" />
+                <Image Source="{StaticResource ScopeIcon}" />
+                <s:DesignerItem.DragThumbTemplate>
+                    <ControlTemplate>
+                        <Path Style="{StaticResource Scope_DragThumb}" />
+                    </ControlTemplate>
+                </s:DesignerItem.DragThumbTemplate>
+                <s:DesignerItem.ConnectorDecoratorTemplate>
+                    <ControlTemplate>
+                        <s:RelativePositionPanel Margin="-4">
+                            <s:Connector Name="VerticalIn" Tag="TimeSignal,Input" Orientation="Left" Background="Red" ToolTip="Signal Input"
+                                    s:RelativePositionPanel.RelativePosition="0,0.5" />
+                        </s:RelativePositionPanel>
+                    </ControlTemplate>
+                </s:DesignerItem.ConnectorDecoratorTemplate>
+            </Grid>
+
+
+            <Grid IsHitTestVisible="False" Margin="0" Tag="Variable">
+                <Path Name="Variable" Style="{StaticResource Variable}" ToolTip="Variable" />
+                <Image Source="{StaticResource VariableIcon}" />
+                <s:DesignerItem.DragThumbTemplate>
+                    <ControlTemplate>
+                        <Path Style="{StaticResource Variable_DragThumb}" />
+                    </ControlTemplate>
+                </s:DesignerItem.DragThumbTemplate>
+                <s:DesignerItem.ConnectorDecoratorTemplate>
+                    <ControlTemplate>
+                        <s:RelativePositionPanel Margin="-4">
+                            <s:Connector Name="VarGetValue" Tag="Double,Output" Orientation="Right" Background="Blue" ToolTip="Get Value"
+                                    s:RelativePositionPanel.RelativePosition="1,0.5" />
+
+                            <s:Connector Name="VarSetValue" Tag="Double,Input" Orientation="Left" Background="Blue" ToolTip="Set Value"
+                                    s:RelativePositionPanel.RelativePosition="0,0.5" />
+                        </s:RelativePositionPanel>
+                    </ControlTemplate>
+                </s:DesignerItem.ConnectorDecoratorTemplate>
+            </Grid>
+
+
         </ItemsControl.Items> 
         
     </s:Toolbox>

@@ -20,7 +20,7 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
         /// <summary>
         /// The Name of the Function Generator
         /// </summary>
-        public string Name { get => _name; set { _name = value; FirePropertyChanged(); } }
+        public string Name { get => _name; set { _name = value; OnPropertyChanged(); } }
 
         public Generators.FunctionGenerator Generator { get; set; }
 

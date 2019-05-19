@@ -1,12 +1,14 @@
-﻿using Lyzard.Utilities;
+﻿using Lyzard.CustomControls;
+using Lyzard.Utilities;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
 namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
 {
-    public class SimFunctionViewModel : ViewModelBase
+    public class SimFunctionViewModel : SimViewModelBase
     {
         private string _title;
         private ObservableCollection<FunctionGenerator> _func = new ObservableCollection<FunctionGenerator>();
@@ -23,9 +25,9 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
             Selection = _func[0];
 
         }
-        public string Title { get { return _title; } set { _title = value; FirePropertyChanged(); } }
+        public string Title { get { return _title; } set { _title = value; OnPropertyChanged(); } }
 
-        public ObservableCollection<FunctionGenerator> FunctionType { get => _func; set { _func = value; FirePropertyChanged(); } }
+        public ObservableCollection<FunctionGenerator> FunctionType { get => _func; set { _func = value; OnPropertyChanged(); } }
 
         public FunctionGenerator Selection
         {
@@ -36,35 +38,48 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
                     _selection = value;
                     Title = _selection.Name + " Generator";
                 }
-                FirePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
         /// <summary>
         /// Sets or Gets the StartTime of the Generator
         /// </summary>
-        public double StartTime { get { return Selection.Generator.StartTime; } set { Selection.Generator.StartTime = value; FirePropertyChanged(); } }
+        public double StartTime { get { return Selection.Generator.StartTime; } set { Selection.Generator.StartTime = value; OnPropertyChanged(); } }
 
         /// <summary>
         /// Sets or Gets the Amplitude of the Generator
         /// </summary>
-        public double Amplitude { get { return Selection.Generator.Amplitude; } set { Selection.Generator.Amplitude = value; FirePropertyChanged(); } }
+        public double Amplitude { get { return Selection.Generator.Amplitude; } set { Selection.Generator.Amplitude = value; OnPropertyChanged(); } }
 
         /// <summary>
         /// Sets or Gets the Frequency of the Generator
         /// </summary>
-        public double Frequency { get { return Selection.Generator.Frequency; } set { Selection.Generator.Frequency = value; FirePropertyChanged(); } }
+        public double Frequency { get { return Selection.Generator.Frequency; } set { Selection.Generator.Frequency = value; OnPropertyChanged(); } }
 
 
         /// <summary>
         /// Gets or Sets the SampleRate of the Generator
         /// </summary>
-        public double SampleRate { get { return Selection.Generator.SampleRate; } set { Selection.Generator.SampleRate = value; FirePropertyChanged(); } }
+        public double SampleRate { get { return Selection.Generator.SampleRate; } set { Selection.Generator.SampleRate = value; OnPropertyChanged(); } }
 
         /// <summary>
         /// Gets or Sets the Phase of the Generator
         /// </summary>
-        public double Phase { get { return Selection.Generator.Phase; } set { Selection.Generator.Phase = value; FirePropertyChanged(); } }
+        public double Phase { get { return Selection.Generator.Phase; } set { Selection.Generator.Phase = value; OnPropertyChanged(); } }
 
+        internal override Delegate ConnectToOutput(string connectorName)
+        {
+            return new TimeSignalDelegate(() => _selection.Output);
+        }
+
+        internal override void HandleConnectionAdded(Connector connector)
+        {
+            if (connector.Name == "StartTime")
+            {
+
+            }
+
+        }
     }
 }

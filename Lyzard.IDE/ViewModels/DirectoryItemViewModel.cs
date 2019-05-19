@@ -20,7 +20,7 @@ namespace Lyzard.IDE.ViewModels
             ClearChildren();
         }
 
-        public FileSystemItem Item { get => item; set { item = value; FirePropertyChanged(); } }
+        public FileSystemItem Item { get => item; set { item = value; OnPropertyChanged(); } }
 
         public ObservableCollection<DirectoryItemViewModel> Children { get; set; }
 
@@ -70,12 +70,12 @@ namespace Lyzard.IDE.ViewModels
                     ClearChildren();
                     Item.IsExpanded = false;
                 }
-                FirePropertyChanged();
-                FirePropertyChanged("Children");
+                OnPropertyChanged();
+                OnPropertyChanged("Children");
             }
         }
 
-        public bool IsSelected { get => isSelected; set { isSelected = value; FirePropertyChanged(); } }
+        public bool IsSelected { get => isSelected; set { isSelected = value; OnPropertyChanged(); } }
 
 
         private void ClearChildren()

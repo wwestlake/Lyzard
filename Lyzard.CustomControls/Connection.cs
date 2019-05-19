@@ -64,7 +64,15 @@ namespace Lyzard.CustomControls
                         sink.Connections.Remove(this);
                     }
 
+                    var valTags = value?.Tag?.ToString().Split(',');
+                    var srcTags = source?.Tag?.ToString().Split(',');
+
+                    if (valTags == null || srcTags == null) return;
+                    if (valTags[0] != srcTags[0] || valTags[1] == srcTags[1]) return;
+
                     sink = value;
+
+                    Foreground = source.Background;
 
                     if (sink != null)
                     {

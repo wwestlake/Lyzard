@@ -43,7 +43,7 @@ namespace Lyzard.IDE.ViewModels.DialogsViewModels
             set
             {
                 _title = value;
-                FirePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -52,7 +52,7 @@ namespace Lyzard.IDE.ViewModels.DialogsViewModels
         public string ProjectPath
         {
             get { return _projectPath; }
-            set { _projectPath = value; FirePropertyChanged(); }
+            set { _projectPath = value; OnPropertyChanged(); }
         }
 
 

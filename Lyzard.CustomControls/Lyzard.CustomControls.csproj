@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Connection.cs" />
     <Compile Include="ConnectionAdorner.cs" />
+    <Compile Include="ConnectionChangedEventArgs.cs" />
     <Compile Include="Connector.cs" />
     <Compile Include="ConnectorAdorner.cs" />
     <Compile Include="DesignerCanvas.Commands.cs" />

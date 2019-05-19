@@ -16,6 +16,8 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
             if (item == null) return null;
             if (item.Tag == null) return null;
             if (item.Tag.ToString() == "Function") return new Tuple<ViewModelBase, UserControl>(new SimFunctionViewModel(), new FunctionControl());
+            if (item.Tag.ToString() == "Scope") return new Tuple<ViewModelBase, UserControl>(new ScopeViewModel(), new ScopeControl());
+            if (item.Tag.ToString() == "Variable") return new Tuple<ViewModelBase, UserControl>(new DoubleVariableViewModel(), new VariableControl());
 
             return null;
         }

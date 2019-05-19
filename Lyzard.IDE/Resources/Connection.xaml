@@ -86,7 +86,7 @@
                             ContextMenu="{StaticResource ConnectionContextMenu}">
                         <Path Name="PART_ConnectionPath"
                               StrokeThickness="2"
-                              Stroke="{StaticResource SolidBorderBrush}"
+                              Stroke="{TemplateBinding Foreground}"
                               StrokeStartLineCap="Round"
                               StrokeEndLineCap="Round"
                               StrokeLineJoin="Round"

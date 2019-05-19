@@ -20,7 +20,7 @@ namespace Lyzard.IDE.ViewModels.Plugins
             set
             {
                 _userControl = value;
-                FirePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -30,7 +30,7 @@ namespace Lyzard.IDE.ViewModels.Plugins
             set
             {
                 _viewModel = value;
-                FirePropertyChanged();
+                OnPropertyChanged();
             }
         }
     }

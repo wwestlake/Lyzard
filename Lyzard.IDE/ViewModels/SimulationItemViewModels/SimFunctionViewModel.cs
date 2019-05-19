@@ -3,8 +3,10 @@ using Lyzard.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Windows.Controls;
 
 namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
 {
@@ -14,6 +16,7 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
         private ObservableCollection<FunctionGenerator> _func = new ObservableCollection<FunctionGenerator>();
         private FunctionGenerator _selection;
         private string _selectedGenerator;
+        private DoubleDelegate _startTimeSource;
 
         public SimFunctionViewModel()
         {
@@ -45,7 +48,27 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
         /// <summary>
         /// Sets or Gets the StartTime of the Generator
         /// </summary>
-        public double StartTime { get { return Selection.Generator.StartTime; } set { Selection.Generator.StartTime = value; OnPropertyChanged(); } }
+        public double StartTime { get { return Selection.Generator.StartTime; }
+            set
+            {
+                Selection.Generator.StartTime = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        public DoubleDelegate StartTimeSource
+        {
+            get => _startTimeSource;
+            set
+            {
+                _startTimeSource = value;
+                OnPropertyChanged();
+                OnPropertyChanged("StartTime");
+            }
+        }
+
+
 
         /// <summary>
         /// Sets or Gets the Amplitude of the Generator
@@ -77,9 +100,24 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
         {
             if (connector.Name == "StartTime")
             {
+                foreach (var connection in connector.Connections)
+                {
+                    if (connection.Source != null)
+                    {
+                        var vm = (connection.Source.ParentDesignerItem.Content as Control).DataContext as SimViewModelBase;
+                        StartTimeSource = vm.ConnectToOutput(connection.Sink.Name) as DoubleDelegate;
+                        vm.PropertyChanged += StartTimePropertyChanged;
+                        StartTime = StartTimeSource();
+                    }
+                }
 
             }
 
+        }
+
+        private void StartTimePropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            StartTime = StartTimeSource();
         }
     }
 }

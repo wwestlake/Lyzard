@@ -12,4 +12,10 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
     /// <returns>An enumeration of time signals</returns>
     public delegate IEnumerable<Tuple<double, double>>  TimeSignalDelegate();
 
+    /// <summary>
+    /// Connects a double between view models
+    /// </summary>
+    /// <returns>THe returned double value</returns>
+    public delegate double DoubleDelegate();
+
 }

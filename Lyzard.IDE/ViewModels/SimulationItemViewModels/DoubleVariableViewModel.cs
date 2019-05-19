@@ -17,7 +17,7 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
 
         internal override Delegate ConnectToOutput(string connectorName)
         {
-            throw new NotImplementedException();
+            return new DoubleDelegate(() => Value);
         }
 
         internal override void HandleConnectionAdded(Connector connector)

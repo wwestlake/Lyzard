@@ -12,6 +12,9 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
 
 
         internal abstract void HandleConnectionAdded(Connector connector);
-        internal abstract Delegate ConnectToOutput(string connectorName);
+        internal abstract Delegate ConnectToOutput(Connection connection);
+        internal abstract void OnDelete();
+
+        internal abstract void OnDeleteConnection(Connection connection);
     }
 }

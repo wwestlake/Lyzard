@@ -1,12 +1,11 @@
-﻿using System;
+﻿using Lyzard.FsMath;
+using System;
 using System.Collections.Generic;
-using Lyzard.FsMath;
-using Lyzard.Utilities;
 
 namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
 {
 
-    public abstract class FunctionGenerator : ViewModelBase
+    public class FunctionGenerator : ViewModelBase
     {
         private string _name;
 
@@ -16,6 +15,15 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
         public FunctionGenerator()
         {
         }
+
+        /// <summary>
+        /// Constructs a FunctionGenerator
+        /// </summary>
+        public FunctionGenerator(Generators.FunctionGenerator generator)
+        {
+            Generator = generator;
+        }
+
 
         /// <summary>
         /// The Name of the Function Generator
@@ -29,7 +37,7 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
         /// <summary>
         /// THe output of the Generator
         /// </summary>
-        public IEnumerable<Tuple<double,double>> Output
+        public IEnumerable<Tuple<double, double>> Output
         {
             get
             {

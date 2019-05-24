@@ -908,6 +908,7 @@ namespace Lyzard.CustomControls
         {
             foreach (Connection connection in SelectionService.CurrentSelection.OfType<Connection>())
             {
+                ConnectionDeleteEvent?.Invoke(this, new ConnectionDeleteEventArgs { Connection = connection });
                 this.Children.Remove(connection);
             }
 
@@ -925,6 +926,7 @@ namespace Lyzard.CustomControls
                         this.Children.Remove(con);
                     }
                 }
+                DeleteEvent?.Invoke(this, new DesignerItemDeleteEventArgs { Item = item });
                 this.Children.Remove(item);
             }
 

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Lyzard.CustomControls;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 using System.Windows.Controls;
-using Lyzard.CustomControls;
 
 namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
 {
@@ -37,7 +35,7 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
 
         public string Title { get => _title; set { _title = value; OnPropertyChanged(); } }
 
-        internal override Delegate ConnectToOutput(string connectorName)
+        internal override Delegate ConnectToOutput(Connection connectorName)
         {
             return null;
         }
@@ -51,12 +49,22 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
                     if (connection.Source != null)
                     {
                         var vm = (connection.Source.ParentDesignerItem.Content as Control).DataContext as SimViewModelBase;
-                        SignalSource = vm.ConnectToOutput(connection.Sink.Name) as TimeSignalDelegate;
-                        var list = SignalIn.Take(100).ToList();
-                        var a = 1;
+                        SignalSource = vm.ConnectToOutput(connection) as TimeSignalDelegate;
+                        //var test = SignalSource().Take(10).ToList();
+                        //var a = 1;
                     }
                 }
             }
+        }
+
+        internal override void OnDelete()
+        {
+            SignalSource = null;
+        }
+
+        internal override void OnDeleteConnection(Connection connection)
+        {
+            SignalSource = null;
         }
     }
 }

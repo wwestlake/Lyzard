@@ -91,28 +91,54 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
         /// </summary>
         public double Phase { get { return Selection.Generator.Phase; } set { Selection.Generator.Phase = value; OnPropertyChanged(); } }
 
-        internal override Delegate ConnectToOutput(string connectorName)
+        private Dictionary<Connection, TimeSignalDelegate> Connections = new Dictionary<Connection, TimeSignalDelegate>();
+
+
+        internal override Delegate ConnectToOutput(Connection connection)
         {
-            return new TimeSignalDelegate(() => _selection.Output);
+            var generator = new FunctionGenerator(_selection.Generator);
+            var output = new TimeSignalDelegate(() => generator.Output);
+            Connections.Add(connection, output);
+            return output;
         }
 
         internal override void HandleConnectionAdded(Connector connector)
         {
+            Connection current = null;
+
             if (connector.Name == "StartTime")
             {
-                foreach (var connection in connector.Connections)
+                try
                 {
-                    if (connection.Source != null)
+                    foreach (var connection in connector.Connections)
                     {
-                        var vm = (connection.Source.ParentDesignerItem.Content as Control).DataContext as SimViewModelBase;
-                        StartTimeSource = vm.ConnectToOutput(connection.Sink.Name) as DoubleDelegate;
-                        vm.PropertyChanged += StartTimePropertyChanged;
-                        StartTime = StartTimeSource();
+                        if (connection.Source != null)
+                        {
+                            var vm = (connection.Source.ParentDesignerItem.Content as Control).DataContext as SimViewModelBase;
+                            StartTimeSource = vm.ConnectToOutput(connection) as DoubleDelegate;
+                            vm.PropertyChanged += StartTimePropertyChanged;
+                            StartTime = StartTimeSource();
+                        }
                     }
+                } catch
+                {
+                    if (current != null) connector.Connections.Remove(current);
                 }
-
             }
 
+        }
+
+        internal override void OnDelete()
+        {
+            
+        }
+
+        internal override void OnDeleteConnection(Connection connection)
+        {
+            if (Connections.ContainsKey(connection))
+            {
+                Connections.Remove(connection);
+            }
         }
 
         private void StartTimePropertyChanged(object sender, PropertyChangedEventArgs e)

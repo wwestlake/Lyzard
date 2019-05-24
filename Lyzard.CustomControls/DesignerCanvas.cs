@@ -1,22 +1,24 @@
 ﻿using System;
-using System.Linq;
-using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Markup;
-using System.Xml;
 using System.Windows.Media;
+using System.Xml;
 
 namespace Lyzard.CustomControls
 {
     public delegate void DesignerItemDropEventHandler(object sender, EventArgs args);
+    public delegate void DesignerItemDeleteEventHandler(object sender, DesignerItemDeleteEventArgs args);
+    public delegate void ConnectionDeleteEventHandler(object sender, ConnectionDeleteEventArgs args);
 
     public partial class DesignerCanvas : Canvas
     {
         public event DesignerItemDropEventHandler DropEvent;
+        public event DesignerItemDeleteEventHandler DeleteEvent;
+        public event ConnectionDeleteEventHandler ConnectionDeleteEvent;
 
         private Point? rubberbandSelectionStartPoint = null;
 
@@ -102,7 +104,7 @@ namespace Lyzard.CustomControls
 
                 if (content != null)
                 {
-                    newItem = new DesignerItem(); 
+                    newItem = new DesignerItem();
                     newItem.Content = content;
                     var ctrl = (newItem.Content as Grid);
                     var tag = ctrl?.Tag;
@@ -125,7 +127,7 @@ namespace Lyzard.CustomControls
                     }
 
                     Canvas.SetZIndex(newItem, this.Children.Count);
-                    this.Children.Add(newItem);                    
+                    this.Children.Add(newItem);
                     SetConnectorDecoratorTemplate(newItem);
 
                     //update selection

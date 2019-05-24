@@ -22,6 +22,8 @@ namespace Lyzard.IDE.Views
         {
             InitializeComponent();
 
+            Designer.DeleteEvent += Designer_DeleteEvent;
+            Designer.ConnectionDeleteEvent += Designer_ConnectionDeleteEvent;
 
             Designer.DropEvent += (s, e) =>
             {
@@ -40,6 +42,20 @@ namespace Lyzard.IDE.Views
                     if (result != null) AssignFlowChartViewModeAndView(item, result);
                 }
             };
+        }
+
+        private void Designer_ConnectionDeleteEvent(object sender, ConnectionDeleteEventArgs args)
+        {
+            var vmSource = (args.Connection.Source.ParentDesignerItem.Content as Control).DataContext as SimViewModelBase;
+            var vmSink = (args.Connection.Sink.ParentDesignerItem.Content as Control).DataContext as SimViewModelBase;
+            vmSource.OnDeleteConnection(args.Connection);
+            vmSink.OnDeleteConnection(args.Connection);
+        }
+
+        private void Designer_DeleteEvent(object sender, DesignerItemDeleteEventArgs args)
+        {
+            var vm = (args.Item.Content as Control).DataContext as SimViewModelBase;
+            vm.OnDelete();
         }
 
         private static void AssignSimulationViewModeAndView(DesignerItem item, Tuple<ViewModels.ViewModelBase, UserControl> result)

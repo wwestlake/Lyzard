@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
@@ -12,6 +11,9 @@ namespace Lyzard.CustomControls
 {
     public class Connector : Control, INotifyPropertyChanged
     {
+        public delegate void ConnectionsChangedHandler(object sender, ConnectionChangedEventArgs args);
+
+
         // drag start point, relative to the DesignerCanvas
         private Point? dragStartPoint = null;
 
@@ -59,7 +61,6 @@ namespace Lyzard.CustomControls
             }
         }
 
-        public delegate void ConnectionsChangedHandler(object sender, ConnectionChangedEventArgs args);
         public event ConnectionsChangedHandler ConnectionChanged;
         public Connector()
         {

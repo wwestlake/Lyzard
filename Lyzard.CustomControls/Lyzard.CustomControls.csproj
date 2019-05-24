@@ -53,11 +53,13 @@
     <Compile Include="Connection.cs" />
     <Compile Include="ConnectionAdorner.cs" />
     <Compile Include="ConnectionChangedEventArgs.cs" />
+    <Compile Include="ConnectionDeleteEventArgs.cs" />
     <Compile Include="Connector.cs" />
     <Compile Include="ConnectorAdorner.cs" />
     <Compile Include="DesignerCanvas.Commands.cs" />
     <Compile Include="DesignerCanvas.cs" />
     <Compile Include="DesignerItem.cs" />
+    <Compile Include="DesignerItemDeleteEventArgs.cs" />
     <Compile Include="DragThumb.cs" />
     <Compile Include="PathFinder.cs" />
     <Compile Include="RelativePositionPanel.cs">

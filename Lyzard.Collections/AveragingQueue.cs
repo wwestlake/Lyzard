@@ -1,5 +1,5 @@
 /* 
- * Lyzard Code Generation System
+ * Lyzard Modeling and Simulation System
  * 
  * Copyright 2019 William W. Westlake Jr.
  *

@@ -1,5 +1,5 @@
 /* 
- * Lyzard Code Generation System
+ * Lyzard Modeling and Simulation System
  * 
  * Copyright 2019 William W. Westlake Jr.
  *
@@ -15,14 +15,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 using AppDomainToolkit;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Lyzard.AppDominaControl
@@ -34,30 +31,25 @@ namespace Lyzard.AppDominaControl
     public class AppDomainLoader
     {
         private AppDomainContext<AssemblyTargetLoader, PathBasedAssemblyResolver> _context;
-        private bool _loaded;
 
-        public bool IsLoaded { get => _loaded; private set => _loaded = value; }
+        public bool IsLoaded { get; private set; }
 
-        public AppDomainLoader(string dllpath)
+        public AppDomainLoader(IEnumerable<string> dllpaths)
         {
-            _context = AppDomainContext.Wrap(AppDomain.CurrentDomain);
-            _context.LoadAssembly(LoadMethod.LoadFile, dllpath);
+            foreach (var dllpath in dllpaths)
+            {
+                _context = AppDomainContext.Wrap(AppDomain.CurrentDomain);
+                _context.LoadAssembly(LoadMethod.LoadFile, dllpath);
+            }
             IsLoaded = true;
         }
 
-        public AppDomainLoader(string appName, string dllpath)
+        public AppDomainLoader(string dllpath) : this(new List<string> { dllpath })
         {
-            var rootDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var setupInfo = new AppDomainSetup()
-            {
-                ApplicationName = appName,
-                ApplicationBase = rootDir,
-                PrivateBinPath = rootDir,
-                 
-            };
-            _context = AppDomainContext.Create(setupInfo);
-            _context.LoadAssembly(LoadMethod.LoadFile, dllpath);
-            IsLoaded = true;
+        }
+
+        public AppDomainLoader(string appName, string dllpath) : this(appName, new List<string> { dllpath })
+        {
         }
 
         public AppDomainLoader(string appName, IEnumerable<string> dllpaths)
@@ -76,6 +68,7 @@ namespace Lyzard.AppDominaControl
             }
             IsLoaded = true;
         }
+
 
 
         public void RunRemoteAction(Action action)
@@ -102,12 +95,12 @@ namespace Lyzard.AppDominaControl
             );
         }
 
-        public void RunRemoteAction<T1,T2>(T1 arg1, T2 arg2, Action<T1, T2> action)
+        public void RunRemoteAction<T1, T2>(T1 arg1, T2 arg2, Action<T1, T2> action)
         {
-            RemoteAction.Invoke<T1,T2>(_context.Domain, arg1, arg2, action);
+            RemoteAction.Invoke<T1, T2>(_context.Domain, arg1, arg2, action);
         }
 
-        public async Task  RunRemoteActionAsync<T1, T2>(T1 arg1, T2 arg2, Action<T1, T2> action)
+        public async Task RunRemoteActionAsync<T1, T2>(T1 arg1, T2 arg2, Action<T1, T2> action)
         {
             await Task.Factory.StartNew(() =>
                 RemoteAction.Invoke<T1, T2>(_context.Domain, arg1, arg2, action)

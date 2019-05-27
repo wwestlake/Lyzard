@@ -1,5 +1,5 @@
 ﻿/* 
- * Lyzard Code Generation System
+ * Lyzard Modeling and Simulation System
  * 
  * Copyright 2019 William W. Westlake Jr.
  *
@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 namespace Lyzard.Compiler
 {
     public class Error

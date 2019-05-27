@@ -1,22 +1,28 @@
-﻿using ICSharpCode.AvalonEdit.Document;
+﻿/* 
+ * Lyzard Modeling and Simulation System
+ * 
+ * Copyright 2019 William W. Westlake Jr.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Highlighting;
 using Lyzard.FileSystem;
 using Lyzard.IDE.Dialogs;
-using Lyzard.IDE.Messages;
 using Lyzard.IDE.ViewModels.DialogsViewModels;
 using Lyzard.Interfaces;
-using Lyzard.Logger;
-using Lyzard.MessageBus;
-using Lyzard.SystemIO;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace Lyzard.IDE.ViewModels
@@ -86,7 +92,8 @@ namespace Lyzard.IDE.ViewModels
             }
         }
 
-        public ICommand Check => new DelegateCommand((x) => {
+        public ICommand Check => new DelegateCommand((x) =>
+        {
             var a = _document.Text;
         });
 
@@ -113,7 +120,8 @@ namespace Lyzard.IDE.ViewModels
             if (!IsDirty)
             {
                 DockManagerViewModel.DocumentManager.Documents.Remove(this);
-            } else
+            }
+            else
             {
                 var filename = _file != null ? _file.FileName : "New File";
 
@@ -172,7 +180,8 @@ namespace Lyzard.IDE.ViewModels
                 SystemLog.Instance.LogInfo($"Saving file...{_file.FileName}");
 
                 _file.Save(_document.Text);
-            } else
+            }
+            else
             {
                 SaveAs(null);
             }

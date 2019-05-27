@@ -1,5 +1,5 @@
 ﻿/* 
- * Lyzard Code Generation System
+ * Lyzard Modeling and Simulation System
  * 
  * Copyright 2019 William W. Westlake Jr.
  *
@@ -14,7 +14,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */using System;
+ */
+using System;
 using System.Collections.ObjectModel;
 using System.Windows.Media;
 

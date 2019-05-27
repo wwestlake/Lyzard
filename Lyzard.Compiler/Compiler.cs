@@ -1,5 +1,5 @@
 ﻿/* 
- * Lyzard Code Generation System
+ * Lyzard Modeling and Simulation System
  * 
  * Copyright 2019 William W. Westlake Jr.
  *
@@ -15,12 +15,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
 using Microsoft.CSharp;
 using Microsoft.VisualBasic;
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
 using System.Linq;
-using System.IO;
 
 namespace Lyzard.Compiler
 {
@@ -38,6 +37,7 @@ namespace Lyzard.Compiler
     {
         private readonly CodeDomProvider _provider;
         private readonly CompilerParameters _parameters;
+
 
         public Compiler(CodeDomProvider provider)
         {

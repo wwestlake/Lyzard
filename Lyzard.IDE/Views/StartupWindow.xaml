@@ -1,0 +1,25 @@
+﻿<Window x:Class="Lyzard.IDE.Views.StartupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lyzard.IDE.Views"
+        mc:Ignorable="d"
+        WindowStyle="None" AllowsTransparency="True"
+        Title="StartupWindow" Height="450" Width="800">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome  CaptionHeight="35" />
+    </WindowChrome.WindowChrome>
+    
+    <Grid>
+        <Grid VerticalAlignment="Top" Background="DarkGray">
+            <StackPanel Height="35" WindowChrome.IsHitTestVisibleInChrome="True" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal">
+                <Button Width="35" />
+                <Button Width="35" />
+                <Button Width="35" />
+
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

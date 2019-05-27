@@ -1,12 +1,8 @@
 ﻿using Lyzard.IDE.Views;
 using Lyzard.Interfaces;
-using Lyzard.Logger;
-using Lyzard.SystemIO;
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Media;
 
 namespace Lyzard.IDE
 {
@@ -56,9 +52,14 @@ namespace Lyzard.IDE
                 {
                     //initialize the main window, set it as the application main window
                     //and close the splash screen
+
                     var mainWindow = new MainWindow();
                     MainWindow = mainWindow;
                     mainWindow.Show();
+
+                    //var startWindow = new StartupWindow();
+                    //startWindow.Show();
+
                     splash.Close();
                 });
             });

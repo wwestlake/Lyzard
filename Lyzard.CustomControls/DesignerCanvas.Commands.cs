@@ -1,5 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using Lyzard.Interfaces;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -11,8 +12,6 @@ using System.Windows.Markup;
 using System.Windows.Media;
 using System.Xml;
 using System.Xml.Linq;
-using Lyzard.Interfaces;
-using Microsoft.Win32;
 
 namespace Lyzard.CustomControls
 {
@@ -484,7 +483,7 @@ namespace Lyzard.CustomControls
                     Canvas.SetZIndex(item, selectionSorted.Count + i++);
                 }
             }
-        }        
+        }
 
         #endregion
 
@@ -909,6 +908,7 @@ namespace Lyzard.CustomControls
             foreach (Connection connection in SelectionService.CurrentSelection.OfType<Connection>())
             {
                 ConnectionDeleteEvent?.Invoke(this, new ConnectionDeleteEventArgs { Connection = connection });
+
                 this.Children.Remove(connection);
             }
 
@@ -921,11 +921,13 @@ namespace Lyzard.CustomControls
 
                 foreach (Connector connector in connectors)
                 {
-                    foreach (Connection con in connector.Connections)
+                    foreach (Connection connection in connector.Connections)
                     {
-                        this.Children.Remove(con);
+                        ConnectionDeleteEvent?.Invoke(this, new ConnectionDeleteEventArgs { Connection = connection });
+                        this.Children.Remove(connection);
                     }
                 }
+
                 DeleteEvent?.Invoke(this, new DesignerItemDeleteEventArgs { Item = item });
                 this.Children.Remove(item);
             }

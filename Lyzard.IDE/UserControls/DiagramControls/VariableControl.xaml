@@ -27,7 +27,7 @@
         <Border Margin="6" IsHitTestVisible="False" Background="#333333" CornerRadius="10" Grid.RowSpan="13" BorderThickness="1" BorderBrush="Black" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
 
 
-        <TextBlock Margin="8 8 8 5" IsHitTestVisible="False" Foreground="White" HorizontalAlignment="Center" Background="Transparent" Text="{Binding Title}" Grid.Row="0" />
+        <TextBlock Margin="8 8 8 5" IsHitTestVisible="False" Foreground="White" HorizontalAlignment="Center" Background="Transparent" Text="{Binding Name}" Grid.Row="0" />
 
         <ScrollViewer Grid.Row="1" Margin="4">
             <Grid VerticalAlignment="Stretch">

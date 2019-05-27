@@ -55,20 +55,20 @@
                     DisplayMemberPath="Name"
                   />
                 <TextBlock Foreground="White" Margin="8 0 8 5" Text="Start Time" Grid.Row="2" />
-                <TextBox Margin="8 0 8 5" Background="White" Foreground="Black" Text="{Binding StartTime, Mode=TwoWay, Converter={StaticResource StringToDoubleConverter}}" Grid.Row="3" />
+                <TextBox Style="{StaticResource ConnectableTextbox}" IsEnabled="{Binding StartTimeEnabled}" Margin="8 0 8 5" Background="White" Foreground="Black" Text="{Binding StartTime, Mode=TwoWay, Converter={StaticResource StringToDoubleConverter}}" Grid.Row="3" />
 
                 <TextBlock Foreground="White" Margin="8 0 8 0" Text="Amplitude" Grid.Row="4" />
-                <TextBox Margin="8 0 8 5" Background="White" Foreground="Black" Text="{Binding Amplitude, Mode=TwoWay, Converter={StaticResource StringToDoubleConverter}}" Grid.Row="5" />
+                <TextBox Style="{StaticResource ConnectableTextbox}" IsEnabled="{Binding AmplitudeEnabled}" Margin="8 0 8 5" Background="White" Foreground="Black" Text="{Binding Amplitude, Mode=TwoWay, Converter={StaticResource StringToDoubleConverter}}" Grid.Row="5" />
 
 
                 <TextBlock Foreground="White" Margin="8 0 8 5" Text="Frequency" Grid.Row="6" />
-                <TextBox Margin="8 0 8 5" Background="White" Foreground="Black" Text="{Binding Frequency, Mode=TwoWay, Converter={StaticResource StringToDoubleConverter}}" Grid.Row="7" />
+                <TextBox Style="{StaticResource ConnectableTextbox}" IsEnabled="{Binding FrequencyEnabled}" Margin="8 0 8 5" Background="White" Foreground="Black" Text="{Binding Frequency, Mode=TwoWay, Converter={StaticResource StringToDoubleConverter}}" Grid.Row="7" />
 
                 <TextBlock Foreground="White" Margin="8 0 8 5" Text="Sample Rate" Grid.Row="8" />
-                <TextBox Margin="8 0 8 5" Background="White" Foreground="Black" Text="{Binding SampleRate, Mode=TwoWay, Converter={StaticResource StringToDoubleConverter}}" Grid.Row="9" />
+                <TextBox Style="{StaticResource ConnectableTextbox}" IsEnabled="{Binding SampleRateEnabled}" Margin="8 0 8 5" Background="White" Foreground="Black" Text="{Binding SampleRate, Mode=TwoWay, Converter={StaticResource StringToDoubleConverter}}" Grid.Row="9" />
 
                 <TextBlock Foreground="White" Margin="8 0 8 5" Text="Phase" Grid.Row="10" />
-                <TextBox Margin="8 0 8 5" Background="White" Foreground="Black" Text="{Binding Phase, Mode=TwoWay, Converter={StaticResource StringToDoubleConverter}}" Grid.Row="11" />
+                <TextBox Style="{StaticResource ConnectableTextbox}" IsEnabled="{Binding PhaseEnabled}" Margin="8 0 8 5" Background="White" Foreground="Black" Text="{Binding Phase, Mode=TwoWay, Converter={StaticResource StringToDoubleConverter}}" Grid.Row="11" />
 
             </Grid>
         </ScrollViewer>

@@ -467,6 +467,10 @@
       <Project>{5F586DDB-CDF7-47B0-A6CF-B1105FFC177F}</Project>
       <Name>Lyzard.Utilities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WaveFormRendererLib\WaveFormRendererLib.csproj">
+      <Project>{3efef2d1-5d08-46fd-af6d-098dbe7fb3b4}</Project>
+      <Name>WaveFormRendererLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Help.png" />

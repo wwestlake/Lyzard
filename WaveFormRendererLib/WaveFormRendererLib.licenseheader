@@ -1,0 +1,6 @@
+﻿extensions: designer.cs generated.cs
+extensions: .cs .cpp .h
+/* naudio/NAudio.WaveFormRenderer is licensed under the
+ * MIT License
+ * https://github.com/naudio/NAudio.WaveFormRenderer/blob/master/LICENSE
+ */

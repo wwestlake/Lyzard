@@ -22,7 +22,7 @@ using System.Collections.Generic;
 namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
 {
 
-    public class FunctionGenerator : ViewModelBase
+    internal class FunctionGenerator : ViewModelBase
     {
         private string _name;
 
@@ -64,7 +64,7 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
         }
     }
 
-    public class SquareWaveGenerator : FunctionGenerator
+    internal class SquareWaveGenerator : FunctionGenerator
     {
         public SquareWaveGenerator()
         {
@@ -72,7 +72,7 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
         }
     }
 
-    public class SineWaveGenerator : FunctionGenerator
+    internal class SineWaveGenerator : FunctionGenerator
     {
         public SineWaveGenerator()
         {
@@ -80,7 +80,7 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
         }
     }
 
-    public class TriangleWaveGenerator : FunctionGenerator
+    internal class TriangleWaveGenerator : FunctionGenerator
     {
         public TriangleWaveGenerator()
         {
@@ -88,7 +88,7 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
         }
     }
 
-    public class RandomWaveGenerator : FunctionGenerator
+    internal class RandomWaveGenerator : FunctionGenerator
     {
         public RandomWaveGenerator()
         {

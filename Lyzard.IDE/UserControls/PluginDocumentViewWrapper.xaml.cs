@@ -35,7 +35,7 @@ namespace Lyzard.IDE.UserControls
     /// <summary>
     /// Interaction logic for PluginDocumentViewWrapper.xaml
     /// </summary>
-    public partial class PluginDocumentViewWrapper : UserControl
+    internal partial class PluginDocumentViewWrapper : UserControl
     {
         public PluginDocumentViewWrapper()
         {

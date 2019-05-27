@@ -27,7 +27,7 @@ using System.Windows.Media.Imaging;
 
 namespace Lyzard.IDE.ViewModels
 {
-    public class FileExplorerViewModel : ExplorerViewModelBase
+    internal class FileExplorerViewModel : ExplorerViewModelBase
     {
         private bool _canHide = true;
 

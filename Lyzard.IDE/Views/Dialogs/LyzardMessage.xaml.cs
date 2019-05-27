@@ -35,7 +35,7 @@ namespace Lyzard.IDE.Views.Dialogs
     /// <summary>
     /// Interaction logic for LyzardMessage.xaml
     /// </summary>
-    public partial class LyzardMessage : UserControl
+    internal partial class LyzardMessage : UserControl
     {
         public LyzardMessage()
         {

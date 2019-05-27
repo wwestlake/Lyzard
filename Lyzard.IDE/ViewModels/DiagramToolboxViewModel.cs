@@ -23,7 +23,7 @@ using System.Threading.Tasks;
 
 namespace Lyzard.IDE.ViewModels
 {
-    public class DiagramToolboxViewModel : ExplorerViewModelBase
+    internal class DiagramToolboxViewModel : ExplorerViewModelBase
     {
 
     }

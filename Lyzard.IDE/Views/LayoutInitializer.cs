@@ -24,7 +24,7 @@ using Xceed.Wpf.AvalonDock.Layout;
 
 namespace Lyzard.IDE.Views
 {
-    class LayoutInitializer : ILayoutUpdateStrategy
+    internal class LayoutInitializer : ILayoutUpdateStrategy
     {
         public bool BeforeInsertAnchorable(LayoutRoot layout, LayoutAnchorable anchorableToShow, ILayoutContainer destinationContainer)
         {

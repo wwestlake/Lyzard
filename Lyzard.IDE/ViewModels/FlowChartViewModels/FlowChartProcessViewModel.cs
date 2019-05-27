@@ -23,7 +23,7 @@ using System.Threading.Tasks;
 
 namespace Lyzard.IDE.ViewModels.FlowChartViewModels
 {
-    public class FlowChartProcessViewModel : ViewModelBase
+    internal class FlowChartProcessViewModel : ViewModelBase
     {
         private string _name;
         private object tag;

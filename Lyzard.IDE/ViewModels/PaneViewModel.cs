@@ -24,9 +24,9 @@ using System.Windows.Media;
 
 namespace Lyzard.IDE.ViewModels
 {
-    public delegate void ToolWindowHiddenEventHandler(object sender, EventArgs e);
+    internal delegate void ToolWindowHiddenEventHandler(object sender, EventArgs e);
 
-    public class PaneViewModel : ViewModelBase
+    internal class PaneViewModel : ViewModelBase
     {
         public event ToolWindowHiddenEventHandler ToolWindowHidden;
 

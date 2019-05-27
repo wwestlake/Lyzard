@@ -24,7 +24,7 @@ using System.Windows.Controls;
 
 namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
 {
-    public abstract class SimViewModelBase : ViewModelBase
+    internal abstract class SimViewModelBase : ViewModelBase
     {
 
 

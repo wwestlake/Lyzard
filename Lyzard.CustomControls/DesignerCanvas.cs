@@ -21,7 +21,7 @@ namespace Lyzard.CustomControls
 
     public partial class DesignerCanvas : Canvas
     {
-        public event DesignerItemDropEventHandler DropEvent;
+        public new event DesignerItemDropEventHandler DropEvent;
         public event DesignerItemDeleteEventHandler DeleteEvent;
         public event ConnectionDeleteEventHandler ConnectionDeleteEvent;
 

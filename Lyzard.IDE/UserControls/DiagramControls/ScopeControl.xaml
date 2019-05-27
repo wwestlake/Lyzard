@@ -26,6 +26,7 @@
              xmlns:s="clr-namespace:Lyzard.IDE.ViewModels.SimulationItemViewModels"
              xmlns:vc="clr-namespace:Lyzard.IDE.ValueConverters"
              mc:Ignorable="d" 
+             x:ClassModifier="internal"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type s:DiagramIOViewModel}" >

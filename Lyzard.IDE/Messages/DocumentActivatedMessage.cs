@@ -23,7 +23,7 @@ using System.Threading.Tasks;
 
 namespace Lyzard.IDE.Messages
 {
-    public class DocumentActivatedMessage
+    internal class DocumentActivatedMessage
     {
     }
 }

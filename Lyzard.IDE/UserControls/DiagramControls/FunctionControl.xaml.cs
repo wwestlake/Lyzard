@@ -35,7 +35,7 @@ namespace Lyzard.IDE.UserControls.DiagramControls
     /// <summary>
     /// Interaction logic for FunctionControl.xaml
     /// </summary>
-    public partial class FunctionControl : UserControl
+    internal partial class FunctionControl : UserControl
     {
         public FunctionControl()
         {

@@ -23,12 +23,11 @@ using System.ComponentModel;
 
 namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
 {
-    public class SimFunctionViewModel : SimViewModelBase
+    internal class SimFunctionViewModel : SimViewModelBase
     {
         private string _title;
         private ObservableCollection<FunctionGenerator> _func = new ObservableCollection<FunctionGenerator>();
         private FunctionGenerator _selection;
-        private string _selectedGenerator;
         private DoubleDelegate _startTimeSource;
 
         public SimFunctionViewModel()

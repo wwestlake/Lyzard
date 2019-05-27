@@ -21,7 +21,7 @@ using System.Linq;
 
 namespace Lyzard.IDE.ViewModels
 {
-    public class PropertyBase : ViewModelBase
+    internal class PropertyBase : ViewModelBase
     {
         private string _name;
 
@@ -30,42 +30,42 @@ namespace Lyzard.IDE.ViewModels
         public Type Type { get; set; }
     }
 
-    public class StringProperty : PropertyBase
+    internal class StringProperty : PropertyBase
     {
         private string _value;
 
         public string Value { get => _value; set { _value = value; OnPropertyChanged(); } }
     }
 
-    public class IntProperty : PropertyBase
+    internal class IntProperty : PropertyBase
     {
         private int _value;
 
         public int Value { get => _value; set { _value = value; OnPropertyChanged(); } }
     }
 
-    public class FloatProperty : PropertyBase
+    internal class FloatProperty : PropertyBase
     {
         private float _value;
 
         public float Value { get => _value; set { _value = value; OnPropertyChanged(); } }
     }
 
-    public class DoubleProperty : PropertyBase
+    internal class DoubleProperty : PropertyBase
     {
         private double _value;
 
         public double Value { get => _value; set { _value = value; OnPropertyChanged(); } }
     }
 
-    public class BooleanProperty : PropertyBase
+    internal class BooleanProperty : PropertyBase
     {
         private bool _value;
 
         public bool Value { get => _value; set { _value = value; OnPropertyChanged(); } }
     }
 
-    public class EnumProperty : PropertyBase
+    internal class EnumProperty : PropertyBase
     {
         private Enum _value;
 

@@ -26,7 +26,7 @@ using Lyzard.FileSystem;
 
 namespace Lyzard.IDE.ViewModels
 {
-    public class DirectoryItemViewModel : ViewModelBase
+    internal class DirectoryItemViewModel : ViewModelBase
     {
         private bool isSelected;
         private FileSystemItem item;
@@ -43,7 +43,7 @@ namespace Lyzard.IDE.ViewModels
 
         public bool CanExpand { get { return Item.ItemType != FileSystemItemType.File; } }
 
-        public ICommand ExpandCommand => new DelegateCommand(x => Expand(), x => true);
+        public ICommand ExpandCommand => new DelegateCommand(x => { Expand(); }, x => true);
 
         public string ImageName
         {
@@ -79,7 +79,7 @@ namespace Lyzard.IDE.ViewModels
             {
                 if (value == true)
                 {
-                    Children = Expand().Result;
+                    Children = Expand();
                     Item.IsExpanded = true;
                 }
                 else
@@ -104,7 +104,7 @@ namespace Lyzard.IDE.ViewModels
             }
         }
 
-        private async Task<ObservableCollection<DirectoryItemViewModel>> Expand()
+        private ObservableCollection<DirectoryItemViewModel> Expand()
         {
             return Task.Factory.StartNew(() =>
             {

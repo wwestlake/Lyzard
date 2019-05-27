@@ -27,9 +27,16 @@ using System.Windows.Forms;
 
 namespace Lyzard.IDE.Dialogs
 {
+    /// <summary>
+    /// Manages the display of Dialog boxes
+    /// </summary>
     public static class DialogManager
     {
 
+        /// <summary>
+        /// Opens a managed file
+        /// </summary>
+        /// <returns>A managed file</returns>
         public static ManagedFile OpenFile()
         {
             ManagedFile file = null;
@@ -56,6 +63,10 @@ namespace Lyzard.IDE.Dialogs
             return file;
         }
 
+        /// <summary>
+        /// Gets a path 
+        /// </summary>
+        /// <returns>The file path</returns>
         public static string OpenFilePath()
         {
             var lastPath = StateManager.SystemState.LastFileOpenLocation;
@@ -74,6 +85,11 @@ namespace Lyzard.IDE.Dialogs
         }
 
 
+        /// <summary>
+        /// Save file as dialog
+        /// </summary>
+        /// <param name="text">The text to display</param>
+        /// <returns>A managed file</returns>
         public static ManagedFile SaveFileAs(string text)
         {
             ManagedFile file = null;
@@ -102,6 +118,10 @@ namespace Lyzard.IDE.Dialogs
             return file;
         }
 
+        /// <summary>
+        /// Selects a folder
+        /// </summary>
+        /// <returns>The selected folder</returns>
         public static string SelectFolder()
         {
             var dlg = new FolderBrowserDialog();
@@ -114,6 +134,10 @@ namespace Lyzard.IDE.Dialogs
             return null;
         }
 
+        /// <summary>
+        /// Selects a folder to manage
+        /// </summary>
+        /// <returns>A managed folder</returns>
         public static ManagedFolder SelectManagedFolder()
         {
             var path = SelectFolder();

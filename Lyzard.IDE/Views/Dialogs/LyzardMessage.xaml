@@ -26,6 +26,7 @@
              xmlns:dock="http://schemas.xceed.com/wpf/xaml/avalondock"
              mc:Ignorable="d" 
              Background="Transparent"
+             x:ClassModifier="internal"
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>

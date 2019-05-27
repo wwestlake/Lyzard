@@ -35,7 +35,7 @@ namespace Lyzard.IDE.UserControls
     /// <summary>
     /// Interaction logic for PluginToolPaneViewWrapper.xaml
     /// </summary>
-    public partial class PluginToolPaneViewWrapper : UserControl
+    internal partial class PluginToolPaneViewWrapper : UserControl
     {
         public PluginToolPaneViewWrapper()
         {

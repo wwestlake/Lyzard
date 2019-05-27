@@ -23,7 +23,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Lyzard.CustomControls.xml</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -61,6 +62,8 @@
     <Compile Include="DesignerItem.cs" />
     <Compile Include="DesignerItemDeleteEventArgs.cs" />
     <Compile Include="DragThumb.cs" />
+    <Compile Include="IGroupable.cs" />
+    <Compile Include="ISelectable.cs" />
     <Compile Include="PathFinder.cs" />
     <Compile Include="RelativePositionPanel.cs">
       <SubType>Code</SubType>

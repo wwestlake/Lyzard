@@ -22,6 +22,7 @@
     x:Class="Lyzard.IDE.App" 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    x:ClassModifier="internal"
     xmlns:local="clr-namespace:Lyzard.IDE" >
     
     <Application.Resources>

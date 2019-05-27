@@ -35,7 +35,7 @@ namespace Lyzard.IDE.UserControls.DiagramControls
     /// <summary>
     /// Interaction logic for FlowChartProcessControl.xaml
     /// </summary>
-    public partial class FlowChartProcessControl : UserControl
+    internal partial class FlowChartProcessControl : UserControl
     {
         public FlowChartProcessControl()
         {

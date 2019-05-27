@@ -30,7 +30,7 @@ using Lyzard.IDE.ViewModels;
 namespace Lyzard.IDE.ValueConverters
 {
     [ValueConversion(typeof(string), typeof(BitmapImage))]
-    public class FolderItemToImageConverter : IValueConverter
+    internal class FolderItemToImageConverter : IValueConverter
     {
         public static readonly FolderItemToImageConverter Instance = new FolderItemToImageConverter();
 

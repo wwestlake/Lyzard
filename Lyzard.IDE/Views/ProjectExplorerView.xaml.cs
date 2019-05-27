@@ -35,7 +35,7 @@ namespace Lyzard.IDE.Views
     /// <summary>
     /// Interaction logic for ProjectExplorerView.xaml
     /// </summary>
-    public partial class ProjectExplorerView : UserControl
+    internal partial class ProjectExplorerView : UserControl
     {
         public ProjectExplorerView()
         {

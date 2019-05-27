@@ -23,7 +23,7 @@ using System.Threading.Tasks;
 
 namespace Lyzard.IDE.ViewModels
 {
-    public class ProjectExplorerViewModel : ExplorerViewModelBase
+    internal class ProjectExplorerViewModel : ExplorerViewModelBase
     {
         public ProjectExplorerViewModel()
         {

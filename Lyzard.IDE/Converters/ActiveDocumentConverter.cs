@@ -25,7 +25,7 @@ using System.Windows.Data;
 
 namespace Lyzard.IDE.Converters
 {
-    public class ActiveDocumentConverter : IValueConverter
+    internal class ActiveDocumentConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {

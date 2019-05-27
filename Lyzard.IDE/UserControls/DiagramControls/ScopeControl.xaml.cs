@@ -35,7 +35,7 @@ namespace Lyzard.IDE.UserControls.DiagramControls
     /// <summary>
     /// Interaction logic for ScopeControl.xaml
     /// </summary>
-    public partial class ScopeControl : UserControl
+    internal partial class ScopeControl : UserControl
     {
         public ScopeControl()
         {

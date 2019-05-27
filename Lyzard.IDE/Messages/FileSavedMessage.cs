@@ -24,7 +24,7 @@ using System.Threading.Tasks;
 
 namespace Lyzard.IDE.Messages
 {
-    public class FileSavedMessage
+    internal class FileSavedMessage
     {
         public DocumentViewModelBase Vm { get; set; }
     }

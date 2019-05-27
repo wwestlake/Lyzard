@@ -24,7 +24,7 @@ using System.Windows.Input;
 
 namespace Lyzard.IDE.ViewModels
 {
-    public class DelegateCommand : ICommand
+    internal class DelegateCommand : ICommand
     {
         private Predicate<object> _canExecute;
         private Action<object> _execute;

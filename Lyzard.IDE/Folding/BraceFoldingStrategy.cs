@@ -22,10 +22,10 @@ using ICSharpCode.AvalonEdit.Folding;
 
 namespace Lyzard.IDE.Folding
 {
-	/// <summary>
-	/// Allows producing foldings from a document based on braces.
-	/// </summary>
-	public class BraceFoldingStrategy : AbstractFoldingStrategy
+    /// <summary>
+    /// Allows producing foldings from a document based on braces.
+    /// </summary>
+    internal class BraceFoldingStrategy : AbstractFoldingStrategy
 	{
 		/// <summary>
 		/// Gets/Sets the opening brace. The default value is '{'.

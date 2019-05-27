@@ -35,7 +35,7 @@ namespace Lyzard.IDE.UserControls.DiagramControls
     /// <summary>
     /// Interaction logic for VariableControl.xaml
     /// </summary>
-    public partial class VariableControl : UserControl
+    internal partial class VariableControl : UserControl
     {
         public VariableControl()
         {

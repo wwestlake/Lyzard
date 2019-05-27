@@ -34,7 +34,7 @@ using Xceed.Wpf.AvalonDock.Themes;
 
 namespace Lyzard.IDE.ViewModels
 {
-    public class DockManagerViewModel : ViewModelBase, IApplicationApi
+    internal class DockManagerViewModel : ViewModelBase, IApplicationApi
     {
         private ObservableCollection<DocumentViewModelBase> _editors;
         private ObservableCollection<PaneViewModel> _tools;

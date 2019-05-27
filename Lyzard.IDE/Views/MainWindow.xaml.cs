@@ -32,7 +32,7 @@ namespace Lyzard.IDE.Views
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, IMainRibbonApi
+    internal partial class MainWindow : Window, IMainRibbonApi
     {
         public static IMainRibbonApi MainWindowApi { get; private set; }
         internal static MainWindow CurrentWindow { get; private set; }

@@ -38,7 +38,7 @@ namespace Lyzard.IDE.Views
     /// <summary>
     /// Interaction logic for ConsoleView.xaml
     /// </summary>
-    public partial class ConsoleView : UserControl
+    internal partial class ConsoleView : UserControl
     {
         //private string fsi = @"C:\Program Files (x86)\Microsoft SDKs\F#\4.0\Framework\v4.0\fsi.exe";
         public ConsoleView()

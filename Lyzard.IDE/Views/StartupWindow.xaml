@@ -24,6 +24,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lyzard.IDE.Views"
         mc:Ignorable="d"
+        x:ClassModifier="internal"
         WindowStyle="None" AllowsTransparency="True"
         Title="StartupWindow" Height="450" Width="800">
 

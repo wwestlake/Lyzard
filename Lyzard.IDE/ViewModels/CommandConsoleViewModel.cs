@@ -25,7 +25,7 @@ using System.Threading.Tasks;
 namespace Lyzard.IDE.ViewModels
 {
 
-    public class CommandConsoleViewModel : ConsoleViewModelBase
+    internal class CommandConsoleViewModel : ConsoleViewModelBase
     {
         public CommandConsoleViewModel()
         {

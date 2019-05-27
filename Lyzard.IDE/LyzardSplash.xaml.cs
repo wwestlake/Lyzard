@@ -34,7 +34,7 @@ namespace Lyzard.IDE
     /// <summary>
     /// Interaction logic for LyzardSplash.xaml
     /// </summary>
-    public partial class LyzardSplash : Window
+    internal partial class LyzardSplash : Window
     {
         public LyzardSplash()
         {

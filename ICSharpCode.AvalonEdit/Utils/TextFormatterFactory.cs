@@ -101,8 +101,9 @@ namespace ICSharpCode.AvalonEdit.Utils
 				emSize = TextBlock.GetFontSize(element);
 			if (foreground == null)
 				foreground = TextBlock.GetForeground(element);
-			#if DOTNET4
-			return new FormattedText(
+#if DOTNET4
+#pragma warning disable CS0618 // Type or member is obsolete
+            return new FormattedText(
 				text,
 				CultureInfo.CurrentCulture,
 				FlowDirection.LeftToRight,
@@ -112,7 +113,8 @@ namespace ICSharpCode.AvalonEdit.Utils
 				null,
 				TextOptions.GetTextFormattingMode(element)
 			);
-			#else
+#pragma warning restore CS0618 // Type or member is obsolete
+#else
 			if (TextFormattingModeProperty != null) {
 				object formattingMode = element.GetValue(TextFormattingModeProperty);
 				return (FormattedText)Activator.CreateInstance(
@@ -136,7 +138,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 					foreground
 				);
 			}
-			#endif
-		}
+#endif
+        }
 	}
 }

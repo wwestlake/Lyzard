@@ -25,6 +25,7 @@
              xmlns:local="clr-namespace:Lyzard.IDE.Views"
              xmlns:oxy="http://oxyplot.org/wpf"
              mc:Ignorable="d" 
+             x:ClassModifier="internal"
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
         <Grid DockPanel.Dock="Top">

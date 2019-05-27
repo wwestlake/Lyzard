@@ -27,7 +27,7 @@ namespace Lyzard.IDE.ViewModels
 
 
 
-    public class PropertiesViewModel : ExplorerViewModelBase
+    internal class PropertiesViewModel : ExplorerViewModelBase
     {
         private object _selectedItem;
         private ObservableCollection<PropertyBase> _properties = new ObservableCollection<PropertyBase>();

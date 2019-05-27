@@ -23,7 +23,7 @@ using System.Windows.Controls;
 
 namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
 {
-    public class ScopeViewModel : SimViewModelBase
+    internal class ScopeViewModel : SimViewModelBase
     {
         private string _title;
         private TimeSignalDelegate _signalSource;

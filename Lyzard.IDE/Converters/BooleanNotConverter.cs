@@ -23,7 +23,7 @@ using System.Threading.Tasks;
 
 namespace Lyzard.IDE.Converters
 {
-    public sealed class BooleanNotConverter : BooleanConverter<bool>
+    internal sealed class BooleanNotConverter : BooleanConverter<bool>
     {
         public BooleanNotConverter() :
           base(false, true)

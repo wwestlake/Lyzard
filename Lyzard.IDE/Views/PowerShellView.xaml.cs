@@ -38,7 +38,7 @@ namespace Lyzard.IDE.Views
     /// <summary>
     /// Interaction logic for ConsoleView.xaml
     /// </summary>
-    public partial class PowerShellView : UserControl
+    internal partial class PowerShellView : UserControl
     {
         public PowerShellView()
         {

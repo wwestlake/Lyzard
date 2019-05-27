@@ -39,7 +39,7 @@ namespace Lyzard.IDE.Views
     /// <summary>
     /// Interaction logic for CodeEditorView.xaml
     /// </summary>
-    public partial class CodeEditorView : UserControl
+    internal partial class CodeEditorView : UserControl
     {
         private FoldingManager foldingManager;
         private BraceFoldingStrategy braceStrategy;

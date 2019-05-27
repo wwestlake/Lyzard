@@ -25,9 +25,9 @@ using System.Windows.Input;
 
 namespace Lyzard.IDE.ViewModels.DialogsViewModels
 {
-    public enum LyzardMessageResult { Ok, Yes, No, Cancel, Close }
+    internal enum LyzardMessageResult { Ok, Yes, No, Cancel, Close }
 
-    public class LyzardMessageDlgViewModel : DialogViewModelBase
+    internal class LyzardMessageDlgViewModel : DialogViewModelBase
     {
 
 
@@ -97,22 +97,22 @@ namespace Lyzard.IDE.ViewModels.DialogsViewModels
         private bool _cancelVisible;
         public bool CancelVisible
         {
-            get { return _cancelVisible; OnPropertyChanged(); }
-            set { _cancelVisible = value; }
+            get { return _cancelVisible;  }
+            set { _cancelVisible = value; OnPropertyChanged(); }
         }
 
         private bool _textVisible;
         public bool TextVisible
         {
-            get { return _textVisible; OnPropertyChanged(); }
-            set { _textVisible = value; }
+            get { return _textVisible;  }
+            set { _textVisible = value; OnPropertyChanged(); }
         }
 
         private bool _listVisible;
         public bool ListVisible
         {
-            get { return _listVisible; OnPropertyChanged(); }
-            set { _listVisible = value; }
+            get { return _listVisible;  }
+            set { _listVisible = value; OnPropertyChanged(); }
         }
 
         private ObservableCollection<string> _items = new ObservableCollection<string>();

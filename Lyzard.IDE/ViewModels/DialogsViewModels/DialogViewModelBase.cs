@@ -23,7 +23,7 @@ using System.Threading.Tasks;
 
 namespace Lyzard.IDE.ViewModels.DialogsViewModels
 {
-    public class DialogViewModelBase : ViewModelBase
+    internal class DialogViewModelBase : ViewModelBase
     {
         internal Action<DialogViewModelBase> Completed { get; set; }
 

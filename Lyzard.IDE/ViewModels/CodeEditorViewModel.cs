@@ -27,7 +27,7 @@ using System.Windows.Media.Imaging;
 
 namespace Lyzard.IDE.ViewModels
 {
-    public class CodeEditorViewModel : DocumentViewModelBase
+    internal class CodeEditorViewModel : DocumentViewModelBase
     {
 
         private TextDocument _document = new TextDocument();

@@ -25,7 +25,7 @@ using System.Threading.Tasks;
 namespace Lyzard.IDE.ViewModels
 {
 
-    public class PowerShellConsoleViewModel : ConsoleViewModelBase
+    internal class PowerShellConsoleViewModel : ConsoleViewModelBase
     {
         public PowerShellConsoleViewModel()
         {

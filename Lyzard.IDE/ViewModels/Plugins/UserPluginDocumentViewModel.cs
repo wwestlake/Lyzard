@@ -25,7 +25,7 @@ using System.Windows.Controls;
 
 namespace Lyzard.IDE.ViewModels.Plugins
 {
-    public class UserPluginDocumentViewModel : DocumentViewModelBase
+    internal class UserPluginDocumentViewModel : DocumentViewModelBase
     {
         private IPluginDocumentView _userControl;
         private IPluginDocumentViewModel _viewModel;

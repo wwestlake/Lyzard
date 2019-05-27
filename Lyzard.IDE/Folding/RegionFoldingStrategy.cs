@@ -25,7 +25,7 @@ using System.Threading.Tasks;
 
 namespace Lyzard.IDE.Folding
 {
-    public class RegionFoldingStrategy : AbstractFoldingStrategy
+    internal class RegionFoldingStrategy : AbstractFoldingStrategy
     {
 
         public string OpenRegion { get; set; }

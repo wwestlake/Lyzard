@@ -30,6 +30,7 @@
         AllowsTransparency="True"
         Width="600"
         Height="400"
+        x:ClassModifier="internal"
         Title="LyzardSplash">
     <StackPanel>
         <Image Source="/Resources/Images/LyzardSplash.png" />

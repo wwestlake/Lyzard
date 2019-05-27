@@ -35,7 +35,7 @@ namespace Lyzard.IDE.Views.Dialogs
     /// <summary>
     /// Interaction logic for NewProjectDlg.xaml
     /// </summary>
-    public partial class NewProjectDlg : UserControl
+    internal partial class NewProjectDlg : UserControl
     {
         public NewProjectDlg()
         {

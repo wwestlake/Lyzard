@@ -28,7 +28,7 @@ namespace Lyzard.IDE.ValueConverters
     /// <summary>
     /// Converts strings to double and back
     /// </summary>
-    public class StringToDoubleConverter : IValueConverter
+    internal class StringToDoubleConverter : IValueConverter
     {
         /// <summary>
         /// Converts a string to a double

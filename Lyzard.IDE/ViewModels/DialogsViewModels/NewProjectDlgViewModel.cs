@@ -26,7 +26,7 @@ using System.Windows.Input;
 
 namespace Lyzard.IDE.ViewModels.DialogsViewModels
 {
-    public class NewProjectDlgViewModel : DialogViewModelBase
+    internal class NewProjectDlgViewModel : DialogViewModelBase
     {
         private string _title;
 

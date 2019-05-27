@@ -27,7 +27,7 @@ using System.Windows.Shapes;
 
 namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
 {
-    public static class FlowChartViewModelSelector
+    internal static class FlowChartViewModelSelector
     {
         public static Tuple<ViewModelBase, UserControl> SelectViewAndViewModel(Path item)
         {

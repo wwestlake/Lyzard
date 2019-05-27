@@ -30,7 +30,7 @@ namespace Lyzard.IDE.Views
     /// <summary>
     /// Interaction logic for DiagramView.xaml
     /// </summary>
-    public partial class DiagramView : UserControl
+    internal partial class DiagramView : UserControl
     {
         private Brush _color1 = Brushes.Black;
         private Brush _color2 = Brushes.DarkGray;
@@ -109,7 +109,7 @@ namespace Lyzard.IDE.Views
                 result.Item2.DataContext = result.Item1;
                 var path = item.Content;
                 item.Content = result.Item2;
-                (result.Item2.FindName("Content") as ContentControl).Content = path;
+                (result.Item2.FindName("NewContent") as ContentControl).Content = path;
                 item.UpdateLayout();
                 item.Selected += Item_Selected;
             }

@@ -25,6 +25,7 @@
              xmlns:local="clr-namespace:Lyzard.IDE.Views"
              xmlns:console="clr-namespace:ConsoleControl.WPF;assembly=ConsoleControl.WPF"
              mc:Ignorable="d" 
+             x:ClassModifier="internal"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <console:ConsoleControl x:Name="Console" Background="Blue" PreviewMouseWheel="Console_MouseWheel" />

@@ -35,7 +35,7 @@ namespace Lyzard.IDE.Views
     /// <summary>
     /// Interaction logic for AudioFileView.xaml
     /// </summary>
-    public partial class AudioFileView : UserControl
+    internal partial class AudioFileView : UserControl
     {
         public AudioFileView()
         {

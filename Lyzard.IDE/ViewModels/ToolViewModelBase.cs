@@ -25,9 +25,8 @@ using System.Windows.Input;
 namespace Lyzard.IDE.ViewModels
 {
 
-    public class ToolViewModelBase : PaneViewModel 
+    internal class ToolViewModelBase : PaneViewModel 
     {
-        private string _title;
         private bool _isVisible = false;
 
 
@@ -38,7 +37,7 @@ namespace Lyzard.IDE.ViewModels
 
 
 
-        public bool IsVisible
+        public new bool IsVisible
         {
             get
             {

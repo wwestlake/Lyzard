@@ -26,7 +26,7 @@ using System.Windows.Input;
 
 namespace Lyzard.IDE.ViewModels
 {
-    public abstract class DocumentViewModelBase : PaneViewModel
+    internal abstract class DocumentViewModelBase : PaneViewModel
     {
         private string _filePath;
         protected bool initialLoad = false;

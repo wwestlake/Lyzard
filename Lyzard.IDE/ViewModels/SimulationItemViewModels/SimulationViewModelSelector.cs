@@ -26,7 +26,7 @@ using System.Windows.Shapes;
 
 namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
 {
-    public static class SimulationViewModelSelector
+    internal static class SimulationViewModelSelector
     {
         public static Tuple<ViewModelBase, UserControl> SelectViewAndViewModel(Path item)
         {

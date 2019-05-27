@@ -35,7 +35,7 @@ namespace Lyzard.IDE.Views
     /// <summary>
     /// Interaction logic for ToolBoxView.xaml
     /// </summary>
-    public partial class ToolBoxView : UserControl
+    internal partial class ToolBoxView : UserControl
     {
         public ToolBoxView()
         {

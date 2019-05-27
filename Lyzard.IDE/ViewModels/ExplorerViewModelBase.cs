@@ -23,7 +23,7 @@ using System.Threading.Tasks;
 
 namespace Lyzard.IDE.ViewModels
 {
-    public class ExplorerViewModelBase : PaneViewModel
+    internal class ExplorerViewModelBase : PaneViewModel
     {
 
     }

@@ -37,7 +37,7 @@ namespace Lyzard.IDE.Views
     /// <summary>
     /// Interaction logic for OutputView.xaml
     /// </summary>
-    public partial class OutputView : UserControl, IOutputConsole
+    internal partial class OutputView : UserControl, IOutputConsole
     {
         public OutputView()
         {

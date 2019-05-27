@@ -38,7 +38,7 @@ using Xceed.Wpf.AvalonDock.Themes;
 namespace Lyzard.IDE.ViewModels
 {
     [Serializable]
-    public class MainWindowViewModel : ViewModelBase
+    internal class MainWindowViewModel : ViewModelBase
     {
 
         private string _title;

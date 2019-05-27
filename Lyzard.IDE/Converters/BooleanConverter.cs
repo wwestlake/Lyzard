@@ -23,7 +23,7 @@ using System.Windows.Data;
 
 namespace Lyzard.IDE.Converters
 {
-    public class BooleanConverter<T> : IValueConverter
+    internal class BooleanConverter<T> : IValueConverter
     {
         public BooleanConverter(T trueValue, T falseValue)
         {

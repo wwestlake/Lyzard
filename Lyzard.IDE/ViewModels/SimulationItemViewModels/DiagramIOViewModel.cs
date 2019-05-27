@@ -23,7 +23,7 @@ using System.Threading.Tasks;
 
 namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
 {
-    public class DiagramIOViewModel : ViewModelBase
+    internal class DiagramIOViewModel : ViewModelBase
     {
         private string _name;
         private string _value;

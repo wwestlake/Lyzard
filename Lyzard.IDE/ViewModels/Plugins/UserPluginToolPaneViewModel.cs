@@ -24,7 +24,7 @@ using System.Threading.Tasks;
 
 namespace Lyzard.IDE.ViewModels.Plugins
 {
-    public class UserPluginToolPaneViewModel : ExplorerViewModelBase
+    internal class UserPluginToolPaneViewModel : ExplorerViewModelBase
     {
         private IPluginToolPaneView _userControl;
         private IPluginToolPaneViewModel _viewModel;

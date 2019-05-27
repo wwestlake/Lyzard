@@ -20,7 +20,7 @@ using System;
 
 namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
 {
-    public class DoubleVariableViewModel : SimViewModelBase
+    internal class DoubleVariableViewModel : SimViewModelBase
     {
         private string _name;
         private double _value;

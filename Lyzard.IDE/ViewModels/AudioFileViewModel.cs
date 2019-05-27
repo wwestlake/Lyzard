@@ -33,10 +33,8 @@ using WaveFormRendererLib;
 
 namespace Lyzard.IDE.ViewModels
 {
-    public class AudioFileViewModel : DocumentViewModelBase
+    internal class AudioFileViewModel : DocumentViewModelBase
     {
-        private PlotModel _plotModel;
-        private AudioFile _audioFile;
         private string _filepath;
 
         public AudioFileViewModel(string filepath)
@@ -105,7 +103,10 @@ namespace Lyzard.IDE.ViewModels
             OnPropertyChanged("Play");
         }
 
-        public string FilePath { get { return _filepath; } set { _filepath = value; OnPropertyChanged(); } }
+        /// <summary>
+        /// The file patgh to audio files
+        /// </summary>
+        public new string FilePath { get { return _filepath; } set { _filepath = value; OnPropertyChanged(); } }
         public override bool CanSave(object param)
         {
             return false;

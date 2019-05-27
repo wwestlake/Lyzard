@@ -19,6 +19,7 @@ using Lyzard.Interfaces;
 
 namespace Lyzard.Interfaces
 {
+
     public interface ICacheManager
     {
         ISerializer Serializer { get; set; }

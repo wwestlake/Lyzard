@@ -34,7 +34,7 @@ namespace Lyzard.IDE.Views
     /// <summary>
     /// Interaction logic for StartupWindow.xaml
     /// </summary>
-    public partial class StartupWindow : Window
+    internal partial class StartupWindow : Window
     {
         public StartupWindow()
         {

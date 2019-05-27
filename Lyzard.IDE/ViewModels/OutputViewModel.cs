@@ -23,7 +23,7 @@ using System.Threading.Tasks;
 
 namespace Lyzard.IDE.ViewModels
 {
-    public class OutputViewModel : ConsoleViewModelBase
+    internal class OutputViewModel : ConsoleViewModelBase
     {
         public OutputViewModel()
         {

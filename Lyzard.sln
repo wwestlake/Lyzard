@@ -65,7 +65,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lyzard.SignalProcessing", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External Builds", "External Builds", "{03997986-E42C-4543-A27D-FF0726B237B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveFormRendererLib", "..\NAudio.WaveFormRenderer\WaveFormRendererLib\WaveFormRendererLib.csproj", "{3EFEF2D1-5D08-46FD-AF6D-098DBE7FB3B4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveFormRendererLib", "WaveFormRendererLib\WaveFormRendererLib.csproj", "{3EFEF2D1-5D08-46FD-AF6D-098DBE7FB3B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

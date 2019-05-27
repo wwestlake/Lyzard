@@ -415,10 +415,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\NAudio.WaveFormRenderer\WaveFormRendererLib\WaveFormRendererLib.csproj">
-      <Project>{3EFEF2D1-5D08-46FD-AF6D-098DBE7FB3B4}</Project>
-      <Name>WaveFormRendererLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj">
       <Project>{6c55b776-26d4-4db3-a6ab-87e783b2f3d1}</Project>
       <Name>ICSharpCode.AvalonEdit</Name>

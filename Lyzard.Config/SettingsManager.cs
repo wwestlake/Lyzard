@@ -17,6 +17,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Threading;
@@ -60,14 +61,14 @@ namespace Lyzard.Config
             } else
             {
                 var settings = new Settings();
-                _file.Save<Settings>(Settings);
+                _file.Save<Settings>(settings);
                 return settings;
             }
         }
 
         public void SaveSettings()
         {
-            _file.Save<Settings>(Settings);
+            _file.Save(Settings);
         }
 
         private void SaveSettings(object sender, EventArgs e)

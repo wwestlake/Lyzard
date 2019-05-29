@@ -17,7 +17,7 @@ namespace Lyzard.GraphicsLib
         }
     }
 
-    public class AxisRender : Renderer
+    public class AxisRenderer : Renderer
     {
         public override void Render<T>(Graphics graphics, GraphDescription description, DataSet<T> dataset)
         {
@@ -25,5 +25,19 @@ namespace Lyzard.GraphicsLib
         }
     }
 
+    public class TextRenderer : Renderer
+    {
+        public override void Render<T>(Graphics graphics, GraphDescription description, DataSet<T> dataset)
+        {
+            throw new NotImplementedException();
+        }
+    }
 
+    public class PlotRenderer : Renderer
+    {
+        public override void Render<T>(Graphics graphics, GraphDescription description, DataSet<T> dataset)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

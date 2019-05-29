@@ -30,7 +30,12 @@ namespace Lyzard.Serialization
 
         public void Serialize<T>(TextWriter writer, Format format, T item)
         {
-            var text = JsonConvert.SerializeObject(item, FormatConverter.Convert(format));
+            var text = JsonConvert.SerializeObject(item, FormatConverter.Convert(format) 
+                ,new JsonSerializerSettings()
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                }
+            );
             writer.Write(text);
         }
     }

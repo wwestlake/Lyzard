@@ -58,6 +58,9 @@
     <Reference Include="NAudio, Version=1.8.5.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NAudio.1.8.5\lib\net35\NAudio.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="OxyPlot, Version=1.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
       <HintPath>..\packages\OxyPlot.Core.1.0.0\lib\net45\OxyPlot.dll</HintPath>
     </Reference>
@@ -454,6 +457,10 @@
     <ProjectReference Include="..\Lyzard.PluginFramework\Lyzard.PluginFramework.csproj">
       <Project>{0b6a580a-fc50-4f97-a652-e89bea5cc68a}</Project>
       <Name>Lyzard.PluginFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lyzard.Serialization\Lyzard.Serialization.csproj">
+      <Project>{1D58DD38-A80A-4462-BE67-13F9880790B6}</Project>
+      <Name>Lyzard.Serialization</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lyzard.SignalProcessing\Lyzard.SignalProcessing.csproj">
       <Project>{757A545F-96C7-4D30-8D66-2D22B3EC176C}</Project>

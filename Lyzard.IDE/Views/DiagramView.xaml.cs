@@ -39,6 +39,12 @@ namespace Lyzard.IDE.Views
         {
             InitializeComponent();
 
+            Loaded += (s, e) =>
+            {
+                var vm = DataContext as DiagramViewModel;
+                vm.RegisterDesigner(Designer);
+            };
+
             Designer.DeleteEvent += Designer_DeleteEvent;
             Designer.ConnectionDeleteEvent += Designer_ConnectionDeleteEvent;
 
@@ -82,6 +88,7 @@ namespace Lyzard.IDE.Views
                 result.Item2.DataContext = result.Item1;
                 item.Content = result.Item2;
                 item.UpdateLayout();
+                item.DataContext = null;
                 var connectors = item.GetConnectors();
                 foreach (var connector in connectors)
                 {

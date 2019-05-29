@@ -3,7 +3,7 @@
  * https://www.codeproject.com/Articles/22952/WPF-Diagram-Designer-Part-1
  */
 
-using Lyzard.Interfaces;
+
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;

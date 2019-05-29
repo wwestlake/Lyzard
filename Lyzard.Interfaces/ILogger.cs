@@ -15,24 +15,87 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
 
 namespace Lyzard.Interfaces
 {
-    public enum LogEntryType { Info, Warning, Error, Exception, Critical }
+    /// <summary>
+    /// Describes a log entry
+    /// </summary>
+    public enum LogEntryType
+    {
+        /// <summary>
+        /// An INFO log message
+        /// </summary>
+        Info,
 
+        /// <summary>
+        /// A warning log message
+        /// </summary>
+        Warning,
+
+        /// <summary>
+        /// An error log message
+        /// </summary>
+        Error,
+
+        /// <summary>
+        /// An exception log message
+        /// </summary>
+        Exception,
+
+        /// <summary>
+        /// A critical log message
+        /// </summary>
+        Critical
+    }
+
+
+    /// <summary>
+    /// Interface defining a logger
+    /// </summary>
     public interface ILogger
     {
+        /// <summary>
+        /// Creates a log entry
+        /// </summary>
+        /// <param name="type">THe type of log entry</param>
+        /// <param name="message">The message</param>
+        /// <param name="args">Any arguments</param>
         void Log(LogEntryType type, string message, params object[] args);
+
+        /// <summary>
+        /// Creates an INFO log message
+        /// </summary>
+        /// <param name="message">The message</param>
+        /// <param name="args">Any arguments</param>
         void LogInfo(string message, params object[] args);
+
+        /// <summary>
+        /// Creates a WARNING log message
+        /// </summary>
+        /// <param name="message">The message</param>
+        /// <param name="args">Any arguments</param>
         void LogWarning(string message, params object[] args);
+
+        /// <summary>
+        /// Creates an ERROR log message
+        /// </summary>
+        /// <param name="message">The message</param>
+        /// <param name="args">Any arguments</param>
         void LogError(string message, params object[] args);
+
+        /// <summary>
+        /// Creates an exception log message
+        /// </summary>
+        /// <param name="message">The message</param>
+        /// <param name="args">Any arguments</param>
         void LogException(string message, params object[] args);
+
+        /// <summary>
+        /// Creates a critical log message
+        /// </summary>
+        /// <param name="message">The message</param>
+        /// <param name="args">Any arguments</param>
         void LogCritical(string message, params object[] args);
     }
 }

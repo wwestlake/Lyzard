@@ -15,16 +15,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-using System;
+
+using Lyzard.CustomControls;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lyzard.IDE.ViewModels
 {
+    internal class JsonDiagram
+    {
+        public IEnumerable<DesignerItem> Items { get; set; }
+        public IEnumerable<Connection> Connections { get; set; }
+    }
+
     internal class DiagramViewModel : DocumentViewModelBase
     {
+        private DesignerCanvas _designer;
+
+        public void RegisterDesigner(DesignerCanvas designer)
+        {
+            _designer = designer;
+        }
+
         public override bool CanSave(object param)
         {
             return true;
@@ -32,13 +43,16 @@ namespace Lyzard.IDE.ViewModels
 
         public override void Close()
         {
-            
+
         }
 
         public override void Save(object param)
         {
-            
+
+
         }
+
+
 
         public override void SaveAs(object param)
         {

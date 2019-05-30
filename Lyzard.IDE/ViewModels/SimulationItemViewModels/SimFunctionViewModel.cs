@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
 {
@@ -55,6 +56,7 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
                     Title = _selection.Name + " Generator";
                 }
                 OnPropertyChanged();
+                OnSettingsChanged();
             }
         }
 
@@ -68,6 +70,7 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
             {
                 Selection.Generator.StartTime = value;
                 OnPropertyChanged();
+                OnSettingsChanged();
             }
         }
 
@@ -82,6 +85,7 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
                 OnPropertyChanged("StartTime");
                 StartTimeEnabled = value == null;
                 OnPropertyChanged("StartTimeEnabled");
+                OnSettingsChanged();
             }
         }
 
@@ -90,7 +94,13 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
         /// <summary>
         /// Sets or Gets the Amplitude of the Generator
         /// </summary>
-        public double Amplitude { get { return Selection.Generator.Amplitude; } set { Selection.Generator.Amplitude = value; OnPropertyChanged(); } }
+        public double Amplitude { get { return Selection.Generator.Amplitude; }
+            set
+            {
+                Selection.Generator.Amplitude = value;
+                OnPropertyChanged();
+                OnSettingsChanged();            }
+        }
 
         public DoubleDelegate AmplitudeSource
         {
@@ -102,6 +112,7 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
                 OnPropertyChanged("Amplitude");
                 AmplitudeEnabled = value == null;
                 OnPropertyChanged("AmplitudeEnabled");
+                OnSettingsChanged();
             }
         }
 
@@ -111,7 +122,14 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
         /// <summary>
         /// Sets or Gets the Frequency of the Generator
         /// </summary>
-        public double Frequency { get { return Selection.Generator.Frequency; } set { Selection.Generator.Frequency = value; OnPropertyChanged(); } }
+        public double Frequency { get { return Selection.Generator.Frequency; }
+            set
+            {
+                Selection.Generator.Frequency = value;
+                OnPropertyChanged();
+                OnSettingsChanged();
+            }
+        }
 
         public DoubleDelegate FrequencySource
         {
@@ -123,6 +141,7 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
                 OnPropertyChanged("Frequency");
                 FrequencyEnabled = value == null;
                 OnPropertyChanged("FrequencyEnabled");
+                OnSettingsChanged();
             }
         }
 
@@ -131,7 +150,14 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
         /// <summary>
         /// Gets or Sets the SampleRate of the Generator
         /// </summary>
-        public double SampleRate { get { return Selection.Generator.SampleRate; } set { Selection.Generator.SampleRate = value; OnPropertyChanged(); } }
+        public double SampleRate { get { return Selection.Generator.SampleRate; }
+            set
+            {
+                Selection.Generator.SampleRate = value;
+                OnPropertyChanged();
+                OnSettingsChanged();
+            }
+        }
 
         public DoubleDelegate SampleRateSource
         {
@@ -143,6 +169,7 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
                 OnPropertyChanged("SampleRate");
                 SampleRateEnabled = value == null;
                 OnPropertyChanged("SampleRateEnabled");
+                OnSettingsChanged();
             }
         }
 
@@ -152,7 +179,14 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
         /// <summary>
         /// Gets or Sets the Phase of the Generator
         /// </summary>
-        public double Phase { get { return Selection.Generator.Phase; } set { Selection.Generator.Phase = value; OnPropertyChanged(); } }
+        public double Phase { get { return Selection.Generator.Phase; }
+            set
+            {
+                Selection.Generator.Phase = value;
+                OnPropertyChanged();
+                OnSettingsChanged();
+            }
+        }
 
         public DoubleDelegate PhaseSource
         {
@@ -164,12 +198,21 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
                 OnPropertyChanged("Phase");
                 PhaseEnabled = value == null;
                 OnPropertyChanged("PhaseEnabled");
+                OnSettingsChanged();
             }
         }
 
         public bool PhaseEnabled { get; set; } = true;
 
-
+        protected void OnSettingsChanged()
+        {
+            foreach (var connection in Connections.Keys)
+            {
+                var content = connection.Sink.ParentDesignerItem.Content as Control;
+                var vm = content.DataContext as SimViewModelBase;
+                vm.HandleSettingsChanged(connection);
+            }
+        }
 
         private Dictionary<Connection, TimeSignalDelegate> Connections = new Dictionary<Connection, TimeSignalDelegate>();
         private DoubleDelegate _phaseSource;
@@ -181,6 +224,8 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
         {
             var generator = new FunctionGenerator(_selection.Generator);
             var output = new TimeSignalDelegate(() => generator.Output);
+            if (Connections.ContainsKey(connection))
+                return output;
             Connections.Add(connection, output);
             return output;
         }
@@ -257,6 +302,10 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
         private void PhasePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             Phase = PhaseSource();
+        }
+
+        public override void HandleSettingsChanged(Connection connection)
+        {
         }
     }
 }

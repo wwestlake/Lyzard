@@ -34,6 +34,8 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
 
         internal abstract void OnDeleteConnection(Connection connection);
 
+        public abstract void HandleSettingsChanged(Connection connection);
+
 
         protected void SetDelegate(Connector connector, Expression<Func<DoubleDelegate>> source, PropertyChangedEventHandler handler, Expression<Func<double>> variable)
         {

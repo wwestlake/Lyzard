@@ -144,6 +144,7 @@
     </Compile>
     <Compile Include="ValueConverters\StringToDoubleConverter.cs" />
     <Compile Include="ValueConverters\FolderItemToImageConverter.cs" />
+    <Compile Include="ValueConverters\StringToIntCOnverter.cs" />
     <Compile Include="ViewModels\AudioFileViewModel.cs" />
     <Compile Include="ViewModels\CodeEditorViewModel.cs" />
     <Compile Include="ViewModels\DiagramToolboxViewModel.cs" />

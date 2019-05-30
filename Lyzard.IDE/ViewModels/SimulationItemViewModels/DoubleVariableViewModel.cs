@@ -28,6 +28,11 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
         public string Name { get => _name; set { _name = value; OnPropertyChanged(); } }
         public double Value { get => _value; set { _value = value; OnPropertyChanged(); } }
 
+        public override void HandleSettingsChanged(Connection connection)
+        {
+            throw new NotImplementedException();
+        }
+
         internal override Delegate ConnectToOutput(Connection connectorName)
         {
             return new DoubleDelegate(() => Value);

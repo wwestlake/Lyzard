@@ -20,6 +20,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Controls;
+using OxyPlot;
 
 namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
 {
@@ -27,15 +28,37 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
     {
         private string _title;
         private TimeSignalDelegate _signalSource;
+        private int _samples;
 
         public ScopeViewModel()
         {
             Title = "Oscilloscope";
+            Samples = 1000;
         }
 
         public IEnumerable<Tuple<double, double>> SignalIn
         {
-            get => SignalSource();
+            get => SignalSource != null ? SignalSource() : null;
+        }
+
+        public int Samples { get => _samples;
+            set
+            {
+                _samples = value;
+                OnPropertyChanged();
+                OnPropertyChanged("Points");
+            }
+        }
+
+
+        public IList<DataPoint> Points
+        {
+            get
+            {
+                if (SignalIn != null)
+                    return SignalIn.Select(x => new DataPoint(x.Item1, x.Item2)).Take(_samples).ToList();
+                return null;
+            }
         }
 
         public TimeSignalDelegate SignalSource
@@ -46,11 +69,19 @@ namespace Lyzard.IDE.ViewModels.SimulationItemViewModels
                 _signalSource = value;
                 OnPropertyChanged();
                 OnPropertyChanged("SignalIn");
+                OnPropertyChanged("Points");
             }
         }
 
 
         public string Title { get => _title; set { _title = value; OnPropertyChanged(); } }
+
+        public override void HandleSettingsChanged(Connection connection)
+        {
+            var vm = (connection.Source.ParentDesignerItem.Content as Control).DataContext as SimViewModelBase;
+            SignalSource = vm.ConnectToOutput(connection) as TimeSignalDelegate;
+            OnPropertyChanged("Points");
+        }
 
         internal override Delegate ConnectToOutput(Connection connectorName)
         {

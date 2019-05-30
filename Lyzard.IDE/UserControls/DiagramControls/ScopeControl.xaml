@@ -25,6 +25,7 @@
              xmlns:local="clr-namespace:Lyzard.IDE.UserControls.DiagramControls"
              xmlns:s="clr-namespace:Lyzard.IDE.ViewModels.SimulationItemViewModels"
              xmlns:vc="clr-namespace:Lyzard.IDE.ValueConverters"
+             xmlns:oxy="http://oxyplot.org/wpf"
              mc:Ignorable="d" 
              x:ClassModifier="internal"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -36,6 +37,7 @@
             </StackPanel>
         </DataTemplate>
         <vc:StringToDoubleConverter x:Key="StringToDoubleConverter" />
+        <vc:StringToIntCOnverter x:Key="StringToIntConverter" />
     </UserControl.Resources>
 
     <Grid>
@@ -53,10 +55,20 @@
             <Grid VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Scope Controls" Foreground="White" />
-                
+                <TextBlock Grid.Row="0" Text="Scope Controls" Foreground="White" />
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock Foreground="White" Text="Samples" />
+                    <TextBox Text="{Binding Samples, Mode=TwoWay, Converter={StaticResource StringToIntConverter}}" />
+                </StackPanel>
+                <oxy:Plot  Grid.Row="2" Background="LightGreen">
+                    <oxy:Plot.Series>
+                        <oxy:LineSeries ItemsSource="{Binding Points}" />
+                    </oxy:Plot.Series>
+                </oxy:Plot>
             </Grid>
         </ScrollViewer>
     </Grid>
